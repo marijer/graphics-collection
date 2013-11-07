@@ -1,0 +1,16 @@
+{
+  "name": "viz_graphics",
+  "version": "0.0.0",
+  "description": "",
+  "main": "gruntfile.js",
+  "scripts": {
+    "test": "node app"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "bower": "~1.2.7",
+    "express": "~3.4.4"
+  }
+}
