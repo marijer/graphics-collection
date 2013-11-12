@@ -1,8 +1,9 @@
 APP.Router = Backbone.Router.extend({
 	
 	routes: {
-	    "first":   "firstRoute",   // #first route
-	    "second": 	"secondRoute"
+	    "first" :   "firstRoute",   // #first route
+	    "second": 	"secondRoute",
+       "users" :   "renderUser", 
   	},
 
   	firstRoute: function () {
@@ -14,11 +15,29 @@ APP.Router = Backbone.Router.extend({
 
   	secondRoute: function () {
       console.log ("second router was hit");
-      
+
       APP.usersCollection = new APP.users();
       APP.usersCollection.fetch();
       console.dir(APP.usersCollection);
-  	}
+  	},
+
+    renderUser: function () {
+       console.log ("user router was hit");
+       APP.users = new APP.users();
+       APP.users.fetch({
+        success: function () {
+         console.log("hi success");
+          APP.user3 = APP.users.get(3);
+          APP.userView3 = new APP.userView({
+            model: APP.user3
+          })
+          APP.userView3.render();
+          $('body').append(APP.userView3.$el)
+         }
+      });
+
+
+    }
 
 });
 

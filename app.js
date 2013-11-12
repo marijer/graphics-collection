@@ -11,7 +11,13 @@ var app = express()
 
 
 var db = [
-	{ id: 1, name: "john" }
+	{ id: 1, name: "john", lastname: "check" },
+	{ id: 2, name: "clease", lastname: "check" },
+	{ id: 3, name: "dasds", lastname: "check" },
+	{ id: 4, name: "dsdsa", lastname: "check" },
+	{ id: 5, name: "dsfs", lastname: "check" },
+	{ id: 6, name: "sdcfs", lastname: "check" },
+	{ id: 7, name: "fsdf", lastname: "check" },
 ];
 
 var id = _.max (db, function () { return db.id; }).id;
