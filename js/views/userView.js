@@ -16,6 +16,4 @@ APP.userView = Backbone.View.extend ({
 		this.$el.html(this.template(attributes));
 	}
 
-
-
 })

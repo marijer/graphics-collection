@@ -1,13 +1,15 @@
-var path = require ("path"),
-	_ = require ("underscore"),
-	express = require ("express");
-
+var path     = require ("path"),
+	 _        = require ("underscore"),
+	 express  = require ("express"),
+	 mysql    = require('mysql'),
+	 http     = require('http');
 
 var app = express()
 			.use (express.static (__dirname,
 									path.join (__dirname, "bower_components"),
 									path.join (__dirname, "js")))
 			.use(express.bodyParser());
+
 
 
 var db = [
@@ -22,10 +24,29 @@ var db = [
 
 var id = _.max (db, function () { return db.id; }).id;
 
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'node_test',
+  password : 'node_test1',
+  database : 'thesis'
+});
 
-app.get ("/hello", function ( req, res ) {
-//	res.json 
-	res.send ("Hello World!");
+var object_json;
+
+	connection.connect();
+
+	connection.query('SELECT * from graphics', function(err, rows, fields) {
+	  if (err) throw err;
+
+	  console.log('first data row: ', rows[0]);
+	  var object_json = rows;
+	});
+
+	connection.end();
+
+
+app.get ("/", function ( req, res ) {
+	res.json ( object_json );
 });
 
 
