@@ -9,7 +9,6 @@ APP.userView = Backbone.View.extend ({
 		'</div>'
 	),
 
-
 	render: function () {
 		var attributes = this.model.toJSON();
 		console.log (attributes);

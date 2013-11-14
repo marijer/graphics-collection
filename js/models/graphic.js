@@ -6,7 +6,7 @@ APP.graphic = Backbone.Model.extend ({
 		creators: "unknown",
 		favorite: false,
 		img: {
-			small: "test.png",
+			small: "img/graphics/test.jpg",
 			large: "test_large.png"
 		},
 		news_type: "unknown",

@@ -1,25 +1,20 @@
 APP.GraphicView = Backbone.View.extend ({
 	tagName: "div",  // default setting
-	className: "graphic",
+	className: "article-wrapper",
 
 	template: Handlebars.compile(
-		'<div>' +
-		'<h1>{{title}}</h1>' +
-		'<div class="date">{{date}}</div>' +
-		'<div class="img">{{img.small}}</div>' +
-		'</div>'
+		'<article class="graphic">' +
+		'<img class="graphics-image" src={{img.small}}>' +
+		'<h2>{{title}}</h2>' +
+		'<div class="date">{{date}}</div>' +		
+		'</article>'
 	),
 
 	events: {
 		"click .date": "onClickData"
 	},
 
-	onClickData: function ( e ) {
-		var element = $(e.currentTarget);
-		element.addClass('clicked');
-	},
-
-	render: function () {
+	renderGraphics: function () {
 		this.collection.each (function ( model ) {
 			//var itemView = new 
 
@@ -28,6 +23,16 @@ APP.GraphicView = Backbone.View.extend ({
 			
 		}, this);
 		return this;
-	}
+	},
+
+	render: function () {
+		this.renderGraphics();
+	},
+
+	onClickData: function ( e ) {
+		var element = $(e.currentTarget);
+		element.addClass('clicked');
+	},
+
 
 })

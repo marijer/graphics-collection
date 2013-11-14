@@ -5,7 +5,7 @@ APP.Router = Backbone.Router.extend({
        "users"         :   "renderUser",
   	},
 
-   renderGraphics : function () {
+   renderGraphics : function (category) {
       console.log ("render graphics was hit");
 
       APP.graphics = new APP.Graphics();
@@ -24,7 +24,7 @@ APP.Router = Backbone.Router.extend({
             // });
 
             APP.graphicView3.render();
-            $('body').append(APP.graphicView3.$el)
+            $('.graphics-wrapper').append(APP.graphicView3.$el)
          }
       });
 
