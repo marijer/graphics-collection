@@ -38,14 +38,13 @@ var object_json;
 	connection.query('SELECT * from graphics', function(err, rows, fields) {
 	  if (err) throw err;
 
-	  console.log('first data row: ', rows[0]);
-	  var object_json = rows;
+	 // console.log('first data row: ', rows[0]);
+	   object_json = rows;
 	});
 
 	connection.end();
 
-
-app.get ("/", function ( req, res ) {
+app.get ("/graphics", function ( req, res ) {
 	res.json ( object_json );
 });
 

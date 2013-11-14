@@ -1,4 +1,4 @@
-APP.users = Backbone.Collection.extend ( {
-	model: APP.user,
-	url: "/graphics"
+APP.Graphics = Backbone.Collection.extend ( {
+	model: APP.graphic,
+	url: "graphics"
 })

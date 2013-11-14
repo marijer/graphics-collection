@@ -1,11 +1,33 @@
-APP.graphicView = Backbone.View.extend ({
+APP.GraphicView = Backbone.View.extend ({
 	tagName: "div",  // default setting
-	className: "user",
+	className: "graphic",
 
-	template: _.template('<h3><%= name %></h3>'),
+	template: Handlebars.compile(
+		'<div>' +
+		'<h1>{{title}}</h1>' +
+		'<div class="date">{{date}}</div>' +
+		'<div class="img">{{img.small}}</div>' +
+		'</div>'
+	),
+
+	events: {
+		"click .date": "onClickData"
+	},
+
+	onClickData: function ( e ) {
+		var element = $(e.currentTarget);
+		element.addClass('clicked');
+	},
 
 	render: function () {
-		var attributes = this.model.toJSON();
-		this.$el.html (this.template(attributes));
+		this.collection.each (function ( model ) {
+			//var itemView = new 
+
+			var attributes = model.attributes;
+			this.$el.append(this.template(attributes));
+			
+		}, this);
+		return this;
 	}
+
 })

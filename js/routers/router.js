@@ -1,27 +1,36 @@
 APP.Router = Backbone.Router.extend({
 	
 	routes: {
-	    "first" :   "firstRoute",   // #first route
-	    "second": 	"secondRoute",
-       "users" :   "renderUser", 
+       "graphics"      :   "renderGraphics", 
+       "users"         :   "renderUser",
   	},
 
-  	firstRoute: function () {
-  		console.log ("first route was hit");
-  		APP.usersCollection = new APP.users();
-  		APP.usersCollection.create ({name: "Colin", phone: "555-222-21"});
-  		APP.usersCollection.create ({ name:"Dan", address: "Seattle"});
-  	},
+   renderGraphics : function () {
+      console.log ("render graphics was hit");
 
-  	secondRoute: function () {
-      console.log ("second router was hit");
+      APP.graphics = new APP.Graphics();
 
-      APP.usersCollection = new APP.users();
-      APP.usersCollection.fetch();
-      console.dir(APP.usersCollection);
-  	},
+      APP.graphics.fetch({
+         success: function (collection, response, options) {
 
-    renderUser: function () {
+            APP.graphicView3 = new APP.GraphicView ({
+               collection:  collection
+            });
+
+
+            // model works
+            // APP.graphicView3 = new APP.GraphicView ({
+            //    model: APP.graphic3
+            // });
+
+            APP.graphicView3.render();
+            $('body').append(APP.graphicView3.$el)
+         }
+      });
+
+   },
+
+   renderUser : function () {
        console.log ("user router was hit");
        APP.users = new APP.users();
        APP.users.fetch({
