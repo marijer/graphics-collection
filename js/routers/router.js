@@ -1,11 +1,11 @@
 APP.Router = Backbone.Router.extend({
 	
 	routes: {
-       "graphics"      :   "renderGraphics", 
-       "users"         :   "renderUser",
+       "graphics"               :   "renderGraphics", 
+       "users(/:foo)"           :   "renderUser",
   	},
 
-   renderGraphics : function (category) {
+   renderGraphics : function () {
       console.log ("render graphics was hit");
 
       APP.graphics = new APP.Graphics();
@@ -16,12 +16,6 @@ APP.Router = Backbone.Router.extend({
             APP.graphicView3 = new APP.GraphicView ({
                collection:  collection
             });
-
-
-            // model works
-            // APP.graphicView3 = new APP.GraphicView ({
-            //    model: APP.graphic3
-            // });
 
             APP.graphicView3.render();
             $('.graphics-wrapper').append(APP.graphicView3.$el)
