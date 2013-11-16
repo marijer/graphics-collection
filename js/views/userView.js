@@ -5,7 +5,7 @@ APP.userView = Backbone.View.extend ({
 	template: Handlebars.compile(
 		'<div>' +
 		'<h1>{{name}}</h1>' +
-		'<span class="hi">{{id}}</span' +
+		'<span class="hi">{{id}}</span>' +
 		'</div>'
 	),
 

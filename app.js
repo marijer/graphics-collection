@@ -38,7 +38,7 @@ var object_json;
 	connection.query('SELECT * from graphics', function(err, rows, fields) {
 	  if (err) throw err;
 
-	 // console.log('first data row: ', rows[0]);
+	  console.log('first data row: ', rows[0]);
 	   object_json = rows;
 	});
 

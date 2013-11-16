@@ -18,14 +18,33 @@ header h2 {
 	margin: 0;
 }
 
+.content-wrapper {
+	overflow: hidden;
+}
+
+/* graphics-container */
 
 article {
 	width: 300px;
 	height: 190px;
-	margin: 14px 7px 0;
+	margin: 14px 25px 0;
 	float: left;
 }
 
 article h2 {
 	font-size: 12px;
+}
+
+/* filter */
+
+.filter-wrapper {
+	width: 200px;
+	height: 1000px;
+	float: left;
+	margin: 20px 7px;
+}
+
+input[type="text"] {
+	padding: 6px 5px;
+	width: 100%;
 }

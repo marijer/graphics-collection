@@ -1,17 +1,27 @@
 APP.Router = Backbone.Router.extend({
 	
 	routes: {
-       "graphics"               :   "renderGraphics", 
-       "users(/:foo)"           :   "renderUser",
+       "graphics(/*querystring)"    :   "renderGraphics", 
+       "users(/:foo)"               :   "renderUser"
   	},
 
-   renderGraphics : function () {
-      console.log ("render graphics was hit");
+    events : {
+
+    },
+
+    initialize:function () {
+      var search = new APP.SearchView();
+      $('.filter-wrapper').append(search.$el);
+    },
+
+   renderGraphics : function (bar, params) {
+      console.log ("route is triggered");
 
       APP.graphics = new APP.Graphics();
 
       APP.graphics.fetch({
          success: function (collection, response, options) {
+
 
             APP.graphicView3 = new APP.GraphicView ({
                collection:  collection
@@ -45,4 +55,4 @@ APP.Router = Backbone.Router.extend({
 });
 
 APP.router = new APP.Router();
-Backbone.history.start ({ root: "/"});
+Backbone.history.start ({ pushState: true });
