@@ -1,12 +1,19 @@
 APP.Router = Backbone.Router.extend({
 	
 	routes: {
-       "graphics(/*querystring)"    :   "renderGraphics", 
-       "users(/:foo)"               :   "renderUser"
+       "graphics"                 :   "renderGraphics", 
+       "graphics(/*querystring)"  :   "paramHit"
   	},
 
     events : {
 
+    },
+
+    paramHit: function () {
+      console.log ('param entered');
+      // something is parsed and you find out you want to sort by date
+      //  APP.graphics.set('_order_by', 'date');
+      //  APP.graphics.trigger('change');
     },
 
     initialize:function () {
@@ -22,13 +29,12 @@ APP.Router = Backbone.Router.extend({
       APP.graphics.fetch({
          success: function (collection, response, options) {
 
-
-            APP.graphicView3 = new APP.GraphicView ({
+            APP.graphicCollectionView = new APP.GraphicCollectionView ({
                collection:  collection
             });
 
-            APP.graphicView3.render();
-            $('.graphics-wrapper').append(APP.graphicView3.$el)
+            APP.graphicCollectionView.render();
+            $('.graphics-wrapper').append(APP.graphicCollectionView.$el)
          }
       });
 

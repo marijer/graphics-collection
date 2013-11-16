@@ -1,4 +1,4 @@
-APP.graphic = Backbone.Model.extend ({
+APP.Graphic = Backbone.Model.extend ({
 	defaults: {
 		title: "undefined",
 		date: null,

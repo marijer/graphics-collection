@@ -25,17 +25,21 @@ APP.SearchView = Backbone.View.extend ({
 
 	onSearch: function () {
 		var key = $('.search-input').val();
-
 		var temp = Backbone.history.getQueryParameters();
-		temp.q = key;
-		temp= APP.router.toFragment("graphics", temp);
+
+		if (key === "") {
+			delete temp.q;
+		} else {
+			temp.q = key;
+		}
+
+		temp = APP.router.toFragment("graphics/", temp);
 
 		APP.router.navigate (temp, {trigger: true});
-		 Backbone.history.checkUrl();
+		Backbone.history.checkUrl();
+		
 		/*
-		APP.router.toFragment("graphics", {bar: "bye", new: "category"})
-		APP.router._toQueryString({"bar":"bye", new: "category2"})
-
+		need to check 
 		debounce > sets a delay
 		*/
 	}
