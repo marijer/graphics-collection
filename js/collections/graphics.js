@@ -1,9 +1,6 @@
 APP.Graphics = Backbone.Collection.extend ( {
 	model: APP.Graphic,
 	url: "graphics",
-	defaults: {
-		comparator: 'title'
-	},
 
 	initialize: function() {
 		console.log ("collection initialized");
