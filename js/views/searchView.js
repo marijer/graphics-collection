@@ -33,9 +33,9 @@ APP.SearchView = Backbone.View.extend ({
 			temp.q = key;
 		}
 
-		temp = APP.router.toFragment("graphics/", temp);
+		var frag = APP.router.toFragment("graphics/", temp);
 
-		APP.router.navigate (temp, {trigger: true});
+		APP.router.navigate (frag, {trigger: true});
 		Backbone.history.checkUrl();
 		
 		/*

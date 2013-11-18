@@ -1,6 +1,7 @@
 APP.GraphicCollectionView = Backbone.View.extend ({
 	tagName: "div",  // default setting
 	className: "article-wrapper",
+	comparator: "date",  //
 
 	initialize: function() {
 		this.collection.on('sort', this.render, this);

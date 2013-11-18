@@ -1,9 +1,10 @@
 APP.Router = Backbone.Router.extend({
 	
 	routes: {
-       "graphics"                 :   "renderGraphics", 
-       "graphics(/*querystring)"  :   "paramHit",
-       ""                         :   "index",
+       "graphics"                 : "renderGraphics", 
+       "graphics(/*querystring)"  : "paramHit",
+       ""                         : "index",
+       "*path"                    : "notFound", 
   	},
 
     events : {
@@ -40,23 +41,9 @@ APP.Router = Backbone.Router.extend({
 
    },
 
-   renderUser : function () {
-       console.log ("user router was hit");
-       APP.users = new APP.users();
-       APP.users.fetch({
-        success: function () {
-         console.log("hi success");
-          APP.user3 = APP.users.get(3);
-          APP.userView3 = new APP.userView({
-            model: APP.user3
-          })
-          APP.userView3.render();
-          $('body').append(APP.userView3.$el)
-         }
-      });
-
-
-    }
+   notFound: function () {
+      console.log ("404 message here");
+   }
 
 });
 

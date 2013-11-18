@@ -42,17 +42,17 @@ var object_json;
 
 	connection.end();
 
-app.get ("/graphics", function ( req, res ) {
+app.get ("/graphics", function( req, res ) {
 	res.json ( object_json );
 });
 
 
-app.get ("/users", function ( req, res ) {
+app.get ("/users", function( req, res ) {
 	res.json( db );
 });
 
 
-app.post ("/users", function ( req, res ) {
+app.post ("/users", function( req, res ) {
 	db.push (req.body);
 	res.end();
 	//console.log (req.body);
