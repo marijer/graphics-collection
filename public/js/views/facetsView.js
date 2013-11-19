@@ -29,41 +29,39 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   filterResults: function( e ) {
-    var self = this,
-        $this = $(e.target),
-        $parent = $this.parent();
+      var self = this,
+         $this = $(e.target),
+         $parent = $this.parent();
         
         // set class active or non-active
-         if($this.hasClass('active')){
+      if($this.hasClass('active')){
             $this.removeClass("active");
-         } else {
+      } else {
             $this.addClass('active').siblings().removeClass('active');
-         }
+      }
         
-         // go through selected facets
-         var _hash = [];
+      // go through all selected facets and save them in array
+      var _hash = [];
 
-         self.$el.find('.active').each(function(){
+      self.$el.find('.active').each(function(){
           
-          var ele = $(this),
-              category = ele.attr("data-facet"),
-              name = ele.attr("data-facet-name");
+      var el = $(this),
+         category = el.attr("data-facet"),
+         name = el.attr("data-facet-name");
+         _hash.push(category+"="+escape(name));
+      });
 
-          _hash.push(category+"="+escape(name));
-        });
-
-         console.log (_hash);
-
-
+      if(_hash.length){
+          window.location.hash="!/search?"+_hash.join('&');
+      }else{
+         window.location.hash="!/";
+      }
+       
+      e.preventDefault();
   },
 
   render: function () {
-    // var self = this;
-    // var col =  self.collection.attributes;
 
-    // _.each(col.facets, function (facet) {
-    //     this.$el.append(this.template(facet));
-    //   }, this);
   }
 
 });

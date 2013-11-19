@@ -14,16 +14,20 @@ li {
 
 header {
 	height: 40px;
-	background: #CCC;
+	background: #EEE;
+	border-bottom: 1px solid #CCC;
+}
+
+header h2 {
+	font-size: 1.2em;
+	color: #3A3A3A;
+	line-height: 1.8em;
+	margin: 0;
 }
 
 .header-constraint {
 	margin: 0 7px;
 	padding: 5px 0;
-}
-
-header h2 {
-	margin: 0;
 }
 
 .content-wrapper {
@@ -80,13 +84,17 @@ article h2 {
 	font-size: 14px;
 	font-weight: bold;
 	margin: 0;
-	padding: 10px 0;
+	padding: 0 0 10px;
 }
 
 .filter-wrapper li {
 	font-size: 13px;
 	padding: 5px;
 	cursor: pointer;
+}
+
+.filter-wrapper {
+	margin-bottom: 15px;
 }
 
 .filter-wrapper li:hover, .filter-wrapper li.active {

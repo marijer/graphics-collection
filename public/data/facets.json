@@ -3,17 +3,17 @@
     {
       "facet": "newspaper",
       "heading": "News Organization",
-      "options": ["Guardian", "NYTimes"],
+      "options": ["Guardian", "Ny Times"],
       "sort_order": ""        
     },
     {
-      "facet": "news_category",
+      "facet": "newscategory",
       "heading": "Category",
       "options": ["Business", "Sports", "Conflict"],
       "sort_order": ""    
     },
     {
-      "facet": "open_data",
+      "facet": "opendata",
       "heading": "Open data",
       "options": [0, 1],
       "sort_order": ""    
