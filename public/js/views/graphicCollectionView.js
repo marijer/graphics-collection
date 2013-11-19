@@ -1,7 +1,6 @@
 APP.GraphicCollectionView = Backbone.View.extend ({
 	tagName: "div",  // default setting
 	className: "article-wrapper",
-	comparator: "date",  //
 
 	initialize: function() {
 		this.on("change:filterType", this.filterByType, this);

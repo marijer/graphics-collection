@@ -32,6 +32,9 @@
       ],
       "sort_order": ""        
     }
-
+  ],
+  "sort": [
+    {"facet": "desc", "title":"descending", "comparator": "date"},
+    {"facet": "asc", "title":"ascending", "comparator": "date"}
   ]
 }

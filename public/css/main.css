@@ -50,6 +50,8 @@ header h2 {
 /* graphics-container */
 
 .main-content {
+	margin-left: 240px;
+	overflow:hidden;
 }
 
 article {

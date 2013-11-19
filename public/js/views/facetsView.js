@@ -11,33 +11,52 @@ APP.FacetsView = Backbone.View.extend ({
     '</div>'
   ),
 
+  template2: Handlebars.compile(
+      '<select>' + 
+         '{{#each sort}}' +
+         '<option class="facet" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
+         '{{/each}}' +
+      '</select>'
+   ),
+
   events: {
-    'click .facet': 'filterResults'
+    'click .facet': 'filterResults',
+    'change select': 'selectionChanged',
   },
-  
+
   initialize: function(){
-    this.renderFacets(); 
+    this.renderSort();
+    this.renderFacets();
   },
 
   renderFacets: function() {
   	var self = this;
-    var col =  self.collection.attributes;
+   var col =  self.collection.attributes;
 
-    _.each(col.facets, function (facet) {
+    _.each(col.facets, function(facet) {
         this.$el.append(this.template(facet));
       }, this);
   },
 
-  filterResults: function( e ) {
+  renderSort: function() {
+      var self = this;
+      var col =  self.collection.attributes;
+
+      this.$el.append(this.template2(col.sort));
+  },
+
+  filterResults: function( e, select ) {
       var self = this,
          $this = $(e.target),
          $parent = $this.parent();
+
+      if (select) $this = e;
         
         // set class active or non-active
       if($this.hasClass('active')){
-            $this.removeClass("active");
+         $this.removeClass("active");
       } else {
-            $this.addClass('active').siblings().removeClass('active');
+         $this.addClass('active').siblings().removeClass('active');
       }
         
       // go through all selected facets and save them in array
@@ -56,8 +75,17 @@ APP.FacetsView = Backbone.View.extend ({
       }else{
          window.location.hash="!/";
       }
-       
+      
+      if (e.preventDefault) e.preventDefault();
+  },
+
+   selectionChanged: function( e ) {
       e.preventDefault();
+      var field = $(e.currentTarget);
+      var option = $("option:selected", field);
+
+      this.filterResults(option, true);  // tell renderResults its a select menu
+
   },
 
   render: function () {

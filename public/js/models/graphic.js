@@ -1,5 +1,6 @@
 APP.Graphic = Backbone.Model.extend ({
 	defaults: {
+		id: "",
 		title: "undefined",
 		date: null,
 		source: "unknown",
@@ -11,7 +12,6 @@ APP.Graphic = Backbone.Model.extend ({
 		},
 		news_type: "unknown",
 		annotated_type: "unknown"
-
 	}
 });
 

@@ -43,7 +43,6 @@ APP.Router = Backbone.Router.extend({
 
          $('.filters-wrapper').append(APP.facetsView.$el);
       })
-
      
     },
 
@@ -57,10 +56,11 @@ APP.Router = Backbone.Router.extend({
    },
 
    filterResults:function(params) {
-     // console.log (params);
+      // console.log (params);
 
       var newCollection = this.search(params);
-    
+
+
       // Get All the Facets from Param
       
       var _paramsArray = new Array(),
@@ -72,40 +72,44 @@ APP.Router = Backbone.Router.extend({
            _paramsValueArray.push(value);
          });
 
-
-
       if (_paramsValueArray.length){
         
           var _facets = _.filter($facets, function(i, k){
             return _.indexOf(_paramsValueArray, $(i).text()) != -1? true: false
           });
           
-         console.log(_facets);
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
           
       }
 
       this.renderGraphics (newCollection);
-      
    },
 
    search: function(params){
       var self = this,
           newCollection = APP.collectionData;
 
-        if(_.size(params)){ // checks if 1 or more parameters are used
+         if (params.sort) {
+            // call sort function
+            APP.graphics.sortByColumn("title");
+
+            delete params.sort;
+            //this.render()
+         } 
+
+         if(_.size(params)){ // checks if 1 or more parameters are used
 
             _.each(params, function (val, key){  // loop over all parameters
-               var val = self.escapeRegex(val); //clean up value
+                  var val = self.escapeRegex(val); //clean up value
 
-               var pattern = new RegExp(val, "i");
+                  var pattern = new RegExp(val, "i");
 
-               newCollection = newCollection.filter(function(doc){        
-                  pattern.lastIndex= 0; // Reset the last Index          
-                  return pattern.test(doc.get(key));        
-            
-               });
+                  newCollection = newCollection.filter(function(doc){        
+                     pattern.lastIndex= 0; // Reset the last Index          
+                     return pattern.test(doc.get(key));        
+                 
+                  });
             }) //end each
 
          return new Backbone.Collection(newCollection);
@@ -123,13 +127,13 @@ APP.Router = Backbone.Router.extend({
       console.log ("404 message here");
    },
 
-   index: function () {
+   index: function (e) {
       var self = this;
 
       //removes all clases
       $('.facet').removeClass('active');     
       self.renderGraphics (APP.collectionData);
-      
+
    }
 
 });
