@@ -39,7 +39,7 @@ APP.Router = Backbone.Router.extend({
       APP.facets.on("dataLoaded", function() {  
          APP.facetsView = new APP.FacetsView({
           collection: APP.facetsData
-         });
+      });
 
          $('.filters-wrapper').append(APP.facetsView.$el);
       })
@@ -72,7 +72,19 @@ APP.Router = Backbone.Router.extend({
            _paramsValueArray.push(value);
          });
 
-         
+
+
+      if (_paramsValueArray.length){
+        
+          var _facets = _.filter($facets, function(i, k){
+            return _.indexOf(_paramsValueArray, $(i).text()) != -1? true: false
+          });
+          
+         console.log(_facets);
+          // Add Active Class to Selected Facet
+          $(_facets).addClass("active");
+          
+      }
 
       this.renderGraphics (newCollection);
       

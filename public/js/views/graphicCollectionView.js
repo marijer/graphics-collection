@@ -14,6 +14,7 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 	},
 
 	renderGraphics: function() {
+		this.updateTotalGraphics (this.collection.length);
 		this.collection.each(this.addOne, this);
         	return this;
 	},
@@ -23,6 +24,10 @@ APP.GraphicCollectionView = Backbone.View.extend ({
             model: model
         });
         this.$el.append(graphicItemView.render().el);
+    },
+
+    updateTotalGraphics: function( num ) {
+    	$('.total-graphics').html( num + " graphics");
     },
 
 	sortCollection: function () {

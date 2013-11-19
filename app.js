@@ -21,7 +21,7 @@ var object_json;
 
 	connection.connect();
 
-	connection.query('SELECT * from graphics LIMIT 5', function(err, rows, fields) {
+	connection.query('SELECT * from graphics LIMIT 40', function(err, rows, fields) {
 	  if (err) throw err;
 
 	 // console.log('first data row: ', rows[0]);
