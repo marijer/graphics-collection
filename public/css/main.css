@@ -1,0 +1,99 @@
+body {
+	margin: 0 auto;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
+
+header {
+	height: 40px;
+	background: #CCC;
+}
+
+.header-constraint {
+	margin: 0 7px;
+	padding: 5px 0;
+}
+
+header h2 {
+	margin: 0;
+}
+
+.content-wrapper {
+	overflow: hidden;
+}
+
+/* graphics-container */
+
+article {
+	width: 250px;
+	height: 190px;
+	margin: 14px 25px 0;
+	float: left;
+}
+
+article h2 {
+	font-size: 11px;
+	line-height: 1.2em;
+	margin: 5px 0;
+}
+
+.graphics-image {
+	border: 1px solid #CCC;
+	border-top-color: #EEE;
+	border-left-color: #EEE;
+	max-width: 250px;
+	height: 150px;
+}
+
+.image-wrapper {
+	position: relative;
+}
+
+.date {
+	position: absolute;
+	bottom: 10px;
+	left: 10px;
+	background-color: rgba(124, 124, 124, 0.48);
+	padding: 2px 5px;
+	font-size: 12px;
+	color: #4D4D4D;
+}
+
+/* filter */
+
+.filters-wrapper {
+	width: 220px;
+	height: 1000px;
+	float: left;
+	margin: 20px 10px;
+}
+
+.filter-wrapper h2 {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+	padding: 10px 0;
+}
+
+.filter-wrapper li {
+	font-size: 13px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.filter-wrapper li:hover, .filter-wrapper li.active {
+	background-color: rgb(238, 238, 238);
+}
+
+input[type="text"] {
+	padding: 6px 5px;
+	width: 100%;
+}
