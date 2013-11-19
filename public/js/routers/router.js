@@ -2,8 +2,7 @@ APP.Router = Backbone.Router.extend({
 	
 	routes: {
        "!/"                       : "index",
-       "!/search"                 : "filterResults", 
-       "*path"                    : "notFound", 
+       "!/search"                 : "filterResults"
   	},
 
     initialize: function() {
@@ -24,6 +23,7 @@ APP.Router = Backbone.Router.extend({
       // trigger rendergraphics when data is loaded
       APP.graphics.on("dataLoaded", function() {
          self.renderGraphics(APP.collectionData);
+         Backbone.history.start();  // start the history after data is loaded
       })
 
       // get and display the facets
@@ -43,6 +43,8 @@ APP.Router = Backbone.Router.extend({
 
          $('.filters-wrapper').append(APP.facetsView.$el);
       })
+
+     
     },
 
    renderGraphics: function(collection) {
@@ -58,7 +60,22 @@ APP.Router = Backbone.Router.extend({
      // console.log (params);
 
       var newCollection = this.search(params);
+    
+      // Get All the Facets from Param
+      
+      var _paramsArray = new Array(),
+          _paramsValueArray = new Array()
+          $facets = $('.facet');
+                        
+         _.each(params, function(value, key){
+           _paramsArray.push(key);
+           _paramsValueArray.push(value);
+         });
+
+         
+
       this.renderGraphics (newCollection);
+      
    },
 
    search: function(params){
@@ -82,7 +99,7 @@ APP.Router = Backbone.Router.extend({
          return new Backbone.Collection(newCollection);
 
         } else {
-         return APP.collectionData;  // if no parameters are set - return normal collection
+         return newCollection;  // if no parameters are set - return normal collection
         }   
    },
 
@@ -91,17 +108,18 @@ APP.Router = Backbone.Router.extend({
    }, 
 
    notFound: function() {
-     // console.log ("404 message here");
+      console.log ("404 message here");
    },
 
    index: function () {
-      //removes all clases
-       $('.facet').removeClass('active');     
+      var self = this;
 
-       this.renderGraphics (APP.collectionData);
+      //removes all clases
+      $('.facet').removeClass('active');     
+      self.renderGraphics (APP.collectionData);
+      
    }
 
 });
 
 APP.router = new APP.Router();
-Backbone.history.start({root: '/'});

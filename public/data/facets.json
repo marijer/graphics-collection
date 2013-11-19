@@ -3,20 +3,35 @@
     {
       "facet": "newspaper",
       "heading": "News Organization",
-      "options": ["Guardian", "Ny Times"],
+      "options": [
+          {"facet":"Guardian", "title":"Guardian"},
+          {"facet":"NY Times", "title":"New York Times"}
+      ],
       "sort_order": ""        
     },
     {
       "facet": "newscategory",
       "heading": "Category",
-      "options": ["Business", "Sports", "Conflict"],
+      "options": [
+        {"facet": "economy", "title":"Business"}, 
+        {"facet": "Sports", "title":"Sports"}, 
+        {"facet": "Conflict", "title":"Conflict"},
+        {"facet": "Politics", "title":"Politics"},
+        {"facet": "Culture", "title":"Culture"},
+        {"facet": "Disaster", "title":"Disaster"}
+      ],
       "sort_order": ""    
     },
-    {
-      "facet": "opendata",
-      "heading": "Open data",
-      "options": [0, 1],
-      "sort_order": ""    
+     {
+      "facet": "annotation",
+      "heading": "Annotation",
+      "options": [
+          {"facet":"high", "title":"high"},
+          {"facet":"low", "title":"low"},
+          {"facet":"debatable", "title":"debatable"}
+      ],
+      "sort_order": ""        
     }
+
   ]
 }
