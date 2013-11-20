@@ -32,9 +32,9 @@
       "facet": "annotation",
       "heading": "Annotation",
       "options": [
-          {"facet":"high", "title":"high"},
-          {"facet":"low", "title":"low"},
-          {"facet":"debatable", "title":"debatable"}
+          {"facet":"high", "title":"High"},
+          {"facet":"low", "title":"Low"},
+          {"facet":"debatable", "title":"Debatable"}
       ],
       "sort_order": ""        
     },
@@ -42,9 +42,9 @@
       "facet": "datatype",
       "heading": "Data Type",
       "options": [
-          {"facet":"quantative", "title":"quantative"},
-          {"facet":"combination", "title":"combination"},
-          {"facet":"qualitative", "title":"qualitative"}
+          {"facet":"quantative", "title":"Quantative"},
+          {"facet":"combination", "title":"Combination"},
+          {"facet":"qualitative", "title":"Qualitative"}
       ],
       "sort_order": ""        
     },
@@ -52,7 +52,7 @@
       "facet": "flash",
       "heading": "Flash",
       "options": [
-          {"facet":"flash", "title":"flash"},
+          {"facet":"flash", "title":"Flash"},
           {"facet":"non-flash", "title":"non-flash"}
       ],
       "sort_order": ""        

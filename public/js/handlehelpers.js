@@ -1,3 +1,5 @@
+
+// converts date=20120802 to August, 2013
 var m_names = new Array("January", "February", "March", "April", "May", 
 	"June", "July", "August", "September", "October", "November", "December");
 
@@ -9,7 +11,7 @@ Handlebars.registerHelper("formatDate", function( date ) {
  	month = month.replace(/^0+/, '');  // regex removes leading zero's
  	var f_month = m_names[month - 1];	// set month zero based
 
-  	return f_month + " " + year;
+  	return f_month + ", " + year;
 });
 
 
@@ -26,3 +28,9 @@ Handlebars.registerHelper("getImgPath", function( data ) {
   	return imgPath;
 });
 
+// sets correct class on title which has the favicon in css 
+Handlebars.registerHelper("setFavicon", function( data ) {
+	var faviconClass = data === "Guardian" ? 'gua' : 'nyt'
+	faviconClass+= " favicon";
+	return faviconClass;
+})

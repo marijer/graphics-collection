@@ -58,39 +58,74 @@ header h2 {
 	overflow:auto;
 }
 
-article {
-	width: 250px;
-	height: 190px;
-	margin: 0 35px 25px 0;
-	float: left;
-}
-
-article h2 {
-	font-size: 11px;
-	line-height: 1.2em;
-	margin: 5px 0;
+a:hover .graphics-image {
+	border-color: rgb(134, 197, 255);
 }
 
 .graphics-image {
 	border: 1px solid #CCC;
 	border-top-color: #EEE;
 	border-left-color: #EEE;
-	max-width: 250px;
-	height: 150px;
 }
 
 .image-wrapper {
 	position: relative;
+	height: 150px;
+	max-width: 250px;
+	background: #CCC;
 }
+
+.inner-graphics-wrapper {
+	max-width: 252px;
+}
+
+article {
+	min-width: 250px;
+	height: 190px;
+	margin: 0 35px 25px 0;
+	float: left;
+	width: 29%;
+}
+
+article h2 {
+	font-size: 12px;
+	line-height: 1.2em;
+	margin: 5px 0;
+	min-height: 20px;
+	padding-left: 25px;
+	color: #555555;
+	font-weight: 400;
+}
+
+article h2 span {
+	padding-top: 5px;
+	display: inline-block;
+}
+
+.favicon {
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	display: inline-block;
+}
+
+.gua {
+	background-image: url('../img/assets/favicon_guardian.png');
+}
+
+.nyt {
+	background-image: url('../img/assets/favicon_nytimes.png');
+}
+
 
 .date {
 	position: absolute;
-	bottom: 10px;
-	left: 10px;
+	bottom: 5px;
+	right: 5px;
 	background-color: rgba(124, 124, 124, 0.48);
-	padding: 2px 5px;
+	padding: 3px 10px;
 	font-size: 12px;
-	color: #4D4D4D;
+	color: #ECECEC;
+	text-shadow: -1px 1px #929292;
 }
 
 .show-more {
@@ -112,15 +147,15 @@ article h2 {
 }
 
 .filter-wrapper h2 {
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: bold;
 	margin: 0;
-	padding: 0 0 10px;
+	padding: 0 0 5px;
 }
 
 .filter-wrapper li {
-	font-size: 13px;
-	padding: 5px;
+	font-size: 12px;
+	padding: 4px 5px;
 	cursor: pointer;
 }
 

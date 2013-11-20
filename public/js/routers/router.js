@@ -74,6 +74,8 @@ APP.Router = Backbone.Router.extend({
       var _paramsArray = new Array(),
           _paramsValueArray = new Array()
           $facets = $('.facet');
+
+//TODO this removing class could be done smarter;
           $facets.removeClass('active'); 
                         
          _.each(params, function(value, key){
@@ -84,7 +86,8 @@ APP.Router = Backbone.Router.extend({
       if (_paramsValueArray.length){
           
           var _facets = _.filter($facets, function(i, k){
-            return _.indexOf(_paramsValueArray, $(i).text()) != -1? true: false
+            var facet_name = $(i).data('facet-name').toLowerCase();
+            return _.indexOf(_paramsValueArray, facet_name) != -1? true: false
           });
           
           // Add Active Class to Selected Facet
@@ -101,7 +104,7 @@ APP.Router = Backbone.Router.extend({
          if (params.sort) {
             // call sort function
             APP.graphics.sortByColumn("title");
-
+//TODO need to set the right option
             delete params.sort;
          } 
 
@@ -115,7 +118,6 @@ APP.Router = Backbone.Router.extend({
                   newCollection = newCollection.filter(function(doc){        
                      pattern.lastIndex= 0; // Reset the last Index          
                      return pattern.test(doc.get(key));        
-                 
                   });
             }) //end each
 
