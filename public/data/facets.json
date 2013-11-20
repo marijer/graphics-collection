@@ -13,12 +13,18 @@
       "facet": "newscategory",
       "heading": "Category",
       "options": [
+        {"facet": "Politics", "title":"Politics"},
         {"facet": "economy", "title":"Business"}, 
         {"facet": "Sports", "title":"Sports"}, 
         {"facet": "Conflict", "title":"Conflict"},
-        {"facet": "Politics", "title":"Politics"},
+        {"facet": "Disaster", "title":"Disaster"},
+        {"facet": "Environment", "title":"Environment"},
+        {"facet": "Demographics", "title":"Demographics"},
+        {"facet": "Science", "title":"Science"},
         {"facet": "Culture", "title":"Culture"},
-        {"facet": "Disaster", "title":"Disaster"}
+        {"facet": "lifestyle", "title":"Lifestyle"},
+        {"facet": "healthcare", "title":"Healthcare"},
+        {"facet": "other", "title":"Other"}
       ],
       "sort_order": ""    
     },
@@ -29,6 +35,25 @@
           {"facet":"high", "title":"high"},
           {"facet":"low", "title":"low"},
           {"facet":"debatable", "title":"debatable"}
+      ],
+      "sort_order": ""        
+    },
+    {
+      "facet": "datatype",
+      "heading": "Data Type",
+      "options": [
+          {"facet":"quantative", "title":"quantative"},
+          {"facet":"combination", "title":"combination"},
+          {"facet":"qualitative", "title":"qualitative"}
+      ],
+      "sort_order": ""        
+    },
+    {
+      "facet": "flash",
+      "heading": "Flash",
+      "options": [
+          {"facet":"flash", "title":"flash"},
+          {"facet":"non-flash", "title":"non-flash"}
       ],
       "sort_order": ""        
     }

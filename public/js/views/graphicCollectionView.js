@@ -2,50 +2,80 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 	tagName: "div",  // default setting
 	className: "article-wrapper",
 
+	template: Handlebars.compile(
+		'<div class="show-more">show more</div>'
+	),
+
+	page: 0,
+	limit: 6,
+	totalGraphics: 0,
+
+	events: {
+	    'click .show-more': 'onShowMore',
+  	},
+
 	initialize: function() {
-		this.on("change:filterType", this.filterByType, this);
     	this.on("reset", this.render, this);
+
+    	$(window).scroll(this.onScrolling);
 	},
 
 	render: function() {
-		this.$el.html("");  // reset html element
-		this.renderGraphics(); // render
-	},
+		var self = this;
+		self.$el.html("");  // reset html element
 
-	renderGraphics: function() {
-		this.updateTotalGraphics (this.collection.length);
-		this.collection.each(this.addOne, this);
-        	return this;
+		self.totalGraphics = self.collection.length;
+		self.updateTotalGraphics();
+		
+		self.page = 0;
+
+		self.renderProjectGroup(self.page, self.limit);
+
+		if (self.limit <= self.totalGraphics) {
+			self.$el.append(self.template);
+		}
 	},
+		
 
 	addOne: function( model ) {
         var graphicItemView = new APP.GraphicItemView({
             model: model
         });
+
+
         this.$el.append(graphicItemView.render().el);
     },
 
-    updateTotalGraphics: function( num ) {
-    	$('.total-graphics').html( num + " graphics");
+	renderProjectGroup: function(start, end) {
+		end--;
+	   var subset = _.filter(this.collection.models, function(num, index){
+	      return (index >= start) && (index <= end);
+	   });
+
+	   _.each(subset, function(project) {
+	   		this.addOne(project);
+	   }, this);
+	},
+
+    updateTotalGraphics: function(  ) {
+    	$('.total-graphics').html( this.totalGraphics + " graphics");
     },
 
-	sortCollection: function () {
-		//this.collection.fetch({reset: true});
-		this.$el.html("");
-		console.log (this.collection.models);
-		
-		var filtered = _.filter(this.collection.models, function(graphic) {
-    		console.log ( graphic.get("newscategory") === "Conflict" );
-    		return graphic.get("newscategory") === "Conflict";
-  		});
-		this.collection.reset(filtered);
-/*
-		var filtered = _.filter(this.collection.models, function(item) {
-    		return item.get("title") == "how";
-  		});
-  		console.log (filtered);
-  		this.collection.reset(filtered);
-  		*/
-	}
+    onShowMore: function() {
+    	this.page++;
+    	var start = this.page * this.limit;
+    	var end = start + this.limit;
+
+    	$( ".show-more" ).remove();
+    	this.renderProjectGroup(start, start + this.limit);
+
+    	if (end < this.totalGraphics) {
+    		this.$el.append(this.template);
+    	} 
+    },
+
+    onScrolling: function () {
+
+    }
 
 })

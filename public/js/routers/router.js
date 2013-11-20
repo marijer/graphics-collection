@@ -1,5 +1,6 @@
 APP.Router = Backbone.Router.extend({
-	
+	prev: false,
+
 	routes: {
        "!/"                       : "index",
        "!/search"                 : "filterResults"
@@ -11,20 +12,6 @@ APP.Router = Backbone.Router.extend({
      // var search = new APP.SearchView();
      // $('.filters-wrapper').append(search.$el);
 
-      //get the collection data 
-      APP.graphics = new APP.Graphics();
-      APP.graphics.fetch({
-         success: function (collection, response, options) {
-            APP.collectionData = collection;   
-            APP.graphics.trigger("dataLoaded");
-         }
-      });
-
-      // trigger rendergraphics when data is loaded
-      APP.graphics.on("dataLoaded", function() {
-         self.renderGraphics(APP.collectionData);
-         Backbone.history.start();  // start the history after data is loaded
-      })
 
       // get and display the facets
       APP.facets = new APP.Facets();
@@ -40,15 +27,38 @@ APP.Router = Backbone.Router.extend({
          APP.facetsView = new APP.FacetsView({
           collection: APP.facetsData
       });
-
          $('.filters-wrapper').append(APP.facetsView.$el);
+          self.startRouter();
       })
-     
+
+      //get the collection data 
+      APP.graphics = new APP.Graphics();
+      APP.graphics.fetch({
+         success: function (collection, response, options) {
+            console.log(collection);
+            APP.collectionData = collection;   
+            APP.graphics.trigger("dataLoaded");
+         }
+      });
+
+      // trigger rendergraphics when data is loaded
+      APP.graphics.on("dataLoaded", function() {
+         self.renderGraphics(APP.collectionData);
+         self.startRouter();
+      })
+    },
+
+    startRouter: function() {  //starts the router after both renders are done
+      if (APP.router.prev){
+         Backbone.history.start(); 
+      } else {
+         APP.router.prev = true;
+      }
     },
 
    renderGraphics: function(collection) {
       APP.graphicCollectionView = new APP.GraphicCollectionView ({
-          collection: collection
+          collection: collection,
       });
 
       APP.graphicCollectionView.render();
@@ -60,27 +70,26 @@ APP.Router = Backbone.Router.extend({
 
       var newCollection = this.search(params);
 
-
       // Get All the Facets from Param
       
       var _paramsArray = new Array(),
           _paramsValueArray = new Array()
           $facets = $('.facet');
+          $facets.removeClass('active'); 
                         
          _.each(params, function(value, key){
            _paramsArray.push(key);
            _paramsValueArray.push(value);
          });
-
+         
       if (_paramsValueArray.length){
-        
+          
           var _facets = _.filter($facets, function(i, k){
             return _.indexOf(_paramsValueArray, $(i).text()) != -1? true: false
           });
           
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
-          
       }
 
       this.renderGraphics (newCollection);
@@ -95,7 +104,6 @@ APP.Router = Backbone.Router.extend({
             APP.graphics.sortByColumn("title");
 
             delete params.sort;
-            //this.render()
          } 
 
          if(_.size(params)){ // checks if 1 or more parameters are used

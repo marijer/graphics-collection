@@ -11,6 +11,10 @@ APP.Graphics = Backbone.Collection.extend ( {
 	sortByColumn: function(colName) {
 	  this.comparator = colName;
 	  this.sort();
-	}
+	},
+
+	nextPage : function() {
+        this.page++;
+    }
 
 })
