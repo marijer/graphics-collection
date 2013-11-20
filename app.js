@@ -1,8 +1,9 @@
 var path     = require ("path"),
-	 _        = require ("underscore"),
-	 express  = require ("express"),
-	 mysql    = require('mysql'),
-	 http     = require('http');
+	_        = require ("underscore"),
+	express  = require ("express"),
+	request  = require('request'),
+	mysql    = require('mysql'),
+	http     = require('http');
 
 var app = express()
 			.use (express.static (__dirname,
@@ -10,28 +11,14 @@ var app = express()
 									path.join (__dirname, "js")))
 			.use(express.bodyParser());
 
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'node_test',
-  password : 'node_test1',
-  database : 'thesis'
-});
-
-var object_json;
-
-	connection.connect();
-
-	connection.query('SELECT * from graphics LIMIT 40', function(err, rows, fields) {
-	  if (err) throw err;
-
-	 // console.log('first data row: ', rows[0]);
-	   object_json = rows;
-	});
-
-	connection.end();
+request('http://marijerooze.nl/thesis/graphics/API/', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    object_json = body;
+  }
+})
 
 app.get ("/graphics", function( req, res ) {
-	res.json ( object_json );
+	res.send( object_json );
 });
 
 
