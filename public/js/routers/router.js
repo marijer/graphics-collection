@@ -35,7 +35,6 @@ APP.Router = Backbone.Router.extend({
       APP.graphics = new APP.Graphics();
       APP.graphics.fetch({
          success: function (collection, response, options) {
-            console.log(collection);
             APP.collectionData = collection;   
             APP.graphics.trigger("dataLoaded");
          }

@@ -8,7 +8,7 @@ APP.Graphics = Backbone.Collection.extend ( {
 		this.on('change', this.viewRefresh, this);
 	},
 
-	sortByColumn: function(colName) {
+	sortByColumn: function(colName) { // this needs to be fixed properly
 	  this.comparator = colName;
 	  this.sort();
 	},

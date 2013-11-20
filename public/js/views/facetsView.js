@@ -25,7 +25,7 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   initialize: function(){
-    this.renderSort();
+   // this.renderSort();
     this.renderFacets();
   },
 
@@ -85,7 +85,6 @@ APP.FacetsView = Backbone.View.extend ({
       var option = $("option:selected", field);
 
       this.filterResults(option, true);  // tell renderResults its a select menu
-
   },
 
   render: function () {
