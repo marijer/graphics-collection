@@ -30,7 +30,7 @@ APP.SortView = Backbone.View.extend ({
       var field = $(e.currentTarget);
       var option = $("option:selected", field);
 
-      this.trigger("sorted", {option: option});
+      this.trigger("sorted_Changed", {target: option});
   },
 
 })

@@ -16,55 +16,21 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   initialize: function(){
-    this.renderFacets();
+    this.render();
   },
 
-  renderFacets: function() {
-  	var self = this;
-    var col =  self.collection.attributes;
-    //console.log(col);
-
-    _.each(col.facets, function(facet) {
-        this.$el.append(this.template(facet));
-      }, this);
-  },
-
-  filterResults: function( e, select ) {
-      var self = this,
-         $this = $(e.target),
-         $parent = $this.parent();
-
-      if (select) $this = e;
-        
-        // set class active or non-active
-      if($this.hasClass('active')){
-         $this.removeClass("active");
-      } else {
-         $this.addClass('active').siblings().removeClass('active');
-      }
-        
-      // go through all selected facets and save them in array
-      var _hash = [];
-
-      self.$el.find('.active').each(function(){
-          
-      var el = $(this),
-         category = el.attr("data-facet"),
-         name = el.attr("data-facet-name").toLowerCase();
-         _hash.push(category+"="+escape(name));
-      });
-
-      if(_hash.length){
-          window.location.hash="!/search?"+_hash.join('&');
-      }else{
-         window.location.hash="!/";
-      }
-      
-      if (e.preventDefault) e.preventDefault();
+  filterResults: function(e) {
+    this.trigger("filter_Changed", {target: e.target});
   },
 
   render: function () {
+    var self = this;
+    var col =  self.collection;
+    //console.log(col);
 
+    _.each(col, function(facet) {
+        this.$el.append(this.template(facet));
+      }, this);
   }
 
 });

@@ -5,6 +5,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 
 		self.initSearch();
 		self.initSort();
+		self.initFacet();
 	},
 
 	initSearch: function() {
@@ -19,19 +20,31 @@ APP.FacetsMasterView = Backbone.View.extend({
 		var sort = new APP.SortView({collection: sortData});
 		$('.sort-by').append(sort.$el);
 
-		sort.on("sorted", function(el) {  
-        	//self.filterResults(el.option, true);
-        	console.log(el.option);
+		sort.on("sorted_Changed", function(el) {  
+        	self.filterResults(el.target);
       	});
 	},
 
+	initFacet: function() {
+		var self = this;
+
+         APP.facetsView = new APP.FacetsView({
+          collection: self.collection.attributes.facets
+         });
+
+         $('.filters-wrapper').append(APP.facetsView.$el);
+
+		APP.facetsView.on("filter_Changed", function(el) {  
+        	self.filterResults(el.target);
+      	});
+	},
 
     filterResults: function( e, select ) {
       var self = this,
-         $this = $(e.target),
+         $this = $(e),
          $parent = $this.parent();
 
-      if (select) $this = e;
+      if (select) var $this = e;
         
         // set class active or non-active
       if($this.hasClass('active')){
@@ -43,7 +56,7 @@ APP.FacetsMasterView = Backbone.View.extend({
       // go through all selected facets and save them in array
       var _hash = [];
 
-      self.$el.find('.active').each(function(){
+      $('body').find('.active').each(function(){
           
       var el = $(this),
          category = el.attr("data-facet"),
@@ -58,6 +71,6 @@ APP.FacetsMasterView = Backbone.View.extend({
       }
       
       if (e.preventDefault) e.preventDefault();
-  	},
+  	}
 
 });

@@ -21,13 +21,6 @@ APP.Router = Backbone.Router.extend({
 
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  
-         APP.facetsView = new APP.FacetsView({
-          collection: APP.facetsData
-      });
-
-         
-         $('.filters-wrapper').append(APP.facetsView.$el);
-
           var masterView = new APP.FacetsMasterView({
               collection: APP.facetsData
           });
