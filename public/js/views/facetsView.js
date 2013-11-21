@@ -19,14 +19,14 @@ APP.FacetsView = Backbone.View.extend ({
     this.render();
   },
 
+//triggers function in master view
   filterResults: function(e) {
-    this.trigger("filter_Changed", {target: e.target});
+    this.trigger("filter_Changed", {target: e.target}); 
   },
 
   render: function () {
     var self = this;
     var col =  self.collection;
-    //console.log(col);
 
     _.each(col, function(facet) {
         this.$el.append(this.template(facet));

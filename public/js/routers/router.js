@@ -9,7 +9,6 @@ APP.Router = Backbone.Router.extend({
     initialize: function() {
       var self = this;
      
-     
       // get and display the facets
       APP.facets = new APP.Facets();
       APP.facets.fetch({
@@ -21,10 +20,6 @@ APP.Router = Backbone.Router.extend({
 
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  
-          var masterView = new APP.FacetsMasterView({
-              collection: APP.facetsData
-          });
-
           self.startRouter();
       })
 
@@ -47,6 +42,12 @@ APP.Router = Backbone.Router.extend({
     startRouter: function() {  //starts the router after both renders are done
       if (APP.router.prev){
          Backbone.history.start(); 
+
+          var masterView = new APP.FacetsMasterView({
+              collection: APP.facetsData
+          });
+
+
       } else {
          APP.router.prev = true;
       }
@@ -62,12 +63,9 @@ APP.Router = Backbone.Router.extend({
    },
 
    filterResults:function(params) {
-      // console.log (params);
-
       var newCollection = this.search(params);
 
       // Get All the Facets from Param
-      
       var _paramsArray = new Array(),
           _paramsValueArray = new Array()
           $facets = $('.facet');
@@ -84,24 +82,23 @@ APP.Router = Backbone.Router.extend({
           
           var _facets = _.filter($facets, function(i, k){
             var facet_name = $(i).data('facet-name').toLowerCase();
-            return _.indexOf(_paramsValueArray, facet_name) != -1? true: false
+            return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
           });
           
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
       }
 
-      this.renderGraphics (newCollection);
+      this.renderGraphics( newCollection );
    },
 
    search: function(params){
       var self = this,
           newCollection = APP.collectionData;
 
+          // call sort function with right param + remove it from selection
          if (params.sort) {
-            // call sort function
-            APP.graphics.sortByColumn("title");
-//TODO need to set the right option
+            APP.graphics.sortByColumn(params.sort);
             delete params.sort;
          } 
 
@@ -139,9 +136,9 @@ APP.Router = Backbone.Router.extend({
       //removes all clases
       $('.facet').removeClass('active');     
       self.renderGraphics (APP.collectionData);
-
    }
 
 });
+
 
 APP.router = new APP.Router();

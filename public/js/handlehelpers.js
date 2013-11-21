@@ -34,3 +34,11 @@ Handlebars.registerHelper("setFavicon", function( data ) {
 	faviconClass+= " favicon";
 	return faviconClass;
 })
+
+
+Handlebars.registerHelper("setSelected", function(param1, param2) {
+	sel = param1.selection === param2 ? "selected" : "";
+
+	return sel;
+})
+

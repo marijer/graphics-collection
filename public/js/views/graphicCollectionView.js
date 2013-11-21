@@ -16,7 +16,6 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 
 	initialize: function() {
     	this.on("reset", this.render, this);
-
     	$(window).scroll(this.onScrolling);
 	},
 
@@ -35,13 +34,11 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 			self.$el.append(self.template);
 		}
 	},
-		
 
 	addOne: function( model ) {
         var graphicItemView = new APP.GraphicItemView({
             model: model
         });
-
 
         this.$el.append(graphicItemView.render().el);
     },
@@ -79,7 +76,5 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 		if($(window).scrollTop() + $(window).height() == $(document).height()) {
 		    // show more graphics
 		 }
-
     }
-
 })

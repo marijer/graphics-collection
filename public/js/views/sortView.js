@@ -3,9 +3,9 @@ APP.SortView = Backbone.View.extend ({
 	className: "filter",
 
 	template: Handlebars.compile(
-	      '<select>' + 
+	      '<select class="sort-by">' + 
 	         '{{#each sort}}' +
-	         '<option class="facet" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
+	         '<option class="facet option-sort" {{setSelected ../this this.facet}} data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
 	         '{{/each}}' +
 	      '</select>'
 	),
@@ -20,13 +20,20 @@ APP.SortView = Backbone.View.extend ({
 
 	render: function () {
         var self = this;
-        var col =  self.collection;
+        var col = self.collection;
+		
+		var app = Backbone.history.getQueryParameters();
 
+        if (app.sort){
+			col.selection = app.sort;
+		}
+		
      	this.$el.append(this.template(col));
 	},
 
    selectionChanged: function( e ) {
       e.preventDefault();
+      console.log("hi")
       var field = $(e.currentTarget);
       var option = $("option:selected", field);
 
