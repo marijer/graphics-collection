@@ -23,9 +23,9 @@ APP.SortView = Backbone.View.extend ({
         var self = this;
         var col = self.collection;
 		
-		var app = Backbone.history.getQueryParameters();
+	//	var app = Backbone.history.getQueryParameters();
 
-        if (app.sort){ col.selection = app.sort; } //sets selection if it is there
+    //    if (app.sort){ col.selection = app.sort; } //sets selection if it is there
 		
      	this.$el.append(this.template(col));
 	},
@@ -36,7 +36,7 @@ APP.SortView = Backbone.View.extend ({
       var field = $(e.currentTarget);
       var option = $("option:selected", field);
 
-      this.trigger("sorted_Changed", {target: option});
+     this.trigger("sorted_Changed", {target: option});
   },
 
 })

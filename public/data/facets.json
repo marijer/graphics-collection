@@ -39,11 +39,11 @@
       "sort_order": ""        
     },
     {
-      "facet": "datatype",
+      "facet": "visualizationtype",
       "heading": "Data Type",
       "options": [
-          {"facet":"quantative", "title":"Quantative"},
-          {"facet":"combination", "title":"Combination"},
+          {"facet":"quantitative", "title":"Quantative"},
+          {"facet":"hybrid", "title":"Combination"},
           {"facet":"qualitative", "title":"Qualitative"}
       ],
       "sort_order": ""        

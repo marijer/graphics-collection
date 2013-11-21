@@ -13,7 +13,7 @@ li {
 }
 
 header {
-	height: 35px;
+	height: 30px;
 	border-bottom: 1.5px solid #B7B7B7;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 	
@@ -30,11 +30,11 @@ header {
 
 .header-constraint {
 	margin: 0 20px;
-	padding: 5px 0;
+	padding: 2px 0;
 }
 
 header h2 {
-	font-size: 1em;
+	font-size: .9em;
 	color: #DDDDDD;
 	line-height: 1.7em;
 	margin: 0;
@@ -44,7 +44,7 @@ header h2 {
 
 .content-wrapper {
 	overflow: hidden;
-	margin: 20px;
+	margin: 60px 20px;
 }
 
 /* graphics-container */
@@ -143,6 +143,33 @@ article h2 span {
 	cursor: pointer;
 }
 
+/* fixed submenu */
+
+.fixed-menu-wrapper {
+	height: 35px;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	background: #FFF;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.inner-fixed-menu {
+	padding: 1px 20px;
+}
+
+.search-input {
+	padding: 5px;
+	width: 215px;
+	font-size: .8em;
+	font-family: "helvetica Neue";
+	font-weight: 200;
+	border: 1px solid #E0E0E0;
+	border-top-color: #E6E6E6;
+	border-right: 1px solid #C7C7C7;
+	border-bottom: 1px solid #C7C7C7;
+}
+
 /* filter */
 
 .filters-wrapper {
@@ -169,9 +196,4 @@ article h2 span {
 
 .filter-wrapper li:hover, .filter-wrapper li.active {
 	background-color: rgb(238, 238, 238);
-}
-
-input[type="text"] {
-	padding: 6px 5px;
-	width: 100%;
 }

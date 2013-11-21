@@ -20,6 +20,11 @@ APP.Router = Backbone.Router.extend({
 
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  
+        
+          var masterView = new APP.FacetsMasterView({
+              collection: APP.facetsData
+          });
+
           self.startRouter();
       })
 
@@ -42,11 +47,6 @@ APP.Router = Backbone.Router.extend({
     startRouter: function() {  //starts the router after both renders are done
       if (APP.router.prev){
          Backbone.history.start(); 
-
-          var masterView = new APP.FacetsMasterView({
-              collection: APP.facetsData
-          });
-
 
       } else {
          APP.router.prev = true;
