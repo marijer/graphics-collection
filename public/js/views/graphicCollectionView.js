@@ -7,7 +7,7 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 	),
 
 	page: 0,
-	limit: 12,
+	limit: 9,
 	totalGraphics: 0,
 
 	events: {
@@ -54,7 +54,7 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 	},
 
     updateTotalGraphics: function(  ) {
-    	$('.total-graphics').html( this.totalGraphics + " graphics");
+    	$('.total-graphics').html( "<span class='bold'>"+ this.totalGraphics + "</span> graphics");
     },
 
     onShowMore: function() {

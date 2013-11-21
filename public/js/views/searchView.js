@@ -5,7 +5,7 @@ APP.SearchView = Backbone.View.extend ({
 
 	template: Handlebars.compile(
 		'<div class="search">' +
-			'<input class="search-input" data-facet="title" data-facet-name="" type="text" placeholder="search" >' +
+			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search title" >' +
 		'</div>'
 	),
 
@@ -36,12 +36,6 @@ APP.SearchView = Backbone.View.extend ({
 		}
 		
 		this.trigger("search_Changed", {target: $search});
-
-		// update data attribute
-		/*
-		need to check 
-		debounce > sets a delay
-		*/
 	}
 
 })

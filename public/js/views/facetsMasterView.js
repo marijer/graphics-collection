@@ -10,11 +10,10 @@ APP.FacetsMasterView = Backbone.View.extend({
 
 	initSearch: function() {
 		var self = this;
-	    var search = new APP.SearchView();
-	    $('.inner-fixed-menu').append(search.$el);
+	    var search = new APP.SearchView({ el: $(".search-wrapper") });
 
 	    search.on("search_Changed", function(el) {  
-        	self.filterResults(el.target);
+        	_.debounce(self.filterResults(el.target), 800);	
       	});
 	},
 
@@ -50,6 +49,7 @@ APP.FacetsMasterView = Backbone.View.extend({
          $parent = $this.parent(),
          search = false;
 
+         // handle list items + input
          if ( $this.is( "input" ) ) {
          	search = true;
          	var query = $this.val();

@@ -7,24 +7,27 @@ APP.ScrollView = Backbone.View.extend ({
 	},
 
 	goToTop: function() {
-		console.log("clicked");
       $('html,body').animate({ scrollTop: 0 }, 'slow');
       return false; 
 	},
 
     onScrolling: function () {
-    	
-    	if ($(window).scrollTop() > 33) {
+    	var $scrollTop = $(window).scrollTop();
+    	if ($scrollTop > 34) {
 		    $('.fixed-menu-wrapper').addClass('fixed');
-		    $('.scroll-to-top').show();
+
+		    if ( $scrollTop > 400){
+		    	$('.scroll-to-top').fadeIn(600);
+		    } else {
+				$('.scroll-to-top').fadeOut(600);
+		    }
 		} else {
 		    $('.fixed-menu-wrapper').removeClass('fixed');
 		    $('.scroll-to-top').hide();
 		}
 
-		if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		if($scrollTop + $(window).height() == $(document).height()) {
 		    APP.graphicCollectionView.onShowMore();
 		}
-		
     }
 })
