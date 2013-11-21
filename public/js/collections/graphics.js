@@ -4,17 +4,11 @@ APP.Graphics = Backbone.Collection.extend ( {
 	comparator: "date",  //
 
 	initialize: function() {
-		console.log ("collection initialized");
 		this.on('change', this.viewRefresh, this);
 	},
 
 	sortByColumn: function(colName) { // this needs to be fixed properly
 	  this.comparator = colName;
 	  this.sort();
-	},
-
-	nextPage : function() {
-        this.page++;
-    }
-
+	}
 })

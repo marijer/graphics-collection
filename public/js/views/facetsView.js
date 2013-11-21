@@ -11,38 +11,22 @@ APP.FacetsView = Backbone.View.extend ({
     '</div>'
   ),
 
-  template2: Handlebars.compile(
-      '<select>' + 
-         '{{#each sort}}' +
-         '<option class="facet" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
-         '{{/each}}' +
-      '</select>'
-   ),
-
   events: {
     'click .facet': 'filterResults',
-    'change select': 'selectionChanged',
   },
 
   initialize: function(){
-   // this.renderSort();
     this.renderFacets();
   },
 
   renderFacets: function() {
   	var self = this;
-   var col =  self.collection.attributes;
+    var col =  self.collection.attributes;
+    //console.log(col);
 
     _.each(col.facets, function(facet) {
         this.$el.append(this.template(facet));
       }, this);
-  },
-
-  renderSort: function() {
-      var self = this;
-      var col =  self.collection.attributes;
-
-      this.$el.append(this.template2(col.sort));
   },
 
   filterResults: function( e, select ) {
@@ -77,14 +61,6 @@ APP.FacetsView = Backbone.View.extend ({
       }
       
       if (e.preventDefault) e.preventDefault();
-  },
-
-   selectionChanged: function( e ) {
-      e.preventDefault();
-      var field = $(e.currentTarget);
-      var option = $("option:selected", field);
-
-      this.filterResults(option, true);  // tell renderResults its a select menu
   },
 
   render: function () {

@@ -9,10 +9,7 @@ APP.Router = Backbone.Router.extend({
     initialize: function() {
       var self = this;
      
-     // var search = new APP.SearchView();
-     // $('.filters-wrapper').append(search.$el);
-
-
+     
       // get and display the facets
       APP.facets = new APP.Facets();
       APP.facets.fetch({
@@ -27,7 +24,14 @@ APP.Router = Backbone.Router.extend({
          APP.facetsView = new APP.FacetsView({
           collection: APP.facetsData
       });
+
+         
          $('.filters-wrapper').append(APP.facetsView.$el);
+
+          var masterView = new APP.FacetsMasterView({
+              collection: APP.facetsData
+          });
+
           self.startRouter();
       })
 

@@ -75,6 +75,10 @@ APP.GraphicCollectionView = Backbone.View.extend ({
     },
 
     onScrolling: function () {
+    	var self = this;
+		if($(window).scrollTop() + $(window).height() == $(document).height()) {
+		    // show more graphics
+		 }
 
     }
 
