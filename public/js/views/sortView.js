@@ -3,6 +3,7 @@ APP.SortView = Backbone.View.extend ({
 	className: "filter",
 
 	template: Handlebars.compile(
+		'<span class="label">Sort By</span>' +
 	      '<select class="sort-by">' + 
 	         '{{#each sort}}' +
 	         '<option class="facet option-sort" {{setSelected ../this this.facet}} data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
@@ -24,9 +25,7 @@ APP.SortView = Backbone.View.extend ({
 		
 		var app = Backbone.history.getQueryParameters();
 
-        if (app.sort){
-			col.selection = app.sort;
-		}
+        if (app.sort){ col.selection = app.sort; } //sets selection if it is there
 		
      	this.$el.append(this.template(col));
 	},

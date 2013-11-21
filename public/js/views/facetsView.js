@@ -32,5 +32,4 @@ APP.FacetsView = Backbone.View.extend ({
         this.$el.append(this.template(facet));
       }, this);
   }
-
 });

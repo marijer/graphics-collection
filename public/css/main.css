@@ -49,6 +49,10 @@ header h2 {
 
 /* graphics-container */
 
+.sort-by {
+	float: right;
+}
+
 .main-content {
 	margin-left: 240px;
 	overflow:hidden;
@@ -56,6 +60,7 @@ header h2 {
 
 .graphics-wrapper {
 	overflow:auto;
+	clear: both;
 }
 
 a:hover .graphics-image {
@@ -115,7 +120,6 @@ article h2 span {
 .nyt {
 	background-image: url('../img/assets/favicon_nytimes.png');
 }
-
 
 .date {
 	position: absolute;
