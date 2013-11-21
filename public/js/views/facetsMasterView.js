@@ -14,8 +14,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 	    $('.inner-fixed-menu').append(search.$el);
 
 	    search.on("search_Changed", function(el) {  
-        	//self.filterResults(el.target);
-        	console.log(el.target);
+        	self.filterResults(el.target);
       	});
 	},
 
@@ -45,19 +44,31 @@ APP.FacetsMasterView = Backbone.View.extend({
       	});
 	},
 
-    filterResults: function( e, select ) {
+    filterResults: function( e ) {
       var self = this,
          $this = $(e),
-         $parent = $this.parent();
+         $parent = $this.parent(),
+         search = false;
 
-      if (select) var $this = e;
-        
-        // set class active or non-active
-      if($this.hasClass('active')){
-         $this.removeClass("active");
-      } else {
-         $this.addClass('active').siblings().removeClass('active');
-      }
+         if ( $this.is( "input" ) ) {
+         	search = true;
+         	var query = $this.val();
+
+			if( query === "" && $this.hasClass("active") ) {
+				$this.removeClass("active");
+			} else {
+				$this.addClass("active");
+			}
+
+         } else {
+		      // set class active or non-active
+		      if($this.hasClass('active')){
+		         $this.removeClass("active");
+		      } else {
+		         $this.addClass('active').siblings().removeClass('active');
+		      }	
+         }
+
         
       // go through all selected facets and save them in array
       var _hash = [];

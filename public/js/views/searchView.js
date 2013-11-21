@@ -24,21 +24,20 @@ APP.SearchView = Backbone.View.extend ({
 
 	onSearch: function () {
 		var $search = $('.search-input');
-		var query = $search.val();
-		
+		var query = $search.val();		
 
 		if( query === "" && $search.hasClass("active") ) {
-			$search.removeClass("active");
-			$search.data( "facet-name", "");
+			//$search.removeClass("active");
 		} else {
-			$('.search-input').data("facet-name", query);
-			
-			if ( !$search.hasClass("active") ){
-				$search.addClass("active");
-			}
+			//$search.addClass("active");
+			var data = $search.attr("data-facet-name");
+		    data = query;
+		    $search.attr('data-facet-name', data);			
 		}
 		
 		this.trigger("search_Changed", {target: $search});
+
+		// update data attribute
 		/*
 		need to check 
 		debounce > sets a delay
