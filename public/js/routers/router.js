@@ -20,7 +20,7 @@ APP.Router = Backbone.Router.extend({
 
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  
-        
+
           var masterView = new APP.FacetsMasterView({
               collection: APP.facetsData
           });
@@ -137,8 +137,6 @@ APP.Router = Backbone.Router.extend({
       $('.facet').removeClass('active');     
       self.renderGraphics (APP.collectionData);
    }
-
 });
-
 
 APP.router = new APP.Router();

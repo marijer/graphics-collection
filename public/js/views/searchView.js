@@ -6,7 +6,7 @@ APP.SearchView = Backbone.View.extend ({
 
 	template: Handlebars.compile(
 		'<div class="search">' +
-			'<input class="search-input" type="text" placeholder="search" >' +
+			'<input class="search-input" data-facet="title" data-facet-name="" type="text" placeholder="search" >' +
 		'</div>'
 	),
 
@@ -24,20 +24,22 @@ APP.SearchView = Backbone.View.extend ({
 	},
 
 	onSearch: function () {
-		var key = $('.search-input').val();
-		var temp = Backbone.history.getQueryParameters();
-
-		if (key === "") {
-			delete temp.q;
-		} else {
-			temp.q = key;
-		}
-
-		var frag = APP.router.toFragment("graphics/", temp);
-
-		APP.router.navigate (frag, {trigger: true});
-		Backbone.history.checkUrl();
+		var $search = $('.search-input');
+		var query = $search.val();
 		
+
+		if( query === "" && $search.hasClass("active") ) {
+			$search.removeClass("active");
+			$search.data( "facet-name", "");
+		} else {
+			$('.search-input').data("facet-name", query);
+			
+			if ( !$search.hasClass("active") ){
+				$search.addClass("active");
+			}
+		}
+		
+		this.trigger("search_Changed", {target: $search});
 		/*
 		need to check 
 		debounce > sets a delay

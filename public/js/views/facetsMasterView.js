@@ -9,8 +9,14 @@ APP.FacetsMasterView = Backbone.View.extend({
 	},
 
 	initSearch: function() {
+		var self = this;
 	    var search = new APP.SearchView();
 	    $('.inner-fixed-menu').append(search.$el);
+
+	    search.on("search_Changed", function(el) {  
+        	//self.filterResults(el.target);
+        	console.log(el.target);
+      	});
 	},
 
 	initSort: function () {

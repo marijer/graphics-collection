@@ -12,6 +12,11 @@ li {
 	list-style-type: none;
 }
 
+.fixed {
+	position: fixed;
+	top:0;
+}
+
 header {
 	height: 30px;
 	border-bottom: 1.5px solid #B7B7B7;
@@ -44,7 +49,7 @@ header h2 {
 
 .content-wrapper {
 	overflow: hidden;
-	margin: 60px 20px;
+	margin: 20px 20px;
 }
 
 /* graphics-container */
@@ -93,9 +98,9 @@ article {
 }
 
 article h2 {
-	font-size: 12px;
+	font-size: 13px;
 	line-height: 1.2em;
-	margin: 5px 0;
+	margin: 7px 0;
 	min-height: 20px;
 	padding-left: 25px;
 	color: #555555;
@@ -103,7 +108,7 @@ article h2 {
 }
 
 article h2 span {
-	padding-top: 5px;
+	padding-top: 3px;
 	display: inline-block;
 }
 
@@ -147,7 +152,6 @@ article h2 span {
 
 .fixed-menu-wrapper {
 	height: 35px;
-	position: fixed;
 	width: 100%;
 	z-index: 1000;
 	background: #FFF;
@@ -160,7 +164,7 @@ article h2 span {
 
 .search-input {
 	padding: 5px;
-	width: 215px;
+	width: 200px;
 	font-size: .8em;
 	font-family: "helvetica Neue";
 	font-weight: 200;
