@@ -49,7 +49,7 @@ header h2 {
 
 .content-wrapper {
 	overflow: hidden;
-	margin: 20px 20px;
+	margin: 30px 20px;
 }
 
 /* graphics-container */
@@ -156,6 +156,11 @@ article h2 span {
 	z-index: 1000;
 	background: #FFF;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	position: absolutef;
+}
+
+.fixed-menu-wrapper .fixed {
+	position: fixed;
 }
 
 .inner-fixed-menu {
@@ -172,6 +177,14 @@ article h2 span {
 	border-top-color: #E6E6E6;
 	border-right: 1px solid #C7C7C7;
 	border-bottom: 1px solid #C7C7C7;
+}
+
+.scroll-to-top {
+	float: right;
+	padding-top: 9px;
+	font-size: 14px;
+	color: #6F6F6F;
+	cursor: pointer;
 }
 
 /* filter */

@@ -16,13 +16,6 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 
 	initialize: function() {
     	this.on("reset", this.render, this);
-    	$(window).scroll(this.onScrolling);
-
- 	$('.scroll-to-top').click(function(){ 
-        $('html,body').animate({ scrollTop: 0 }, 'slow');
-        return false; 
-    });
-
 	},
 
 	render: function() {
@@ -75,21 +68,5 @@ APP.GraphicCollectionView = Backbone.View.extend ({
     	if (end < this.totalGraphics) {
     		this.$el.append(this.template);
     	} 
-    },
-
-    onScrolling: function () {
-    	var self = this;
-
-		if ($(window).scrollTop() > 35) {
-		    $('.fixed-menu-wrapper').addClass('fixed');
-		    $('.scroll-to-top').show();
-		} else {
-		    $('.fixed-menu-wrapper').removeClass('fixed');
-		    $('.scroll-to-top').hide();
-		}
-
-		if($(window).scrollTop() + $(window).height() == $(document).height()) {
-		    APP.graphicCollectionView.onShowMore();
-		 }
     }
 })

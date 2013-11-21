@@ -1,5 +1,4 @@
 // not working properly at the moment
-
 APP.SearchView = Backbone.View.extend ({
 	tagName: "div",  // default setting
 	className: "filter",
