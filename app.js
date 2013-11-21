@@ -2,7 +2,6 @@ var path     = require ("path"),
 	_        = require ("underscore"),
 	express  = require ("express"),
 	request  = require('request'),
-	mysql    = require('mysql'),
 	http     = require('http');
 
 var app = express()
