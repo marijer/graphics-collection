@@ -75,6 +75,7 @@ header h2 {
 .graphics-wrapper {
 	overflow:auto;
 	clear: both;
+	min-width: 575px;
 }
 
 a:hover .graphics-image {
