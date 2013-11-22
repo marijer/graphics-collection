@@ -21,14 +21,21 @@ APP.GraphicItemView = Backbone.View.extend({
 
 //TODO hide only images that have not been loaded yet
         self.$el.html(self.template( attributes ));  
-        self.$el.find('img.graphics-image').hide().on('load', function(e) { //load images
-            self.img_loaded(e) 
-        });
+
+        var $img = self.$el.find('img.graphics-image');
+
+        if ($img[0].complete){  // checks i
+            $img.hide().fadeIn(200);
+        } else {
+            $img.hide().on('load', function(e) { //load images
+                self.img_loaded(e);
+            });
+        } 
+
         return self;
     },
 
     img_loaded: function( e ){
          $(e.target).fadeIn(400);
     }
- 
 });
