@@ -47,15 +47,6 @@
           {"facet":"qualitative", "title":"Qualitative"}
       ],
       "sort_order": ""        
-    },
-    {
-      "facet": "flash",
-      "heading": "Flash",
-      "options": [
-          {"facet":"flash", "title":"Flash"},
-          {"facet":"non-flash", "title":"non-flash"}
-      ],
-      "sort_order": ""        
     }
   ],
   "sort": [
