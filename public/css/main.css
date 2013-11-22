@@ -149,13 +149,14 @@ article h2 span {
 
 .show-more {
 	clear: both;
-	background: #CBF7FF;
+	background: #F8F8F8;
 	padding: 5px 10px;
-	border: 1px solid #C3D9FF;
+	border: 1px solid #E7E7E7;
 	color: rgb(82, 82, 82);
 	text-align: center;
-	font-weight: 600;
+	font-weight: 200;
 	cursor: pointer;
+	font-size: 13px;
 }
 
 /* fixed submenu */
@@ -173,7 +174,7 @@ article h2 span {
 }
 
 .inner-fixed-menu {
-	padding: 2px 20px 0;
+	padding: 3px 20px 0;
 }
 
 .search-input {
