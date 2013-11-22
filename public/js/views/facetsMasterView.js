@@ -50,21 +50,22 @@ APP.FacetsMasterView = Backbone.View.extend({
          search = false;
 
          // handle list items + input
-         if ( $this.is( "input" ) ) {
+         if( $this.is( "input" )) {
          	search = true;
          	var query = $this.val();
 
-			if( query === "" && $this.hasClass("active") ) {
-				$this.removeClass("active");
-			} else {
-				$this.addClass("active");
-			}
+    			if( query === "" && $this.hasClass("active") ) {
+    				$this.removeClass("active");
+    			} else {
+    				$this.addClass("active");
+    			}
 
          } else {
 		      // set class active or non-active
 		      if($this.hasClass('active')){
 		         $this.removeClass("active");
 		      } else {
+               console.log("none-active");
 		         $this.addClass('active').siblings().removeClass('active');
 		      }	
          }
@@ -77,7 +78,8 @@ APP.FacetsMasterView = Backbone.View.extend({
           
       var el = $(this),
          category = el.attr("data-facet"),
-         name = el.attr("data-facet-name").toLowerCase();
+         name = el.attr("data-facet-name");
+         if (isNaN(name)) name = name.toLowerCase();
          _hash.push(category+"="+escape(name));
       });
 
@@ -89,5 +91,4 @@ APP.FacetsMasterView = Backbone.View.extend({
       
       if (e.preventDefault) e.preventDefault();
   	}
-
 });

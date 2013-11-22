@@ -84,8 +84,9 @@ APP.Router = Backbone.Router.extend({
       if (_paramsValueArray.length){
           
           var _facets = _.filter($facets, function(i, k){
-            var facet_name = $(i).data('facet-name').toLowerCase();
-            return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+            var facet_name = $(i).data('facet-name');
+            if (isNaN(facet_name)) facet_name = facet_name.toLowerCase();
+              return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
           });
           
           // Add Active Class to Selected Facet
@@ -109,7 +110,6 @@ APP.Router = Backbone.Router.extend({
 
             _.each(params, function (val, key){  // loop over all parameters
                   var val = self.escapeRegex(val); //clean up value
-
                   var pattern = new RegExp(val, "i");
 
                   newCollection = newCollection.filter(function(doc){        

@@ -7,7 +7,7 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 	),
 
 	page: 0,
-	limit: 9,
+	limit: 12,
 	totalGraphics: 0,
 
 	events: {

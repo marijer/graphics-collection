@@ -1,4 +1,7 @@
-APP.SearchView = Backbone.View.extend ({
+APP.SelectedFiltersView = Backbone.View.extend ({
+	tagName: "div",  // default setting
+	className: "filter",
+
 	template: Handlebars.compile(
 		'<div class="search">' +
 			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search title" >' +
@@ -19,15 +22,6 @@ APP.SearchView = Backbone.View.extend ({
 	},
 
 	onSearch: function () {
-		var $search = $('.search-input');
-		var query = $search.val();		
-
-		if( query !== "" ) {
-			var data = $search.attr("data-facet-name");
-		    data = query;
-		    $search.attr('data-facet-name', data);			
-		}
-		
 		this.trigger("search_Changed", {target: $search});
 	}
 
