@@ -207,6 +207,11 @@ article h2 span {
 	font-size: 14px;
 	color: #6F6F6F;
 	cursor: pointer;
+	transition:color 0.4s ease;
+}
+
+.scroll-to-top:hover {
+	color: #A0A0A0;
 }
 
 .scroll-to-top span {
@@ -237,6 +242,10 @@ article h2 span {
 	margin-bottom: 15px;
 }
 
-.filter-wrapper li:hover, .filter-wrapper li.active {
+.filter-wrapper li:hover {
 	background-color: rgb(238, 238, 238);
+}
+
+.filter-wrapper li.active {
+	background-color: #D3D3D3;
 }
