@@ -3,8 +3,8 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	className: "filter",
 
 	template: Handlebars.compile(
-		'<div class="search">' +
-			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search title" >' +
+		'<div class="filter-label">' +
+			'<div class="name"> </div>'+
 		'</div>'
 	),
 

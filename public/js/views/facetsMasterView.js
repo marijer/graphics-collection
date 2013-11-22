@@ -65,7 +65,6 @@ APP.FacetsMasterView = Backbone.View.extend({
 		      if($this.hasClass('active')){
 		         $this.removeClass("active");
 		      } else {
-               console.log("none-active");
 		         $this.addClass('active').siblings().removeClass('active');
 		      }	
          }
