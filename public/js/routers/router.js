@@ -100,13 +100,18 @@ APP.Router = Backbone.Router.extend({
       var self = this,
           newCollection = APP.collectionData;
 
-          // call sort function with right param + remove it from selection
-         if (params.sort) {
-            APP.graphics.sortByColumn(params.sort);
-            delete params.sort;
-         } 
-
          if(_.size(params)){ // checks if 1 or more parameters are used
+
+              // call sort function with right param + remove it from selection
+             if (params.sort) {
+                APP.graphics.sortByColumn(params.sort);
+                delete params.sort;
+             } 
+            
+            // cals search view if title is present
+            if (params.title) {
+               Backbone.controller.trigger('checkSearch', {search: params.title});
+            }
 
             _.each(params, function (val, key){  // loop over all parameters
                   var val = self.escapeRegex(val); //clean up value
