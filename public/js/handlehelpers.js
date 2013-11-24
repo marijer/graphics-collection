@@ -35,6 +35,10 @@ Handlebars.registerHelper("setFavicon", function( data ) {
 	return faviconClass;
 })
 
+Handlebars.registerHelper("setToLowerCase", function(param1) {
+	return param1.toLowerCase();
+})
+
 
 Handlebars.registerHelper("setSelected", function(param1, param2) {
 	sel = param1.selection === param2 ? "selected" : "";

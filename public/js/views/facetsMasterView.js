@@ -1,16 +1,17 @@
 APP.FacetsMasterView = Backbone.View.extend({
 
 	initialize: function() {
-    	var self = this;
+		this.initSearch();
+		this.initSort();
+		this.initFacet();
+      this.initSelectedFilters();
 
-		self.initSearch();
-		self.initSort();
-		self.initFacet();
+      Backbone.controller.on('removedSelectedFilter', this.removedSelectedFilter, this);
 	},
 
 	initSearch: function() {
 		var self = this;
-	    var search = new APP.SearchView({ el: $(".search-wrapper") });
+	   var search = new APP.SearchView({ el: $(".search-wrapper") });
 
 	    search.on("search_Changed", function(el) {  
         	_.debounce(self.filterResults(el.target), 800);	
@@ -43,6 +44,21 @@ APP.FacetsMasterView = Backbone.View.extend({
       	});
 	},
 
+   initSelectedFilters: function() {
+      this.selectedFilters = new APP.SelectedFiltersView({ el: $(".selected-filters-wrapper") });
+
+   },
+
+   removedSelectedFilter: function(el) {
+      var $el = el.target;
+      name = $el.attr("data-facet-name");
+      facet = $el.attr("data-facet");
+
+      var target = $('.facet[data-facet="'+facet+'"][data-facet-name="'+name+'"]');
+      this.filterResults(target);
+    //  console.log(el);
+   },
+
     filterResults: function( e ) {
       var self = this,
          $this = $(e),
@@ -62,12 +78,16 @@ APP.FacetsMasterView = Backbone.View.extend({
 
          } else {
 		      // set class active or non-active
-		      if($this.hasClass('active')){
+		      if( $this.hasClass('active')){
 		         $this.removeClass("active");
-		      } else {
+		      }else {
 		         $this.addClass('active').siblings().removeClass('active');
-		      }	
+		      }
+
+            //this.selectedFilters.updateLabel(e);
          }
+
+      // do something with breadcrumb
 
         
       // go through all selected facets and save them in array
@@ -78,7 +98,6 @@ APP.FacetsMasterView = Backbone.View.extend({
       var el = $(this),
          category = el.attr("data-facet"),
          name = el.attr("data-facet-name");
-         if (isNaN(name)) name = name.toLowerCase();
          _hash.push(category+"="+escape(name));
       });
 

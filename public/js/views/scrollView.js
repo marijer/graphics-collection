@@ -13,7 +13,7 @@ APP.ScrollView = Backbone.View.extend ({
 
     onScrolling: function () {
     	var $scrollTop = $(window).scrollTop();
-    	if ($scrollTop > 34) {
+    	if ($scrollTop > 36 ) {
 		    $('.fixed-menu-wrapper').addClass('fixed');
 
 		    if ( $scrollTop > 400){

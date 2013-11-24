@@ -10,12 +10,7 @@ APP.SearchView = Backbone.View.extend ({
 	},
 
 	initialize: function () {
-
 		Backbone.controller.on('checkSearch', this.checkSearch, this);
-		 // this.on("page_refresh", function(el) {  
-   //      	console.log("helloaaaaa");
-   //    	});
-
 		this.render();
 	},
 
@@ -36,21 +31,21 @@ APP.SearchView = Backbone.View.extend ({
 
 	updateSearch: function( query ) {
 		var $search = $('.search-input');
-			
-		if( query !== "" ) {
-			var data = $search.attr("data-facet-name");
-			data = query;
-			$search.attr('data-facet-name', data);	
-			$search.val(query);		
-		}	
+		var data = $search.attr("data-facet-name");
+		
+		data = query;
+		$search.attr('data-facet-name', data);	
+		$search.val(query);	
 	},
 
 	onSearch: function () {
 		var $search = $('.search-input');
 		var query = $search.val();		
 
-		this.updateSearch( query );
-		
+		if( query !== "" ) {
+			this.updateSearch( query );
+		}
+
 		this.trigger("search_Changed", {target: $search});
 	}
 
