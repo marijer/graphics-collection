@@ -32,11 +32,16 @@
       "facet": "visualform",
       "heading": "Visualform",
       "options": [
-          {"facet":"maps", "title":"Maps", "suboptions": [
+          {"facet":"chart", "title":"Charts"},
+          {"facet":"hierarchy", "title":"Hierarchy"},
+          {"facet":"illustration", "title":"Illustration"},
+          {"facet":"map", "title":"Maps", "suboptions": [
               {"facet": "choropleth", "title":"choropleth"},
               {"facet": "choropleth2", "title":"choropleth2"}
              ]
-          }
+          },
+          {"facet":"network", "title":"Network"},
+          {"facet":"text", "title":"Text"}
       ],
       "sort_order": ""        
     },

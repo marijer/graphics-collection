@@ -57,7 +57,7 @@ header h2 {
 
 .content-wrapper {
 	overflow: hidden;
-	margin: 30px 20px;
+	margin: 30px 0 30px 20px;
 }
 
 /* graphics-container */
@@ -101,10 +101,24 @@ a:hover .graphics-image {
 
 article {
 	min-width: 250px;
-	height: 190px;
-	margin: 0 35px 25px 0;
 	float: left;
-	width: 29%;
+	width: 33%;
+	-moz-box-sizing: border-box;  /* starting from ie8 */
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+	height: 225px;
+}
+
+@media (min-width: 1200px) {
+  article {
+  	width:30%;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1050px) {
+  article {
+  	width:50%;
+  }
 }
 
 article h2 {
