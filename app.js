@@ -10,6 +10,8 @@ var app = express()
 									path.join (__dirname, "js")))
 			.use(express.bodyParser());
 
+var object_json;
+
 request('http://marijerooze.nl/thesis/graphics/API/', function (error, response, body) {
   if (!error && response.statusCode == 200) {
     object_json = body;
