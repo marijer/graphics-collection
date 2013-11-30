@@ -3,7 +3,7 @@ APP.ScrollView = Backbone.View.extend ({
 	initialize: function() {
 	    $(window).scroll(this.onScrolling);
 
-	    $('.scroll-to-top').click(this.goToTop);
+	    $('.scroll-to-top').click(this.goToTop); // go to top
 	},
 
 	goToTop: function() {
@@ -13,13 +13,16 @@ APP.ScrollView = Backbone.View.extend ({
 
     onScrolling: function () {
     	var $scrollTop = $(window).scrollTop();
-    	if ($scrollTop > 36 ) {
+    	var viewportHeight = $(window).height();
+    	var bodyHeight = $('body').height();
+
+    	if ($scrollTop > 36 && viewportHeight < bodyHeight) {
 		    $('.fixed-menu-wrapper').addClass('fixed');
 
-		    if ( $scrollTop > 400){
+		    if ( $scrollTop > 800){
 		    	$('.scroll-to-top').fadeIn(600);
 		    } else {
-				$('.scroll-to-top').fadeOut(600);
+				$('.scroll-to-top').fadeOut(200);
 		    }
 		} else {
 		    $('.fixed-menu-wrapper').removeClass('fixed');
@@ -27,7 +30,7 @@ APP.ScrollView = Backbone.View.extend ({
 		}
 
 		if($scrollTop + $(window).height() == $(document).height()) {
-		    APP.graphicCollectionView.onShowMore();
+		    APP.graphicCollectionView.onShowMore(); // infinite scrolling
 		}
     }
 })

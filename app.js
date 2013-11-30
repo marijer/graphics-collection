@@ -12,6 +12,8 @@ var app = express()
 
 var object_json;
 
+//var dataPath = 'http://marijerooze.nl/thesis/graphics/API/';
+
 request('http://marijerooze.nl/thesis/graphics/API/', function (error, response, body) {
   if (!error && response.statusCode == 200) {
     object_json = body;

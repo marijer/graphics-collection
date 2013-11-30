@@ -18,7 +18,14 @@ li {
 
 .fixed {
 	position: fixed;
+}
+
+.fixed-menu-wrapper.fixed{
 	top:0;
+}
+
+.scroll-to-top.fixed{
+	top: 50px;
 }
 
 .none {
@@ -113,7 +120,7 @@ article {
 
 @media (min-width: 1200px) {
   article {
-  	width:30%;
+  	width:33%;
   }
 }
 
@@ -236,7 +243,7 @@ article h2 span {
 
 /* filter */
 
-.filters-wrapper {
+.column-left {
 	width: 192px;
 	float: left;
 }
