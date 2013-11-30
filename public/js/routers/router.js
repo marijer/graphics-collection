@@ -2,13 +2,13 @@ APP.Router = Backbone.Router.extend({
 	prev: false,
 
 	routes: {
-       "!/"                       : "index",
-       "!/search"                 : "filterResults"
-  	},
+     "!/"                       : "index",
+     "!/search"                 : "filterResults"
+  },
 
-    initialize: function() {
-      var self = this;
-     
+  initialize: function() {
+   var self = this;
+
       // get and display the facets
       APP.facets = new APP.Facets();
       APP.facets.fetch({
@@ -21,12 +21,12 @@ APP.Router = Backbone.Router.extend({
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  
 
-          var masterView = new APP.FacetsMasterView({
-              collection: APP.facetsData
-          });
+        var masterView = new APP.FacetsMasterView({
+          collection: APP.facetsData
+       });
 
-          self.startRouter();
-      })
+        self.startRouter();
+     })
 
       //get the collection data 
       APP.graphics = new APP.Graphics();
@@ -45,7 +45,7 @@ APP.Router = Backbone.Router.extend({
 
       //initialze the scrollviews
       APP.scroll = new APP.ScrollView();
-    },
+   },
 
     startRouter: function() {  //starts the router after both renders are done
       if (APP.router.prev){
@@ -54,12 +54,12 @@ APP.Router = Backbone.Router.extend({
       } else {
          APP.router.prev = true;
       }
-    },
+   },
 
    renderGraphics: function(collection) {
       APP.graphicCollectionView = new APP.GraphicCollectionView ({
-          collection: collection,
-      });
+        collection: collection,
+     });
 
       APP.graphicCollectionView.render();
       $('.graphics-wrapper').html(APP.graphicCollectionView.$el)
@@ -70,45 +70,48 @@ APP.Router = Backbone.Router.extend({
 
       // Get All the Facets from Param
       var _paramsArray = new Array(),
-          _paramsValueArray = new Array()
-          $facets = $('.facet');
+      _paramsValueArray = new Array()
+      $facets = $('.facet');
 
-//TODO this removing class could be done smarter;
-          $facets.removeClass('active'); 
-                        
-         _.each(params, function(value, key){
-           _paramsArray.push(key);
-           _paramsValueArray.push(value);
-         });
-         
-      if (_paramsValueArray.length){
-          
-          var _facets = _.filter($facets, function(i, k){
-            var facet_name = $(i).data('facet-name');
-            if (isNaN(facet_name)) facet_name = facet_name.toLowerCase();
+        //TODO this removing class could be done smarter;
+        $facets.removeClass('active'); 
+
+        _.each(params, function(value, key){
+          _paramsArray.push(key);
+          _paramsValueArray.push(value);
+       });
+
+        if (_paramsValueArray.length){
+
+           var _facets = _.filter($facets, function(i, k){
+              var facet_name = $(i).data('facet-name');
               return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
-          });
-          
+           });
+
+         _.each(_facets, function(facet){
+            Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
+         })
+
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
-      }
+       }
 
-      this.renderGraphics( newCollection );
-   },
+       this.renderGraphics( newCollection );
+    },
 
-   search: function(params){
+    search: function(params){
       var self = this,
-          newCollection = APP.collectionData;
+      newCollection = APP.collectionData;
 
          if(_.size(params)){ // checks if 1 or more parameters are used
 
               // call sort function with right param + remove it from selection
-             if (params.sort) {
-                APP.graphics.sortByColumn(params.sort);
-                delete params.sort;
-             } 
-            
-            // cals search view if title is present
+              if (params.sort) {
+                 APP.graphics.sortByColumn(params.sort);
+                 delete params.sort;
+              } 
+
+            // cals search view if title is present, updates value if needed (is for refresh)
             if (params.title) {
                Backbone.controller.trigger('checkSearch', {search: params.title});
             }
@@ -123,11 +126,11 @@ APP.Router = Backbone.Router.extend({
                   });
             }) //end each
 
-         return new Backbone.Collection(newCollection);
+            return new Backbone.Collection(newCollection);
 
-        } else {
+         } else {
          return newCollection;  // if no parameters are set - return normal collection
-        }   
+      }   
    },
 
    escapeRegex: function(value){
@@ -144,6 +147,9 @@ APP.Router = Backbone.Router.extend({
       //removes all clases
       $('.facet').removeClass('active');     
       self.renderGraphics (APP.collectionData);
+
+      // removes all selected filters in breadcrumb
+      Backbone.controller.trigger('removeFilters');
    }
 });
 

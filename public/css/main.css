@@ -32,6 +32,17 @@ li {
 	display: none;
 }
 
+noscript {
+	margin-bottom: 500px;
+	display: block;
+	background-color: #FDFAD5;
+	padding: 20px;
+	width: 650px;
+	border-radius: 6px;
+	color: #575757;
+	text-align: center;
+}
+
 header {
 	height: 30px;
 	border-bottom: 1.5px solid #B7B7B7;
@@ -273,7 +284,7 @@ article h2 span {
 	background-color: #D3D3D3;
 }
 
-.facet.active .remove {
+.facet.active .remove, .filter-label .remove {
 	background-image: url('../img/assets/filter_remove.png');
 	width: 12px;
 	height: 12px;
@@ -290,7 +301,22 @@ article h2 span {
 	background: #EBEBEB;
 	padding: 0;
 	margin: 6px 8px;
-	padding: 2px 6px;
+	padding: 4px 6px;
 	border-radius: 3px;
 	cursor: pointer;
+}
+
+.filter-label .name {
+	float:left;
+}
+
+.filter-label .remove {
+	margin-left: 8px;
+}
+
+/* FOOTER */
+
+footer {
+	background:#000;
+	height:10px;
 }

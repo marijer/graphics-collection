@@ -83,11 +83,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 		      }else {
 		         $this.addClass('active').siblings().removeClass('active');
 		      }
-
-            //this.selectedFilters.updateLabel(e);
          }
-
-      // do something with breadcrumb
 
         
       // go through all selected facets and save them in array

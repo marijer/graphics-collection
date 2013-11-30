@@ -4,9 +4,9 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 	template: Handlebars.compile(
 		'<div class="filter-label" data-facet="{{category}}" data-facet-name="{{facet}}">' +
-			'<div class="name">{{name}}</div>'+
-		'</div>'
-	),
+		'<div class="name">{{name}}</div>'+
+		'<span class="remove"></span> </div>'
+		),
 
 	events: {
 		'click .filter-label': "onClickFilterLabel",
@@ -15,6 +15,9 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	initialize: function() {
 		// create array which stores all selected items
 		this._hash = [];
+
+		Backbone.controller.on('selectedFilter', this.selectedFilter, this);
+		Backbone.controller.on('removeFilters', this.removeAll, this);
 	},
 
 // removes the filter from sidebar
@@ -23,37 +26,61 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 		Backbone.controller.trigger('removedSelectedFilter', {target: target});
 	},
 
-	updateLabel: function( el ) {
-		var $el = $(el);
+	selectedFilter: function( obj ){
+		var self = this;
+		this.updateLabel(obj);
 
-		var category = $el.attr("data-facet");
-			 name = $el.text();
-          facet = $el.attr("data-facet-name");
+		// to be removed
+		var tobeRemovedCategory = _.filter(this._hash, function(e){ 
+			for (var key in obj.arr) {
+			   var $el = $(obj.arr[key]);
+			   var category = $el.attr("data-facet");
+			   facet = $el.attr("data-facet-name");
 
-      var tobeRemoved = _.filter(this._hash, function(e){ return e.category == category && e.name === name });
+			   if ( e.category === category ){
+			   	return true;
+			   }
+			}
+			// if nothing returned true, than remove the facet
+			self.removeFacet(e.category);
+		});
+	},
 
-      if (tobeRemoved.length === 1) {
-      	$('.filter-label[data-facet="'+ category +'"]').remove();
+	removeFacet:function(category){
+		var $el = $('.filter-label[data-facet="'+category+'"]')[0];
+		$el.remove();
 
-      	this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
-      } else {
+		//remove from the hash map
+		this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
+	},
 
- 			var existingCategory = _.filter(this._hash, function(e){ return e.category === category; });
+	removeAll:function(el){
+		this._hash = [];
+		$('.filter-label').remove();
+	},
 
-	      if (existingCategory.length === 1) {
-	      	var obj = existingCategory[0],
-	      		 cat = obj.category;
-	      		 catName = obj.name;
+	updateLabel: function( obj ) {
+		//console.log(obj.el)
+		var $el = $(obj.el);
+		//console.log(typeof(obj.arr)) ;
 
-	      	$('.filter-label[data-facet="'+cat+'"]').find('.name').html(name);
-	      	this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
-	      } else {
-				this.$el.append(this.template({category:category, name: name, facet: facet}));
-	      }
-	      this._hash.push({category: category, name: name, facet:facet});
-      }
-     
-      console.log(this._hash);
+		var category = $el.attr("data-facet"),
+		name = $el.text(),
+		facet = $el.attr("data-facet-name");
+
+		var existingCategory = _.filter(this._hash, function( e ){ return e.category === category; });
+
+		if (existingCategory.length === 1) {
+			var obj = existingCategory[0],
+			cat = obj.category;
+			catName = obj.name;
+
+			$('.filter-label[data-facet="'+cat+'"]').find('.name').html(name);
+			this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
+		} else {
+			this.$el.append(this.template({category:category, name: name, facet: facet}));
+		}
+		this._hash.push({category: category, name: name, facet:facet});
 
 	}
 });
