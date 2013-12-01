@@ -4,7 +4,7 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 	),
 
 	page: 0,
-	limit: 11,
+	limit: 12,
 	totalGraphics: 0,
 
 	events: {
@@ -21,8 +21,9 @@ APP.GraphicCollectionView = Backbone.View.extend ({
 
 		self.totalGraphics = self.collection.length;
 		self.updateTotalGraphics();
+		this.page = 0;
 		
-		self.renderProjectGroup(self.page, self.limit);
+		self.renderProjectGroup(self.page, self.limit - 1);
 
 		if (self.limit <= self.totalGraphics) {
 			self.$el.append(self.template);
@@ -38,6 +39,8 @@ APP.GraphicCollectionView = Backbone.View.extend ({
     },
 
 	renderProjectGroup: function(start, end) {
+	   if (end > this.totalGraphics) end = this.totalGraphics -1;
+
 	   var subset = _.filter(this.collection.models, function(num, index){
 	      return (index >= start) && (index <= end);
 	   });
@@ -54,15 +57,12 @@ APP.GraphicCollectionView = Backbone.View.extend ({
     onShowMore: function() {
     	this.page++;
     	var start = this.page * this.limit;
-    	var end = start + this.limit;
+    	var end = start + this.limit -1;
 
     	$( ".show-more" ).remove();
 
-     	var endCheck = this.totalGraphics - end >= this.limit ? end : end + (this.totalGraphics - end);
-
-     	console.log("start: " + start + " end: " + endCheck);
-    	if (end < this.totalGraphics) {
-    		this.renderProjectGroup(start, endCheck);
+    	if (start < this.totalGraphics - 1) {
+    		this.renderProjectGroup(start, end);
     		this.$el.append(this.template);
     	}
     }

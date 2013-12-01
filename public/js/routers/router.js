@@ -130,7 +130,7 @@ APP.Router = Backbone.Router.extend({
                   });
             }) //end each
 
-            collection =  new Backbone.Collection(newCollection);
+            collection = new Backbone.Collection(newCollection);
          } else {
             collection =  newCollection;  // if no parameters are set - return normal collection
       }   
