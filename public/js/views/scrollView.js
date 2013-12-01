@@ -2,6 +2,7 @@ APP.ScrollView = Backbone.View.extend ({
 
 	initialize: function() {
 	    $(window).scroll(this.onScrolling);
+	    $(window).addEventListener("touchmove", this.onScrolling, false);
 
 	    $('.scroll-to-top').click(this.goToTop); // go to top
 	},
