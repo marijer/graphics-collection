@@ -2,11 +2,11 @@ APP.Router = Backbone.Router.extend({
 	prev: false,
 
 	routes: {
-     "!/"                       : "index",
-     "!/search"                 : "filterResults"
-  },
+    "!/"                       : "index",
+    "!/search"                 : "filterResults"
+ },
 
-  initialize: function() {
+ initialize: function() {
    var self = this;
 
       // get and display the facets
@@ -21,12 +21,12 @@ APP.Router = Backbone.Router.extend({
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  
 
-        var masterView = new APP.FacetsMasterView({
-          collection: APP.facetsData
-       });
+       var masterView = new APP.FacetsMasterView({
+        collection: APP.facetsData
+     });
 
-        self.startRouter();
-     })
+       self.startRouter();
+    })
 
       //get the collection data 
       APP.graphics = new APP.Graphics();
@@ -58,9 +58,9 @@ APP.Router = Backbone.Router.extend({
 
    renderGraphics: function(collection) {
       APP.graphicCollectionView = new APP.GraphicCollectionView ({
-        collection: collection,
-        el: $(".graphics-wrapper")
-     });
+       collection: collection,
+       el: $(".graphics-wrapper")
+    });
 
       APP.graphicCollectionView.render();
    },
@@ -77,18 +77,18 @@ APP.Router = Backbone.Router.extend({
         $facets.removeClass('active'); 
 
         _.each(params, function(value, key){
-          _paramsArray.push(key);
-          _paramsValueArray.push(value);
-       });
+           _paramsArray.push(key);
+           _paramsValueArray.push(value);
+        });
 
         if (_paramsValueArray.length){
 
-           var _facets = _.filter($facets, function(i, k){
-              var facet_name = $(i).data('facet-name');
-              return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
-           });
+          var _facets = _.filter($facets, function(i, k){
+             var facet_name = $(i).data('facet-name');
+             return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+          });
 
-         _.each(_facets, function(facet){
+          _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
          })
 
@@ -99,17 +99,21 @@ APP.Router = Backbone.Router.extend({
        this.renderGraphics( newCollection );
     },
 
-    search: function(params){
+   search: function(params){
       var self = this,
       newCollection = APP.collectionData;
+      var paramSort = false;
+      var collection;
 
-         if(_.size(params)){ // checks if 1 or more parameters are used
+         // call sort function with right param + remove it from selection
+         if (params.sort) {
+            APP.graphics.sortByColumn(params.sort);
+            Backbone.controller.trigger('checkSort', {param: params.sort});
+            paramSort = params.sort;
+            delete params.sort;
+         } 
 
-              // call sort function with right param + remove it from selection
-              if (params.sort) {
-                 APP.graphics.sortByColumn(params.sort);
-                 delete params.sort;
-              } 
+         if(_.size(params) ){ // checks if 1 or more parameters are used
 
             // cals search view if title is present, updates value if needed (is for refresh)
             if (params.title) {
@@ -126,11 +130,12 @@ APP.Router = Backbone.Router.extend({
                   });
             }) //end each
 
-            return new Backbone.Collection(newCollection);
-
+            collection =  new Backbone.Collection(newCollection);
          } else {
-         return newCollection;  // if no parameters are set - return normal collection
+            collection =  newCollection;  // if no parameters are set - return normal collection
       }   
+
+      return collection;
    },
 
    escapeRegex: function(value){

@@ -27,7 +27,6 @@ APP.Graphics = Backbone.Collection.extend ( {
 	},
 
 	sortByColumn: function(colName) { 
-		//if( this.sortKey !== colName ) {
 			this.sortkey = colName;
 
 			if (colName === "asc") {
@@ -36,6 +35,5 @@ APP.Graphics = Backbone.Collection.extend ( {
 				this.sort_dir = "desc";
 			}
 			this.sort();	
-		//}
 	}
 })

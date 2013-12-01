@@ -7,42 +7,42 @@ APP.FacetsMasterView = Backbone.View.extend({
       this.initSelectedFilters();
 
       Backbone.controller.on('removedSelectedFilter', this.removedSelectedFilter, this);
-	},
+   },
 
-	initSearch: function() {
-		var self = this;
-	   var search = new APP.SearchView({ el: $(".search-wrapper") });
+   initSearch: function() {
+     var self = this;
+     var search = new APP.SearchView({ el: $(".search-wrapper") });
 
-	    search.on("search_Changed", function(el) {  
-        	_.debounce(self.filterResults(el.target), 800);	
-      	});
-	},
+     search.on("search_Changed", function(el) {  
+      _.debounce(self.filterResults(el.target), 800);	
+      });
+  },
 
-	initSort: function () {
-		var self = this;
+  initSort: function () {
+     var self = this;
 
-		var sortData = self.collection.attributes.sort;
-		var sort = new APP.SortView({collection: sortData});
-		$('.sort-by').append(sort.$el);
+     var sortData = self.collection.attributes.sort;
+     var sort = new APP.SortView({collection: sortData});
+     $('.sort-by').append(sort.$el);
 
-		sort.on("sorted_Changed", function(el) {  
-        	self.filterResults(el.target);
-      	});
-	},
+     sort.on("sorted_Changed", function(el) {  
+      self.filterResults(el.target);
+   });
+  },
 
-	initFacet: function() {
-		var self = this;
+  initFacet: function() {
+     var self = this;
 
-         APP.facetsView = new APP.FacetsView({
-          collection: self.collection.attributes.facets
-         });
+     APP.facetsView = new APP.FacetsView({
+       collection: self.collection.attributes.facets
+    });
 
-         $('.filters-wrapper').append(APP.facetsView.$el);
+     $('.filters-wrapper').append(APP.facetsView.$el);
 
-		APP.facetsView.on("filter_Changed", function(el) {  
-        	self.filterResults(el.target);
-      	});
-	},
+     APP.facetsView.on("filter_Changed", function(el) {  
+      self.filterResults(el.target);
+   });
+  },
 
    initSelectedFilters: function() {
       this.selectedFilters = new APP.SelectedFiltersView({ el: $(".selected-filters-wrapper") });
@@ -57,49 +57,51 @@ APP.FacetsMasterView = Backbone.View.extend({
       this.filterResults(target);
    },
 
-    filterResults: function( e ) {
+   filterResults: function( e ) {
       var self = this,
-         $this = $(e),
-         $parent = $this.parent(),
-         search = false;
+      $this = $(e),
+      $parent = $this.parent(),
+      search = false;
 
-         // handle list items + input
-         if( $this.is( "input" )) {
-         	search = true;
-         	var query = $this.val();
+      // handle list items + input
+      if( $this.is( "input" )) {
+         search = true;
+         var query = $this.val();
 
-    			if( query === "" && $this.hasClass("active") ) {
-    				$this.removeClass("active");
-    			} else {
-    				$this.addClass("active");
-    			}
-
+         if( query === "" && $this.hasClass("active") ) {
+              $this.removeClass("active");
          } else {
-		      // set class active or non-active
-		      if( $this.hasClass('active')){
-		         $this.removeClass("active");
-		      }else {
-		         $this.addClass('active').siblings().removeClass('active');
-		      }
+              $this.addClass("active");
          }
 
-        if (e.preventDefault) e.preventDefault();
-      // go through all selected facets and save them in array
+       } else if($this.is("option")) {
+          $this.addClass('active').siblings().removeClass('active');
+      } else {
+   		      // set class active or non-active
+   		      if( $this.hasClass('active')){
+                 $this.removeClass("active");
+              }else {
+                 $this.addClass('active').siblings().removeClass('active');
+              }
+           }
+
+      if (e.preventDefault) e.preventDefault();
+         // go through all selected facets and save them in array
       var _hash = [];
 
       $('body').find('.active').each(function(){
-          
-      var el = $(this),
-         category = el.attr("data-facet"),
-         name = el.attr("data-facet-name");
-         _hash.push(category+"="+escape(name));
-      });
 
-      if(_hash.length){
+            var el = $(this),
+            category = el.attr("data-facet"),
+            name = el.attr("data-facet-name");
+            _hash.push(category+"="+escape(name));
+         });
+
+         if(_hash.length){
           window.location.hash="!/search?"+_hash.join('&');
-      }else{
+       }else{
          window.location.hash="!/";
       }
-      
-  	}
+
+   }
 });

@@ -12,8 +12,13 @@ li {
 	list-style-type: none;
 }
 
-*:focus {
+input:focus {
     outline: 0;
+}
+
+input, input[type="search"] {
+    -webkit-appearance: none; /* remove border-radius in safari */
+    border-radius: 0;
 }
 
 .bold {
@@ -82,13 +87,19 @@ header h2 {
 	overflow: hidden;
 	margin-top: 30px;
 	clear:both;
+	min-height:600px;
 }
 
 /* graphics-container */
 
 .sort-by {
-	float: right;
-	display: none;
+	font-size:.9em;
+	margin-bottom: 11px;
+}
+
+.sort-by .label {
+	margin-right:10px;
+	font-size:.85em;
 }
 
 .main-content {
@@ -219,7 +230,7 @@ article h2 span {
 
 .search-input {
 	padding: 5px;
-	width: 190px;
+	width: 180px;
 	font-size: .8em;
 	font-family: "helvetica Neue";
 	font-weight: 200;
@@ -227,7 +238,6 @@ article h2 span {
 	border-top-color: #E6E6E6;
 	border-right: 1px solid #C7C7C7;
 	border-bottom: 1px solid #C7C7C7;
-	border-radius: 2px;
 
 	-webkit-transition: background-color 200ms ease-out;
     -moz-transition: background-color 200ms ease-out;
@@ -324,7 +334,6 @@ article h2 span {
 	float: left;
 	font-size: 12px;
 	background: #EBEBEB;
-	padding: 0;
 	margin: 6px 8px;
 	padding: 3px 6px;
 	border-radius: 3px;

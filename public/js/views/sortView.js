@@ -6,7 +6,7 @@ APP.SortView = Backbone.View.extend ({
 		'<span class="label">Sort By</span>' +
 	      '<select class="sort-by">' + 
 	         '{{#each sort}}' +
-	         '<option class="facet option-sort" {{setSelected ../this this.facet}} data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
+	         	'<option class="facet option-sort" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
 	         '{{/each}}' +
 	      '</select>'
 	),
@@ -17,26 +17,28 @@ APP.SortView = Backbone.View.extend ({
 
 	initialize: function () {
 		this.render();
+		Backbone.controller.on('checkSort', this.updateSort, this);
 	},
 
 	render: function () {
         var self = this;
         var col = self.collection;
-		
-	//	var app = Backbone.history.getQueryParameters();
-
-    //    if (app.sort){ col.selection = app.sort; } //sets selection if it is there
-		
      	this.$el.append(this.template(col));
+	},
+
+	updateSort: function(obj) {
+		var $el = $('.facet[data-facet-name="'+obj.param+'"]');
+		//set selection
+		$el.prop('selected', true);
+		$el.addClass('active');
 	},
 
    selectionChanged: function( e ) {
       e.preventDefault();
-      console.log("hi")
       var field = $(e.currentTarget);
       var option = $("option:selected", field);
 
-     this.trigger("sorted_Changed", {target: option});
+      this.trigger("sorted_Changed", {target: option});
   },
 
 })
