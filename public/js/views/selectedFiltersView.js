@@ -21,9 +21,11 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	},
 
 // removes the filter from sidebar
-	onClickFilterLabel: function( ev ) {
-		var target = $(ev.target).parent();
+	onClickFilterLabel: function( e ) {
+		e.preventDefault();
+		var target = $(e.target).parent();
 		Backbone.controller.trigger('removedSelectedFilter', {target: target});
+		this.removeFacet(target.attr("data-facet"));
 	},
 
 	selectedFilter: function( obj ){
@@ -48,10 +50,12 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 	removeFacet:function(category){
 		var $el = $('.filter-label[data-facet="'+category+'"]')[0];
-		$el.remove();
-
+		 $el.remove();
+	
 		//remove from the hash map
 		this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
+		console.log(this._hash);
+
 	},
 
 	removeAll:function(el){
@@ -60,9 +64,7 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	},
 
 	updateLabel: function( obj ) {
-		//console.log(obj.el)
 		var $el = $(obj.el);
-		//console.log(typeof(obj.arr)) ;
 
 		var category = $el.attr("data-facet"),
 		name = $el.text(),
@@ -71,11 +73,14 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 		var existingCategory = _.filter(this._hash, function( e ){ return e.category === category; });
 
 		if (existingCategory.length === 1) {
-			var obj = existingCategory[0],
-			cat = obj.category;
-			catName = obj.name;
 
-			$('.filter-label[data-facet="'+cat+'"]').find('.name').html(name);
+			var $label = $('.filter-label[data-facet="'+category+'"]');
+
+			//update value and data attribute
+			$label.find('.name').html(name);
+			data = facet;
+			$label.attr('data-facet-name', data);	
+
 			this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
 		} else {
 			this.$el.append(this.template({category:category, name: name, facet: facet}));

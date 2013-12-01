@@ -233,6 +233,7 @@ article h2 span {
 	line-height: 33px;
 	font-size: 12px;
 	float:left;
+	min-width:85px;
 }
 
 .scroll-to-top {

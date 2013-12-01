@@ -46,7 +46,6 @@ APP.FacetsMasterView = Backbone.View.extend({
 
    initSelectedFilters: function() {
       this.selectedFilters = new APP.SelectedFiltersView({ el: $(".selected-filters-wrapper") });
-
    },
 
    removedSelectedFilter: function(el) {
@@ -54,16 +53,19 @@ APP.FacetsMasterView = Backbone.View.extend({
       name = $el.attr("data-facet-name");
       facet = $el.attr("data-facet");
 
-      var target = $('.facet[data-facet="'+facet+'"][data-facet-name="'+name+'"]');
+      var target = $('.facet[data-facet="'+facet+'"][data-facet-name="'+name+'"]')[0];
       this.filterResults(target);
-    //  console.log(el);
    },
 
     filterResults: function( e ) {
+      
+
       var self = this,
          $this = $(e),
          $parent = $this.parent(),
          search = false;
+
+         console.log(e);
 
          // handle list items + input
          if( $this.is( "input" )) {
@@ -85,7 +87,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 		      }
          }
 
-        
+        if (e.preventDefault) e.preventDefault();
       // go through all selected facets and save them in array
       var _hash = [];
 
@@ -103,6 +105,5 @@ APP.FacetsMasterView = Backbone.View.extend({
          window.location.hash="!/";
       }
       
-      if (e.preventDefault) e.preventDefault();
   	}
 });
