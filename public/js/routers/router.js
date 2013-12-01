@@ -59,10 +59,10 @@ APP.Router = Backbone.Router.extend({
    renderGraphics: function(collection) {
       APP.graphicCollectionView = new APP.GraphicCollectionView ({
         collection: collection,
+        el: $(".graphics-wrapper")
      });
 
       APP.graphicCollectionView.render();
-      $('.graphics-wrapper').html(APP.graphicCollectionView.$el)
    },
 
    filterResults:function(params) {

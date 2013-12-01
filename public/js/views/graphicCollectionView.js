@@ -1,7 +1,4 @@
 APP.GraphicCollectionView = Backbone.View.extend ({
-	tagName: "div",  // default setting
-	className: "article-wrapper",
-
 	template: Handlebars.compile(
 		'<div class="show-more">show more</div>'
 	),
