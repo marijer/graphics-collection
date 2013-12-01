@@ -233,7 +233,7 @@ article h2 span {
 	line-height: 33px;
 	font-size: 12px;
 	float:left;
-	min-width:85px;
+	min-width:100px;
 }
 
 .scroll-to-top {
@@ -283,6 +283,13 @@ article h2 span {
 
 .filter-wrapper li.active {
 	background-color: #D3D3D3;
+	color: #2E2E2E;
+}
+
+.filter-info {
+	float: left;
+	line-height: 32px;
+	font-size: .9em;
 }
 
 .facet.active .remove, .filter-label .remove {
@@ -302,17 +309,24 @@ article h2 span {
 	background: #EBEBEB;
 	padding: 0;
 	margin: 6px 8px;
-	padding: 4px 6px;
+	padding: 3px 6px;
 	border-radius: 3px;
 	cursor: pointer;
+
+    -webkit-transition: background-color 200ms ease-out;
+    -moz-transition: background-color 200ms ease-out;
+    -o-transition: background-color 200ms ease-out;
+    transition: background-color 200ms ease-out;	
+}
+
+.filter-label:hover {
+	background-color: #D3D3D3;
+	color: #2E2E2E;
 }
 
 .filter-label .name {
 	float:left;
-}
-
-.filter-label .remove {
-	margin-left: 8px;
+	padding-right: 8px;
 }
 
 /* FOOTER */

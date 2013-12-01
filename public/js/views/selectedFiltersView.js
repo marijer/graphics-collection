@@ -50,17 +50,17 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 	removeFacet:function(category){
 		var $el = $('.filter-label[data-facet="'+category+'"]')[0];
-		 $el.remove();
+		$el.remove();
 	
 		//remove from the hash map
 		this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
-		console.log(this._hash);
-
+		if (this._hash.length === 0) $('.filter-info').remove();
 	},
 
 	removeAll:function(el){
 		this._hash = [];
 		$('.filter-label').remove();
+		$('.filter-info').remove();
 	},
 
 	updateLabel: function( obj ) {
@@ -83,6 +83,9 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 			this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
 		} else {
+			if (this._hash.length === 0){
+				this.$el.append("<span class='filter-info'>active filter:</span>");
+			}
 			this.$el.append(this.template({category:category, name: name, facet: facet}));
 		}
 		this._hash.push({category: category, name: name, facet:facet});
