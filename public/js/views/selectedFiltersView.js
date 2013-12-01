@@ -69,6 +69,8 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 		var category = $el.attr("data-facet"),
 		name = $el.text(),
 		facet = $el.attr("data-facet-name");
+		// if category is sort, don't do anything
+		if (category === "sort") return; 
 
 		var existingCategory = _.filter(this._hash, function( e ){ return e.category === category; });
 

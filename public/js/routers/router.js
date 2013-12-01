@@ -134,7 +134,7 @@ APP.Router = Backbone.Router.extend({
          } else {
             collection =  newCollection;  // if no parameters are set - return normal collection
       }   
-
+      if (paramSort) params.sort = paramSort;
       return collection;
    },
 
