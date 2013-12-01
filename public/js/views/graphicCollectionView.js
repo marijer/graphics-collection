@@ -63,8 +63,8 @@ APP.GraphicCollectionView = Backbone.View.extend ({
     	if (end < this.totalGraphics) {
     		this.renderProjectGroup(start, start + this.limit);
     		this.$el.append(this.template);
-    	}else {
-    		console.log("nothing more to show");
+    	}else{
+    		//console.log("nothing more to show");
     	}
     }
 })

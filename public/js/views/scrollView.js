@@ -2,7 +2,8 @@ APP.ScrollView = Backbone.View.extend ({
 
 	initialize: function() {
 	    $(window).scroll(this.onScrolling);
-	    document.addEventListener("touchmove", this.onScrolling, false);
+	    if (Backbone.isiPad) $(window).on({ 'touchmove' : this.onScrolling });
+
 	    $('.scroll-to-top').click(this.goToTop); // go to top
 	},
 

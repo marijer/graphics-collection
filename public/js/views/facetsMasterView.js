@@ -58,14 +58,10 @@ APP.FacetsMasterView = Backbone.View.extend({
    },
 
     filterResults: function( e ) {
-      
-
       var self = this,
          $this = $(e),
          $parent = $this.parent(),
          search = false;
-
-         console.log(e);
 
          // handle list items + input
          if( $this.is( "input" )) {
