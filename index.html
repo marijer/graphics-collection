@@ -4,8 +4,9 @@
 		<meta charset="UTF-8">
 		<title>News Graphics Collection</title>
 
-		<link rel="stylesheet" type="text/css" href="/public/css/normalize.css">
-		<link rel="stylesheet" type="text/css" href="/public/css/main.css">
+		<link rel="stylesheet" type="text/css" href="public/css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="public/css/main.css">
+
 	</head>
 	<body>
 
@@ -45,41 +46,15 @@
 		</footer>
 
 
-		<!-- this needs minification when in production, a Grunt job --> 
+		<script src="public/js/lib/underscore-min.js"> </script>
 
-		<!-- libs -->
-		<script src="/public/js/lib/underscore-min.js"> </script>
-
-		<script src="/public/js/lib/jquery.min.js"> </script>
-		<script src="/public/js/lib/backbone-min.js"> </script>
-		<script src="/public/js/lib/handlebars.min.js"> </script>
-  		<script src="/public/js/lib/backbone.queryparams.js"></script>
-
-		<!-- custom -->
+		<script src="public/js/lib/jquery.min.js"> </script>
+		<script src="public/js/lib/backbone-min.js"> </script>
+		<script src="public/js/lib/handlebars.min.js"> </script>
+  		<script src="public/js/lib/backbone.queryparams.js"></script>
 		
 
-		<!-- build:js app.min.js -->
-		<script src="/public/js/handlehelpers.js"></script>
-		<script src="/public/js/main.js"> </script>
-		<script src="/public/js/views/graphicItemView.js"> </script>
-
-		<script src="/public/js/views/scrollView.js"> </script>
-
-		<script src="/public/js/views/searchView.js"> </script>
-		<script src="/public/js/views/graphicItemView.js"> </script>
-
-		<script src="/public/js/models/facets.js"> </script>
-		<script src="/public/js/views/facetsView.js"> </script>
-		<script src="/public/js/views/sortView.js"> </script>
-		<script src="/public/js/views/selectedFiltersView.js"> </script>		
-		<script src="/public/js/views/facetsMasterView.js"> </script>
-
-		<script src="/public/js/models/graphic.js"> </script>
-		<script src="/public/js/collections/graphics.js"> </script>
-		<script src="/public/js/views/graphicCollectionView.js"> </script>
-
-		<script src="/public/js/routers/router.js"> </script>
-		<!-- /build -->	
+		<script src="public/js/app.min.js"></script>
 		
 	</body>
 </html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>News Graphics Collection</title>
+
+		<!-- build:[href] public/css/ -->
+		<link rel="stylesheet" type="text/css" href="../public/css/normalize.css">
+		<link rel="stylesheet" type="text/css" href="../public/css/main.css">
+		<!-- /build -->
+
+	</head>
+	<body>
+
+		<header>
+			<div class='header-wrapper width-constraint'>
+				<h2>Graphics Collection</h2>
+			</div>
+		</header>
+
+		<div class='fixed-menu-wrapper'>
+			<div class='inner-fixed-menu width-constraint'>
+				<div class="search-wrapper"></div>
+				<div class="total-graphics"> </div>
+				<div class="selected-filters-wrapper"></div>
+			</div>
+		</div>
+
+		<div class='content-wrapper width-constraint'> 
+			<section class="column-left">
+				<div class='filters-wrapper'></div>
+				<div class='scroll-to-top none fixed'> <span>⇧</span> Scroll to top  <span>⇧</span> </div>
+			</section>
+			
+			<div class="main-content">
+			<noscript> Please enable JavaScript to view this page</noscript>
+				<div class="fixed-main-content">
+					<div class="sort-by"></div>
+				</div>
+				<div class='graphics-wrapper' id="graphics-wrapper"> </div>
+			</div>
+				
+			</div>
+		</div>
+
+		<footer>
+			<div class="footer-wrapper"></div>
+		</footer>
+
+
+		<!-- build:[src] public/js/lib/ -->
+		<script src="../public/js/lib/underscore-min.js"> </script>
+
+		<script src="../public/js/lib/jquery.min.js"> </script>
+		<script src="../public/js/lib/backbone-min.js"> </script>
+		<script src="../public/js/lib/handlebars.min.js"> </script>
+  		<script src="../public/js/lib/backbone.queryparams.js"></script>
+		<!-- /build -->
+		
+
+		<!-- build:js public/js/app.min.js -->
+		<script src="js/handlehelpers.js"></script>
+		<script src="js/main.js"> </script>
+		<script src="js/views/graphicItemView.js"> </script>
+
+		<script src="js/views/scrollView.js"> </script>
+
+		<script src="js/views/searchView.js"> </script>
+		<script src="js/views/graphicItemView.js"> </script>
+
+		<script src="js/models/facets.js"> </script>
+		<script src="js/views/facetsView.js"> </script>
+		<script src="js/views/sortView.js"> </script>
+		<script src="js/views/selectedFiltersView.js"> </script>		
+		<script src="js/views/facetsMasterView.js"> </script>
+
+		<script src="js/models/graphic.js"> </script>
+		<script src="js/collections/graphics.js"> </script>
+		<script src="js/views/graphicCollectionView.js"> </script>
+
+		<script src="js/routers/router.js"> </script>
+		<!-- /build -->	
+		
+	</body>
+</html>

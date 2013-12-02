@@ -23,20 +23,6 @@ module.exports = function(grunt) {
       }
     },
 
-     concat: {
-      options: {
-        separator: ';',
-      },
-      dist: {
-        src: [
-          '<%= dirs.src %>/main.js',
-          '<%= dirs.src %>/handlehelpers.js', 
-          '<%= dirs.src %>/collections/graphics.js'
-        ],
-        dest: 'dist/built.js',
-      },
-    },
-
     copy: {
       main: {
         files: [
@@ -54,32 +40,39 @@ module.exports = function(grunt) {
       }
     },
 
+  // process html to set to minified versions
    processhtml: {
-        options: {
-          data: {
-            message: 'Hello world!'
-          }
-        },
         dist: {
           files: {
-            'dest/index.html': ['index.html']
+            'index.html': ['build/index.html']
          }
       }
    },
 
-    uglify: {
-      my_target: {
-        files: {
-          'dest/output.min.js': ['src/input1.js', 'src/input2.js']
+   // concatenates js files
+        concat: {
+            options: {
+                separator: ';' //separates scripts
+            },
+            dist: {
+                src: ['build/js/*.js', 'build/js/models/*.js', 'build/js/collections/*.js', 'build/js/views/*.js', 'build/js/routers/*.js'], //Using mini match for scripts to concatenate
+                dest: 'public/js/app.js' //where to output the script
+            }
+        },
+ 
+  // minify the js
+        uglify: {
+            js: {
+                files: {
+                    'public/js/app.min.js': ['public/js/app.js'] //save over the newly created script
+                }
+            }
         }
-      }
-    }
 
   });
 
  
    grunt.registerTask("copy2", ["copy"]);
-   grunt.registerTask("concat2", ["concat"]);
-   grunt.registerTask("processhtml2", ["processhtml"]);
+   grunt.registerTask("build", ["concat", "uglify", "processhtml"]);
 
 };

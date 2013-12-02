@@ -1,6 +1,6 @@
 APP.Graphics = Backbone.Collection.extend ( {
 	model: APP.Graphic,
-	url: "graphics",
+	url: "../graphics",
 	sortKey: "desc",
 
 	comparator: function(a, b) {
