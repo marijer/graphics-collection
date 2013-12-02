@@ -49,6 +49,7 @@ module.exports = function(grunt) {
       }
     },
 
+    // combine all js files
     concat: {
         basic_and_extras: {
           files: {
@@ -58,6 +59,7 @@ module.exports = function(grunt) {
         },
       },
 
+    // concat and minify css
     cssmin: {
       combine: {
         files: {

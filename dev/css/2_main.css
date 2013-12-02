@@ -31,6 +31,7 @@ input, input[type="search"] {
 
 .fixed-menu-wrapper.fixed{
 	top:0;
+	position:fixed;
 }
 
 .scroll-to-top.fixed{
@@ -84,7 +85,7 @@ header h2 {
 
 .content-wrapper {
 	overflow: hidden;
-	margin-top: 30px;
+	margin-top: 60px;
 	clear:both;
 	min-height:600px;
 }
@@ -215,6 +216,7 @@ article h2 span {
 	height: 35px;
 	width: 100%;
 	z-index: 1000;
+	position: absolute;
 	background: #FFF;
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }

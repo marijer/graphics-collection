@@ -35,6 +35,7 @@ APP.SearchView = Backbone.View.extend ({
 		
 		data = query;
 		$search.attr('data-facet-name', data);	
+		$search.addClass('active');
 		$search.val(query);	
 	},
 
