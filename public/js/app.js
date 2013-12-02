@@ -407,7 +407,7 @@ APP.ScrollView = Backbone.View.extend ({
     	var viewportHeight = $(window).height();
     	var bodyHeight = $('body').height();
 
-    	if ($scrollTop > 34 && viewportHeight < bodyHeight) {
+    	if ($scrollTop > 33 && viewportHeight < bodyHeight) {
 		    $('.fixed-menu-wrapper').addClass('fixed');
 
 		    if ( $scrollTop > 800){
@@ -462,6 +462,7 @@ APP.SearchView = Backbone.View.extend ({
 		
 		data = query;
 		$search.attr('data-facet-name', data);	
+		$search.addClass('active');
 		$search.val(query);	
 	},
 
