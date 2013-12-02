@@ -17,7 +17,7 @@ APP.ScrollView = Backbone.View.extend ({
     	var viewportHeight = $(window).height();
     	var bodyHeight = $('body').height();
 
-    	if ($scrollTop > 36 && viewportHeight < bodyHeight) {
+    	if ($scrollTop > 34 && viewportHeight < bodyHeight) {
 		    $('.fixed-menu-wrapper').addClass('fixed');
 
 		    if ( $scrollTop > 800){
