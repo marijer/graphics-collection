@@ -25,7 +25,10 @@ APP.GraphicItemView = Backbone.View.extend({
         var $img = self.$el.find('img.graphics-image');
 
         if ($img[0].complete){  // checks i
-            $img.hide().fadeIn(200);
+            $img.css("opacity", 0.3).animate({
+              opacity: 1
+            },400);
+
         } else {
             $img.hide().on('load', function(e) { //load images
                 self.img_loaded(e);

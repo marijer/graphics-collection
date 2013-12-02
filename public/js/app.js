@@ -46,7 +46,8 @@ Handlebars.registerHelper("setSelected", function(param1, param2) {
 	return sel;
 })
 
-;var APP =  window.APP = {};  // window is redundant, gives insight
+
+var APP =  window.APP = {};  // window is redundant, gives insight
 
 //sets universal (events) controller which can be used anywhere
 Backbone.controller = _.extend({}, Backbone.Events);
@@ -55,7 +56,8 @@ Backbone.controller = _.extend({}, Backbone.Events);
 Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 
 
-;APP.Facets = Backbone.Model.extend({
+
+APP.Facets = Backbone.Model.extend({
   
   defaults:{
     "facet": "",
@@ -64,7 +66,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
   },
   
   url: '/public/data/facets.json'
-});;APP.Graphic = Backbone.Model.extend ({
+});
+APP.Graphic = Backbone.Model.extend ({
 	defaults: {
 		id: "",
 		title: "undefined",
@@ -80,7 +83,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 });
 
 
-;APP.Graphics = Backbone.Collection.extend ( {
+
+APP.Graphics = Backbone.Collection.extend ( {
 	model: APP.Graphic,
 	url: "../graphics",
 	sortKey: "desc",
@@ -118,7 +122,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 			}
 			this.sort();	
 	}
-});APP.FacetsMasterView = Backbone.View.extend({
+})
+APP.FacetsMasterView = Backbone.View.extend({
 
 	initialize: function() {
 		this.initSearch();
@@ -224,7 +229,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
       }
 
    }
-});;APP.FacetsView = Backbone.View.extend ({
+});
+APP.FacetsView = Backbone.View.extend ({
 
   template: Handlebars.compile(
     '<div class="filter-wrapper">' +
@@ -265,7 +271,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
         this.$el.append(this.template(facet));
       }, this);
   }
-});;APP.GraphicCollectionView = Backbone.View.extend ({
+});
+APP.GraphicCollectionView = Backbone.View.extend ({
 	template: Handlebars.compile(
 		'<div class="show-more">show more</div>'
 	),
@@ -333,7 +340,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
     		this.$el.append(this.template);
     	}
     }
-});APP.GraphicItemView = Backbone.View.extend({
+})
+APP.GraphicItemView = Backbone.View.extend({
  
     tagName:"article",
     className: "graphic",
@@ -360,7 +368,10 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
         var $img = self.$el.find('img.graphics-image');
 
         if ($img[0].complete){  // checks i
-            $img.hide().fadeIn(200);
+            $img.css("opacity", 0.3).animate({
+              opacity: 1
+            },400);
+
         } else {
             $img.hide().on('load', function(e) { //load images
                 self.img_loaded(e);
@@ -373,11 +384,15 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
     img_loaded: function( e ){
          $(e.target).fadeIn(400);
     }
-});;APP.ScrollView = Backbone.View.extend ({
+});
+APP.ScrollView = Backbone.View.extend ({
 
 	initialize: function() {
-	    $(window).scroll(this.onScrolling);
-	    if (Backbone.isiPad) $(window).on({ 'touchmove' : this.onScrolling });
+	    if (Backbone.isiPad) { 
+	    	$(window).on({ 'touchmove' : this.onScrolling });
+	    }else{
+	    	  $(window).scroll(this.onScrolling);
+	    }
 
 	    $('.scroll-to-top').click(this.goToTop); // go to top
 	},
@@ -405,11 +420,12 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 		    $('.scroll-to-top').hide();
 		}
 
-		if($scrollTop + $(window).height() == $(document).height()) {
+		if($scrollTop + $(window).height() === $(document).height()) {
 		    APP.graphicCollectionView.onShowMore(); // infinite scrolling
 		}
     }
-});APP.SearchView = Backbone.View.extend ({
+})
+APP.SearchView = Backbone.View.extend ({
 	template: Handlebars.compile(
 		'<div class="search">' +
 			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search title" >' +
@@ -460,7 +476,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 		this.trigger("search_Changed", {target: $search});
 	}
 
-});APP.SelectedFiltersView = Backbone.View.extend ({
+})
+APP.SelectedFiltersView = Backbone.View.extend ({
 	tagName: "div",  // default setting
 	className: "filter",
 
@@ -555,7 +572,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 		this._hash.push({category: category, name: name, facet:facet});
 
 	}
-});;APP.SortView = Backbone.View.extend ({
+});
+APP.SortView = Backbone.View.extend ({
 	tagName: "div",  // default setting
 	className: "filter",
 
@@ -598,7 +616,8 @@ Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
       this.trigger("sorted_Changed", {target: option});
   },
 
-});APP.Router = Backbone.Router.extend({
+})
+APP.Router = Backbone.Router.extend({
 	prev: false,
 
 	routes: {
