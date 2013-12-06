@@ -70,7 +70,7 @@ header {
 
 .width-constraint {
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 0 0 0 20px ;
 	max-width: 1120px;
 }
 
@@ -116,7 +116,7 @@ header h2 {
 	max-width:100%;
 }
 
-.image-wrapper a {
+a.image-wrapper {
 	display: block;
 	overflow: hidden;
 	background: #CCC;
@@ -128,7 +128,7 @@ header h2 {
 	position:relative;
 }
 
-.image-wrapper a:hover{
+a.image-wrapper:hover{
 	border-color: rgb(134, 197, 255);
 }
 
@@ -205,7 +205,7 @@ article h2 span {
 /* fixed submenu */
 
 .fixed-menu-wrapper {
-	height: 35px;
+	min-height: 35px;
 	width: 100%;
 	z-index: 1000;
 	position: absolute;
@@ -218,7 +218,7 @@ article h2 span {
 }
 
 .inner-fixed-menu {
-	padding: 3px 20px 0;
+	padding-top: 3px;
 }
 
 .search-input {
@@ -276,7 +276,7 @@ article h2 span {
 /* filter */
 
 .column-left {
-	width: 192px;
+	width: 191px;
 	float: left;
 }
 
@@ -285,6 +285,7 @@ article h2 span {
 	font-weight: bold;
 	margin: 0;
 	padding: 0 0 5px;
+	cursor: pointer;
 }
 
 .filter-wrapper li {

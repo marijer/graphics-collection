@@ -5,12 +5,10 @@ APP.GraphicItemView = Backbone.View.extend({
 
     template: Handlebars.compile(
         '<div class="inner-graphics-wrapper">' +
-            '<div class="image-wrapper">'+
-                '<a href="{{ url }}" target="_blank" title="{{ title }}" >' +
+                '<a href="{{ url }}" class="image-wrapper" target="_blank" title="{{ title }}" >' +
                     '<img class="graphics-image" src={{getImgPath this}}>' +
                     '<div class="date">{{formatDate date}}</div>'  + //makes use of registerHelper in handlehelpers.js
                 '</a>' + 
-            '</div>' +
     		'<h2 class="{{setFavicon newspaper}}"><span>{{title}}</span></h2>' +
         '</div>'
 	),

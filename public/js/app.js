@@ -77,7 +77,7 @@ APP.Graphic = Backbone.Model.extend ({
 		favorite: false,
 		thumbnail:"public/img/graphics/test.jpg",
 		news_type: "unknown",
-		annotated_type: "unknown",
+		annotation: "unknown",
 		flash: "unknown"
 	}
 });
@@ -234,8 +234,8 @@ APP.FacetsView = Backbone.View.extend ({
 
   template: Handlebars.compile(
     '<div class="filter-wrapper">' +
-        '<h2>{{heading}}</h2>' +
-          '<ul class={{facet}}>' +
+        '<h2 class="header slideDown">{{heading}}</h2>' +
+          '<ul class="{{facet}}">' +
             '{{#each options}}' + // by using ../ you go one level up in handlebars
                 '<li class="facet" data-facet="{{setToLowerCase ../facet}}" data-facet-name="{{setToLowerCase this.facet}}">{{this.title}}<span class="remove"></span></li>' +
             /*    '{{#if suboptions}}' +
@@ -252,6 +252,7 @@ APP.FacetsView = Backbone.View.extend ({
 
   events: {
     'click .facet': 'filterResults',
+    'click h2': 'onClickHeader',
   },
 
   initialize: function(){
@@ -261,6 +262,21 @@ APP.FacetsView = Backbone.View.extend ({
 //triggers function in master view
   filterResults: function(e) {
     this.trigger("filter_Changed", {target: e.target}); 
+  },
+
+// function that does slide up or down
+  onClickHeader: function (e){
+    var $header = $(e.target);
+
+    if ($header.hasClass('header')){
+      if ($header.hasClass('slideDown')){
+          $header.removeClass('slideDown');
+          $header.siblings( "ul" ).slideUp("fast");
+      } else{
+          $header.addClass('slideDown');
+          $header.siblings( "ul" ).slideDown("fast");
+      }
+    }
   },
 
   render: function () {
@@ -348,12 +364,10 @@ APP.GraphicItemView = Backbone.View.extend({
 
     template: Handlebars.compile(
         '<div class="inner-graphics-wrapper">' +
-            '<div class="image-wrapper">'+
-                '<a href="{{ url }}" target="_blank" title="{{ title }}" >' +
+                '<a href="{{ url }}" class="image-wrapper" target="_blank" title="{{ title }}" >' +
                     '<img class="graphics-image" src={{getImgPath this}}>' +
                     '<div class="date">{{formatDate date}}</div>'  + //makes use of registerHelper in handlehelpers.js
                 '</a>' + 
-            '</div>' +
     		'<h2 class="{{setFavicon newspaper}}"><span>{{title}}</span></h2>' +
         '</div>'
 	),
@@ -366,6 +380,7 @@ APP.GraphicItemView = Backbone.View.extend({
         self.$el.html(self.template( attributes ));  
 
         var $img = self.$el.find('img.graphics-image');
+        var $a = self.$el.find('a');
 
         if ($img[0].complete){  // checks i
             $img.css("opacity", 0.3).animate({
@@ -428,7 +443,7 @@ APP.ScrollView = Backbone.View.extend ({
 APP.SearchView = Backbone.View.extend ({
 	template: Handlebars.compile(
 		'<div class="search">' +
-			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search title" >' +
+			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search on title" >' +
 		'</div>'
 	),
 
@@ -566,7 +581,7 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 			this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
 		} else {
 			if (this._hash.length === 0){
-				this.$el.append("<span class='filter-info'>active filter:</span>");
+				this.$el.append("<span class='filter-info'>active filter(s):</span>");
 			}
 			this.$el.append(this.template({category:category, name: name, facet: facet}));
 		}
@@ -686,6 +701,7 @@ APP.Router = Backbone.Router.extend({
    },
 
    filterResults:function(params) {
+      var self = this;
       var newCollection = this.search(params);
 
       // Get All the Facets from Param
@@ -701,6 +717,46 @@ APP.Router = Backbone.Router.extend({
            _paramsValueArray.push(value);
         });
 
+
+      // Get All the Available Facets
+            
+            // var _facetArray = new Array();
+            
+            // $facets.filter(function(i, k){
+            //    var key = $(this).data('facet');
+            //    var value = $(this).data('facet-name');
+
+            //    if (_.findWhere(_facetArray, key) == null) {
+            //          _facetArray.push({key: key, value: value});
+            //    }
+            // });
+
+
+            // var _excludedFacet = _.without(_facetArray, _paramsArray),
+            //     _availableFacets = new Array();
+
+            
+            // _.each(_excludedFacet, function(value, key){        
+            //   newCollection.filter(function(doc){  
+            //   doc = doc.get(value.value);
+            //    _availableFacets.push(doc);          
+            //   });        
+            // });
+
+            // console.log(_availableFacets);
+
+
+            // _availableFacets.push(_paramsValueArray);
+            // _availableFacets = _.flatten(_availableFacets); 
+            
+            // var $f = $facets.removeClass("disabled").filter(function(i, k){
+            //    var facet_name = $(i).data('facet-name');
+            //   return _.indexOf(_availableFacets, facet_name) == -1? true: false;
+              
+            // }).addClass("disabled");
+      
+
+        // set active or inactive
         if (_paramsValueArray.length){
 
           var _facets = _.filter($facets, function(i, k){

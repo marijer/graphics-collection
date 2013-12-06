@@ -1,7 +1,7 @@
 APP.SearchView = Backbone.View.extend ({
 	template: Handlebars.compile(
 		'<div class="search">' +
-			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search title" >' +
+			'<input class="search-input" data-facet="title" data-facet-name="" type="search" placeholder="search on title" >' +
 		'</div>'
 	),
 
