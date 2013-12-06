@@ -8,7 +8,7 @@ APP.Graphic = Backbone.Model.extend ({
 		favorite: false,
 		thumbnail:"public/img/graphics/test.jpg",
 		news_type: "unknown",
-		annotated_type: "unknown",
+		annotation: "unknown",
 		flash: "unknown"
 	}
 });

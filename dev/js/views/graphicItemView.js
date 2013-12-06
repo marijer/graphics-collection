@@ -23,6 +23,7 @@ APP.GraphicItemView = Backbone.View.extend({
         self.$el.html(self.template( attributes ));  
 
         var $img = self.$el.find('img.graphics-image');
+        var $a = self.$el.find('a');
 
         if ($img[0].complete){  // checks i
             $img.css("opacity", 0.3).animate({

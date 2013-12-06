@@ -1,0 +1,11 @@
+/*@media (min-width: 1200px) {
+  article {
+  	width:33%;
+  }
+}*/
+
+@media (min-width: 200px) and (max-width: 860px) {
+  article {
+  	width:50%;
+  }
+}

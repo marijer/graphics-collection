@@ -86,7 +86,7 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 			this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
 		} else {
 			if (this._hash.length === 0){
-				this.$el.append("<span class='filter-info'>active filter:</span>");
+				this.$el.append("<span class='filter-info'>active filter(s):</span>");
 			}
 			this.$el.append(this.template({category:category, name: name, facet: facet}));
 		}

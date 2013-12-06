@@ -71,7 +71,7 @@ header {
 .width-constraint {
 	margin: 0 auto;
 	padding: 0 20px;
-	max-width: 1200px;
+	max-width: 1120px;
 }
 
 header h2 {
@@ -110,33 +110,37 @@ header h2 {
 .graphics-wrapper {
 	overflow:auto;
 	clear: both;
-	min-width: 575px;
 }
 
 .graphics-image {
+	max-width:100%;
+}
+
+.image-wrapper a {
+	display: block;
+	overflow: hidden;
+	background: #CCC;
 	border: 1px solid #CCC;
 	border-top-color: #EEE;
 	border-left-color: #EEE;
+	height: 0;
+	padding-bottom: 59%;
+	position:relative;
 }
 
-a:hover .graphics-image {
+.image-wrapper a:hover{
 	border-color: rgb(134, 197, 255);
-}
-
-.image-wrapper {
-	position: relative;
-	height: 150px;
-	max-width: 250px;
-	background: #CCC;
 }
 
 .inner-graphics-wrapper {
 	max-width: 252px;
+	height:100%;
 }
 
 article {
-	min-width: 250px;
+	min-width: 150px;
 	float: left;
+	padding-right:2%;
 	width: 33%;
 	-moz-box-sizing: border-box;  /* starting from ie8 */
 	-webkit-box-sizing: border-box; 
@@ -144,26 +148,14 @@ article {
 	height: 225px;
 }
 
-@media (min-width: 1200px) {
-  article {
-  	width:33%;
-  }
-}
-
-@media (min-width: 600px) and (max-width: 1050px) {
-  article {
-  	width:50%;
-  }
-}
-
 article h2 {
-	font-size: 13px;
-	line-height: 1.2em;
+	font-size: 12px;
+	line-height: 1.4em;
+	color: #555555;
+	font-weight: 200;
 	margin: 8px 0;
 	min-height: 20px;
 	padding-left: 25px;
-	color: #555555;
-	font-weight: 400;
 }
 
 article h2 span {

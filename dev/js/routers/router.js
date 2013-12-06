@@ -66,6 +66,7 @@ APP.Router = Backbone.Router.extend({
    },
 
    filterResults:function(params) {
+      var self = this;
       var newCollection = this.search(params);
 
       // Get All the Facets from Param
@@ -81,6 +82,46 @@ APP.Router = Backbone.Router.extend({
            _paramsValueArray.push(value);
         });
 
+
+      // Get All the Available Facets
+            
+            // var _facetArray = new Array();
+            
+            // $facets.filter(function(i, k){
+            //    var key = $(this).data('facet');
+            //    var value = $(this).data('facet-name');
+
+            //    if (_.findWhere(_facetArray, key) == null) {
+            //          _facetArray.push({key: key, value: value});
+            //    }
+            // });
+
+
+            // var _excludedFacet = _.without(_facetArray, _paramsArray),
+            //     _availableFacets = new Array();
+
+            
+            // _.each(_excludedFacet, function(value, key){        
+            //   newCollection.filter(function(doc){  
+            //   doc = doc.get(value.value);
+            //    _availableFacets.push(doc);          
+            //   });        
+            // });
+
+            // console.log(_availableFacets);
+
+
+            // _availableFacets.push(_paramsValueArray);
+            // _availableFacets = _.flatten(_availableFacets); 
+            
+            // var $f = $facets.removeClass("disabled").filter(function(i, k){
+            //    var facet_name = $(i).data('facet-name');
+            //   return _.indexOf(_availableFacets, facet_name) == -1? true: false;
+              
+            // }).addClass("disabled");
+      
+
+        // set active or inactive
         if (_paramsValueArray.length){
 
           var _facets = _.filter($facets, function(i, k){

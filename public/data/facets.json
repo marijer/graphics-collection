@@ -13,7 +13,7 @@
       "facet": "newscategory",
       "heading": "Category",
       "options": [
-        {"facet": "Politics", "title":"Politics"},
+        {"facet": "politics", "title":"Politics"},
         {"facet": "economy", "title":"Business"}, 
         {"facet": "Sports", "title":"Sports"}, 
         {"facet": "Conflict", "title":"Conflict"},
