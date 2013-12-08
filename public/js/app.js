@@ -47,6 +47,17 @@ Handlebars.registerHelper("setSelected", function(param1, param2) {
 })
 
 
+// set filters by default collapsed or expanded
+Handlebars.registerHelper("isExpanded", function(param) {
+	var expanded = param ? "expanded" : "collapsed";
+
+	return expanded;
+})
+
+
+
+
+
 var APP =  window.APP = {};  // window is redundant, gives insight
 
 //sets universal (events) controller which can be used anywhere
@@ -71,7 +82,7 @@ APP.Graphic = Backbone.Model.extend ({
 	defaults: {
 		id: "",
 		title: "undefined",
-		date: null,
+		date: "unknown",
 		source: "unknown",
 		creators: "unknown",
 		favorite: false,
@@ -79,7 +90,19 @@ APP.Graphic = Backbone.Model.extend ({
 		news_type: "unknown",
 		annotation: "unknown",
 		flash: "unknown"
-	}
+	},
+
+	// rewrite of database values
+	parse: function(response){
+		paper = response.newspaper;
+		newscategory = response.newscategory;
+		
+		if (paper == "guardian") response.newspaper = "gua";
+		if (paper == "Ny Times") response.newspaper ="nyt"; 
+		if (newscategory == "Economy") response.newscategory = "business"; 
+
+		return response;
+ 	}
 });
 
 
@@ -234,8 +257,8 @@ APP.FacetsView = Backbone.View.extend ({
 
   template: Handlebars.compile(
     '<div class="filter-wrapper">' +
-        '<h2 class="header slideDown">{{heading}}</h2>' +
-          '<ul class="{{facet}}">' +
+        '<h2 class="{{isExpanded expanded}} header">{{heading}}</h2>' +
+          '<ul class="{{facet}} {{isExpanded expanded}}">' +
             '{{#each options}}' + // by using ../ you go one level up in handlebars
                 '<li class="facet" data-facet="{{setToLowerCase ../facet}}" data-facet-name="{{setToLowerCase this.facet}}">{{this.title}}<span class="remove"></span></li>' +
             /*    '{{#if suboptions}}' +
@@ -256,7 +279,7 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   initialize: function(){
-    this.render();
+    this.render();     
   },
 
 //triggers function in master view
@@ -269,11 +292,11 @@ APP.FacetsView = Backbone.View.extend ({
     var $header = $(e.target);
 
     if ($header.hasClass('header')){
-      if ($header.hasClass('slideDown')){
-          $header.removeClass('slideDown');
+      if ($header.hasClass('expanded')){
+          $header.removeClass('expanded');
           $header.siblings( "ul" ).slideUp("fast");
       } else{
-          $header.addClass('slideDown');
+          $header.addClass('expanded');
           $header.siblings( "ul" ).slideDown("fast");
       }
     }
@@ -286,6 +309,7 @@ APP.FacetsView = Backbone.View.extend ({
     _.each(col, function(facet) {
         this.$el.append(this.template(facet));
       }, this);
+
   }
 });
 APP.GraphicCollectionView = Backbone.View.extend ({

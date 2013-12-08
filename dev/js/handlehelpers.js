@@ -46,3 +46,14 @@ Handlebars.registerHelper("setSelected", function(param1, param2) {
 	return sel;
 })
 
+
+// set filters by default collapsed or expanded
+Handlebars.registerHelper("isExpanded", function(param) {
+	var expanded = param ? "expanded" : "collapsed";
+
+	return expanded;
+})
+
+
+
+

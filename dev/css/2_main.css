@@ -103,7 +103,7 @@ header h2 {
 }
 
 .main-content {
-	margin-left: 220px;
+	margin-left: 231px;
 	overflow:hidden;
 }
 
@@ -140,7 +140,7 @@ a.image-wrapper:hover{
 article {
 	min-width: 150px;
 	float: left;
-	padding-right:2%;
+	padding-right:3%;
 	width: 33%;
 	-moz-box-sizing: border-box;  /* starting from ie8 */
 	-webkit-box-sizing: border-box; 
@@ -225,7 +225,6 @@ article h2 span {
 	padding: 5px;
 	width: 180px;
 	font-size: .8em;
-	font-family: "helvetica Neue";
 	font-weight: 200;
 	border: 1px solid #E0E0E0;
 	border-top-color: #E6E6E6;
@@ -245,7 +244,8 @@ article h2 span {
 
 .search-wrapper {
 	float: left;
-	margin-right: 23px;
+	margin-right: 36px;
+	margin-top:2px;
 }
 
 .total-graphics {
@@ -284,8 +284,24 @@ article h2 span {
 	font-size: 13px;
 	font-weight: bold;
 	margin: 0;
-	padding: 0 0 5px;
+	padding: 0 0 4px;
+	margin-bottom:5px;
 	cursor: pointer;
+	background-position: right 6px;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid #E2E2E2;
+}
+
+.filter-wrapper h2:hover {
+	color: rgb(129, 129, 129);
+}
+
+.filter-wrapper h2 {
+	background-image: url('../img/assets/arrow.png');
+}
+
+.filter-wrapper h2.expanded {
+	background-image: url('../img/assets/arrow_up.png');
 }
 
 .filter-wrapper li {
@@ -297,6 +313,10 @@ article h2 span {
 .filter-wrapper {
 	margin-bottom: 15px;
 }
+/*
+.filter-wrapper ul {
+	padding: 5px 0 0;
+}*/
 
 .filter-wrapper li:hover {
 	background-color: rgb(238, 238, 238);
@@ -307,21 +327,34 @@ article h2 span {
 	color: #2E2E2E;
 }
 
+.filter-wrapper li.active:hover .remove:after {
+	color:#000;
+}
+
 .filter-info {
 	float: left;
 	line-height: 32px;
 	font-size: .9em;
+	margin-right: 5px;
+}
+
+ul.collapsed {
+	display: none;
 }
 
 .facet.active .remove, .filter-label .remove {
-	background-image: url('../img/assets/filter_remove.png');
-	width: 12px;
-	height: 12px;
+	height: 10px;
 	display: inline-block;
 	float: right;
 	right: 5px;
-	background-position: 0px 2px;
-	background-repeat: no-repeat;
+}
+
+.facet.active .remove:after, .filter-label .remove:after {
+	content: "x";
+	text-shadow: 0px 1px #FFF;
+	color: #5C5C5C;
+	font-family: Verdana;
+	line-height: 1em;
 }
 
 .filter-label {

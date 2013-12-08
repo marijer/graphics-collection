@@ -3,25 +3,27 @@
     {
       "facet": "newspaper",
       "heading": "News Organization",
+      "expanded": false,
       "options": [
-          {"facet":"Guardian", "title":"Guardian"},
-          {"facet":"NY Times", "title":"New York Times"}
+          {"facet":"gua", "title":"Guardian"},
+          {"facet":"nyt", "title":"New York Times"}
       ],
       "sort_order": ""        
     },
     {
       "facet": "newscategory",
       "heading": "Category",
+      "expanded": true,
       "options": [
         {"facet": "politics", "title":"Politics"},
-        {"facet": "economy", "title":"Business"}, 
-        {"facet": "Sports", "title":"Sports"}, 
-        {"facet": "Conflict", "title":"Conflict"},
-        {"facet": "Disaster", "title":"Disaster"},
-        {"facet": "Environment", "title":"Environment"},
-        {"facet": "Demographics", "title":"Demographics"},
-        {"facet": "Science", "title":"Science"},
-        {"facet": "Culture", "title":"Culture"},
+        {"facet": "business", "title":"Business"}, 
+        {"facet": "sports", "title":"Sports"}, 
+        {"facet": "conflict", "title":"Conflict"},
+        {"facet": "disaster", "title":"Disaster"},
+        {"facet": "environment", "title":"Environment"},
+        {"facet": "demographics", "title":"Demographics"},
+        {"facet": "science", "title":"Science"},
+        {"facet": "culture", "title":"Culture"},
         {"facet": "lifestyle", "title":"Lifestyle"},
         {"facet": "healthcare", "title":"Healthcare"},
         {"facet": "other", "title":"Other"}
@@ -31,6 +33,7 @@
     {
       "facet": "visualform",
       "heading": "Visualform",
+      "expanded": true,
       "options": [
           {"facet":"chart", "title":"Charts"},
           {"facet":"hierarchy", "title":"Hierarchy"},
@@ -48,6 +51,7 @@
      {
       "facet": "annotation",
       "heading": "Annotation",
+      "expanded": false,
       "options": [
           {"facet":"high", "title":"High"},
           {"facet":"low", "title":"Low"},
@@ -58,6 +62,7 @@
     {
       "facet": "visualizationtype",
       "heading": "Data Type",
+      "expanded": false,
       "options": [
           {"facet":"quantitative", "title":"Quantative"},
           {"facet":"hybrid", "title":"Combination"},

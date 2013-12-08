@@ -2,8 +2,8 @@ APP.FacetsView = Backbone.View.extend ({
 
   template: Handlebars.compile(
     '<div class="filter-wrapper">' +
-        '<h2 class="header slideDown">{{heading}}</h2>' +
-          '<ul class="{{facet}}">' +
+        '<h2 class="{{isExpanded expanded}} header">{{heading}}</h2>' +
+          '<ul class="{{facet}} {{isExpanded expanded}}">' +
             '{{#each options}}' + // by using ../ you go one level up in handlebars
                 '<li class="facet" data-facet="{{setToLowerCase ../facet}}" data-facet-name="{{setToLowerCase this.facet}}">{{this.title}}<span class="remove"></span></li>' +
             /*    '{{#if suboptions}}' +
@@ -24,7 +24,7 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   initialize: function(){
-    this.render();
+    this.render();     
   },
 
 //triggers function in master view
@@ -37,11 +37,11 @@ APP.FacetsView = Backbone.View.extend ({
     var $header = $(e.target);
 
     if ($header.hasClass('header')){
-      if ($header.hasClass('slideDown')){
-          $header.removeClass('slideDown');
+      if ($header.hasClass('expanded')){
+          $header.removeClass('expanded');
           $header.siblings( "ul" ).slideUp("fast");
       } else{
-          $header.addClass('slideDown');
+          $header.addClass('expanded');
           $header.siblings( "ul" ).slideDown("fast");
       }
     }
@@ -54,5 +54,6 @@ APP.FacetsView = Backbone.View.extend ({
     _.each(col, function(facet) {
         this.$el.append(this.template(facet));
       }, this);
+
   }
 });
