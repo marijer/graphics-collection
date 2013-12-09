@@ -35,8 +35,16 @@ Handlebars.registerHelper("setFavicon", function( data ) {
 	return faviconClass;
 })
 
-Handlebars.registerHelper("setToLowerCase", function(param1) {
-	return param1.toLowerCase();
+Handlebars.registerHelper("setRightFacet", function(param1, param2) {
+	var sel;
+
+	if (param1.independent) { // if param1 is independent, every individual item contains a facet
+		sel = param2.facet; 
+	} else {
+		sel = param1.facet;
+	}
+
+	return sel.toLowerCase();
 })
 
 

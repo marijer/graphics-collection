@@ -5,7 +5,7 @@ APP.FacetsView = Backbone.View.extend ({
         '<h2 class="{{isExpanded expanded}} header">{{heading}}</h2>' +
           '<ul class="{{facet}} {{isExpanded expanded}}">' +
             '{{#each options}}' + // by using ../ you go one level up in handlebars
-                '<li class="facet" data-facet="{{setToLowerCase ../facet}}" data-facet-name="{{setToLowerCase this.facet}}">{{this.title}}<span class="remove"></span></li>' +
+                '<li class="facet" data-facet="{{setRightFacet .. this}}" data-facet-name="{{this.value}}">{{this.title}}<span class="remove"></span></li>' +
             /*    '{{#if suboptions}}' +
                     '<ul class="suboptions">' +
                     '{{#each suboptions}}' +

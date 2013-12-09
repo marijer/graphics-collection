@@ -3,77 +3,83 @@
     {
       "facet": "newspaper",
       "heading": "News Organization",
-      "expanded": false,
+      "expanded": true,
       "options": [
-          {"facet":"gua", "title":"Guardian"},
-          {"facet":"nyt", "title":"New York Times"}
-      ],
-      "sort_order": ""        
+          {"value":"gua", "title":"Guardian"},
+          {"value":"nyt", "title":"New York Times"}
+      ]      
     },
     {
       "facet": "newscategory",
       "heading": "Category",
       "expanded": true,
       "options": [
-        {"facet": "politics", "title":"Politics"},
-        {"facet": "business", "title":"Business"}, 
-        {"facet": "sports", "title":"Sports"}, 
-        {"facet": "conflict", "title":"Conflict"},
-        {"facet": "disaster", "title":"Disaster"},
-        {"facet": "environment", "title":"Environment"},
-        {"facet": "demographics", "title":"Demographics"},
-        {"facet": "science", "title":"Science"},
-        {"facet": "culture", "title":"Culture"},
-        {"facet": "lifestyle", "title":"Lifestyle"},
-        {"facet": "healthcare", "title":"Healthcare"},
-        {"facet": "other", "title":"Other"}
-      ],
-      "sort_order": ""    
+        {"value": "politics", "title":"Politics"},
+        {"value": "business", "title":"Business"}, 
+        {"value": "sports", "title":"Sports"}, 
+        {"value": "conflict", "title":"Conflict"},
+        {"value": "disaster", "title":"Disaster"},
+        {"value": "environment", "title":"Environment"},
+        {"value": "demographics", "title":"Demographics"},
+        {"value": "science", "title":"Science"},
+        {"value": "culture", "title":"Culture"},
+        {"value": "lifestyle", "title":"Lifestyle"},
+        {"value": "healthcare", "title":"Healthcare"},
+        {"value": "other", "title":"Other"}
+      ]   
     },
     {
       "facet": "visualform",
       "heading": "Visualform",
-      "expanded": true,
+      "expanded": false,
       "options": [
-          {"facet":"chart", "title":"Charts"},
-          {"facet":"hierarchy", "title":"Hierarchy"},
-          {"facet":"illustration", "title":"Illustration"},
-          {"facet":"map", "title":"Maps", "suboptions": [
-              {"facet": "choropleth", "title":"choropleth"},
-              {"facet": "choropleth2", "title":"choropleth2"}
+          {"value":"chart", "title":"Charts"},
+          {"value":"hierarchy", "title":"Hierarchy"},
+          {"value":"illustration", "title":"Illustration"},
+          {"value":"map", "title":"Maps", "suboptions": [
+              {"value": "choropleth", "title":"choropleth"},
+              {"value": "choropleth2", "title":"choropleth2"}
              ]
           },
-          {"facet":"network", "title":"Network"},
-          {"facet":"text", "title":"Text"}
-      ],
-      "sort_order": ""        
+          {"value":"network", "title":"Network"},
+          {"value":"text", "title":"Text"}
+      ]     
     },
+    {
+      "heading": "Participation",
+      "expanded": false,
+      "independent": true,
+      "options": [
+          {"value":"1", "title":"Open Data", "facet": "opendata"},
+          {"value":"1", "title":"Social Data", "facet": "socialdata"},
+          {"value":"1", "title":"Reader Generated", "facet": "readergenerated"},
+          {"value":"1", "title":"Gamification", "facet": "gamification"}
+      ]    
+    }, 
      {
       "facet": "annotation",
       "heading": "Annotation",
       "expanded": false,
       "options": [
-          {"facet":"high", "title":"High"},
-          {"facet":"low", "title":"Low"},
-          {"facet":"debatable", "title":"Debatable"}
-      ],
-      "sort_order": ""        
-    },
+          {"value":"high", "title":"High"},
+          {"value":"low", "title":"Low"},
+          {"value":"debatable", "title":"Debatable"}
+      ]    
+    }, 
     {
       "facet": "visualizationtype",
       "heading": "Data Type",
       "expanded": false,
       "options": [
-          {"facet":"quantitative", "title":"Quantative"},
-          {"facet":"hybrid", "title":"Combination"},
-          {"facet":"qualitative", "title":"Qualitative"}
-      ],
-      "sort_order": ""        
+          {"value":"quantitative", "title":"Quantative"},
+          {"value":"hybrid", "title":"Combination"},
+          {"value":"qualitative", "title":"Qualitative"}
+      ]      
     }
   ],
   "sort": [
     {"facet": "desc", "title":"date descending", "comparator": "date"},
     {"facet": "asc", "title":"date ascending", "comparator": "date"},
-    {"facet": "newest", "title":"last added", "comparator": "title"}
+    {"facet": "lastadded", "title":"last added", "comparator": "title"}
   ]
 }
