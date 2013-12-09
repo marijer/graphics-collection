@@ -35,8 +35,16 @@ Handlebars.registerHelper("setFavicon", function( data ) {
 	return faviconClass;
 })
 
-Handlebars.registerHelper("setToLowerCase", function(param1) {
-	return param1.toLowerCase();
+Handlebars.registerHelper("setRightFacet", function(param1, param2) {
+	var sel;
+
+	if (param1.independent) { // if param1 is independent, every individual item contains a facet
+		sel = param2.facet; 
+	} else {
+		sel = param1.facet;
+	}
+
+	return sel.toLowerCase();
 })
 
 
@@ -112,10 +120,12 @@ APP.Graphics = Backbone.Collection.extend ( {
 	url: "../graphics",
 	sortKey: "desc",
 
+
+
 	comparator: function(a, b) {
 	  // Optional call if you want case insensitive
-	  name1 = a.get('date').toLowerCase();
-	  name2 = b.get('date').toLowerCase();
+	  name1 = a.get(this.sortKey).toLowerCase();
+	  name2 = b.get(this.sortKey).toLowerCase();
 
 	  if (name1 < name2) {
 	    ret = -1;
@@ -140,9 +150,16 @@ APP.Graphics = Backbone.Collection.extend ( {
 
 			if (colName === "asc") {
 				this.sort_dir = "asc";
-			} else {
+				this.sortKey = "date";
+			} else if ( colName === "desc") {
 				this.sort_dir = "desc";
+				this.sortKey = "date";
+			}else {
+				this.sort_dir = "desc";
+				this.sortKey = "id";
 			}
+
+
 			this.sort();	
 	}
 })
@@ -260,7 +277,7 @@ APP.FacetsView = Backbone.View.extend ({
         '<h2 class="{{isExpanded expanded}} header">{{heading}}</h2>' +
           '<ul class="{{facet}} {{isExpanded expanded}}">' +
             '{{#each options}}' + // by using ../ you go one level up in handlebars
-                '<li class="facet" data-facet="{{setToLowerCase ../facet}}" data-facet-name="{{setToLowerCase this.facet}}">{{this.title}}<span class="remove"></span></li>' +
+                '<li class="facet" data-facet="{{setRightFacet .. this}}" data-facet-name="{{this.value}}">{{this.title}}<span class="remove"></span></li>' +
             /*    '{{#if suboptions}}' +
                     '<ul class="suboptions">' +
                     '{{#each suboptions}}' +
@@ -785,7 +802,14 @@ APP.Router = Backbone.Router.extend({
 
           var _facets = _.filter($facets, function(i, k){
              var facet_name = $(i).data('facet-name');
-             return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+             
+             //workaround for the independent variables such as 'opendata'
+             if (facet_name === 1) { 
+                facet_name = $(i).data('facet');
+                return _.indexOf(_paramsArray, facet_name) != -1 ? true: false
+              } else {
+                return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+              }
           });
 
           _.each(_facets, function(facet){
