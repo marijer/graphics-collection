@@ -3,10 +3,12 @@ APP.Graphics = Backbone.Collection.extend ( {
 	url: "../graphics",
 	sortKey: "desc",
 
+
+
 	comparator: function(a, b) {
 	  // Optional call if you want case insensitive
-	  name1 = a.get('date').toLowerCase();
-	  name2 = b.get('date').toLowerCase();
+	  name1 = a.get(this.sortKey).toLowerCase();
+	  name2 = b.get(this.sortKey).toLowerCase();
 
 	  if (name1 < name2) {
 	    ret = -1;
@@ -29,11 +31,20 @@ APP.Graphics = Backbone.Collection.extend ( {
 	sortByColumn: function(colName) { 
 			this.sortkey = colName;
 
+			console.log(colName);
+
 			if (colName === "asc") {
 				this.sort_dir = "asc";
-			} else {
+				this.sortKey = "date";
+			} else if ( colName === "desc") {
 				this.sort_dir = "desc";
+				this.sortKey = "date";
+			}else {
+				this.sort_dir = "desc";
+				this.sortKey = "id";
 			}
+
+
 			this.sort();	
 	}
 })

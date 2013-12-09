@@ -73,6 +73,7 @@
   ],
   "sort": [
     {"facet": "desc", "title":"date descending", "comparator": "date"},
-    {"facet": "asc", "title":"date ascending", "comparator": "date"}
+    {"facet": "asc", "title":"date ascending", "comparator": "date"},
+    {"facet": "newest", "title":"last added", "comparator": "title"}
   ]
 }
