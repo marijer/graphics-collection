@@ -126,9 +126,18 @@ APP.Router = Backbone.Router.extend({
 
           var _facets = _.filter($facets, function(i, k){
              var facet_name = $(i).data('facet-name');
-             return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+             
+             //workaround for the independent variables such as 'opendata'
+             if (facet_name === 1) { 
+                facet_name = $(i).data('facet');
+                return _.indexOf(_paramsArray, facet_name) != -1 ? true: false
+              } else {
+                return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+              }
           });
 
+
+          console.log(_facets);
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
          })
