@@ -31,8 +31,6 @@ APP.Graphics = Backbone.Collection.extend ( {
 	sortByColumn: function(colName) { 
 			this.sortkey = colName;
 
-			console.log(colName);
-
 			if (colName === "asc") {
 				this.sort_dir = "asc";
 				this.sortKey = "date";

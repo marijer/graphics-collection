@@ -136,8 +136,6 @@ APP.Router = Backbone.Router.extend({
               }
           });
 
-
-          console.log(_facets);
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
          })

@@ -95,6 +95,7 @@ header h2 {
 .sort-by {
 	font-size:.9em;
 	margin-bottom: 11px;
+	float:right;
 }
 
 .sort-by .label {
@@ -296,11 +297,11 @@ article h2 span {
 	color: rgb(129, 129, 129);
 }
 
-.filter-wrapper h2 {
+.filter-wrapper h2.expanded {
 	background-image: url('../img/assets/arrow.png');
 }
 
-.filter-wrapper h2.expanded {
+.filter-wrapper h2 {
 	background-image: url('../img/assets/arrow_up.png');
 }
 
