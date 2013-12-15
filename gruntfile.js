@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       },
 
       jshint: {
-        files: ['Gruntfile.js', 'public/js/*'],
+        files: ['Gruntfile.js', 'dev/js/**'],
         options: {
           // options here to override JSHint defaults
           globals: {
@@ -36,8 +36,8 @@ module.exports = function(grunt) {
             { expand: true, flatten: true, src: ['bower_components/underscore/underscore-min.js'], dest: 'public/js/lib'},
             { expand: true, flatten: true, src: ['bower_components/underscore/underscore-min.map'], dest: 'public/js/lib'},
             { expand: true, flatten: true, src: ['bower_components/normalize-css/normalize.css'], dest: 'public/css'},
-            { expand: true, flatten: false, src:['dev/img/**'], dest: 'public/img'},
-
+            { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.js'], dest: 'public/js/lib'},
+            { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.css'], dest: 'public/css'},
             ]
           }
         },
@@ -81,7 +81,7 @@ module.exports = function(grunt) {
 
   });
 
-
+  grunt.registerTask("jshint2", ["jshint"]);
   grunt.registerTask("copy2", ["copy"]);
   grunt.registerTask("dev", ["concat", "uglify","cssmin", "processhtml"]);
 

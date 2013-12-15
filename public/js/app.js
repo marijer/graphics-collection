@@ -74,8 +74,19 @@ Backbone.controller = _.extend({}, Backbone.Events);
 //checks if user device is ipad
 Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 
+$(function() {
+
+	var minYearSlider = 2000;
+	var maxYearSlider = 2013;
 
 
+	$("#Slider").slider({ from: minYearSlider, to: maxYearSlider, step: 1, smooth: false, skin: "round_plastic", format: { format: '####'}, round: 0, dimension: '', 
+			callback: function( value ){ slideYear()} });
+			
+	function slideYear () {		
+		console.log("you slide me!");
+	};	
+});
 APP.Facets = Backbone.Model.extend({
   
   defaults:{
@@ -120,8 +131,6 @@ APP.Graphics = Backbone.Collection.extend ( {
 	url: "../graphics",
 	sortKey: "desc",
 
-
-
 	comparator: function(a, b) {
 	  // Optional call if you want case insensitive
 	  name1 = a.get(this.sortKey).toLowerCase();
@@ -154,7 +163,7 @@ APP.Graphics = Backbone.Collection.extend ( {
 			} else if ( colName === "desc") {
 				this.sort_dir = "desc";
 				this.sortKey = "date";
-			}else {
+			} else {  // if not asc or desc, it is set to recently added
 				this.sort_dir = "desc";
 				this.sortKey = "id";
 			}
@@ -737,7 +746,7 @@ APP.Router = Backbone.Router.extend({
        collection: collection,
        el: $(".graphics-wrapper")
     });
-
+      this.currentCollection = APP.collectionData;
       APP.graphicCollectionView.render();
    },
 
@@ -746,8 +755,8 @@ APP.Router = Backbone.Router.extend({
       var newCollection = this.search(params);
 
       // Get All the Facets from Param
-      var _paramsArray = new Array(),
-      _paramsValueArray = new Array()
+      var _paramsArray = [],
+      _paramsValueArray = [];
       $facets = $('.facet');
 
         //TODO this removing class could be done smarter;
@@ -757,7 +766,6 @@ APP.Router = Backbone.Router.extend({
            _paramsArray.push(key);
            _paramsValueArray.push(value);
         });
-
 
       // Get All the Available Facets
             
@@ -802,15 +810,17 @@ APP.Router = Backbone.Router.extend({
 
           var _facets = _.filter($facets, function(i, k){
              var facet_name = $(i).data('facet-name');
-             
+
              //workaround for the independent variables such as 'opendata'
              if (facet_name === 1) { 
                 facet_name = $(i).data('facet');
-                return _.indexOf(_paramsArray, facet_name) != -1 ? true: false
+                return _.indexOf(_paramsArray, facet_name) != -1 ? true: false;
               } else {
-                return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+                return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false;
               }
           });
+
+
 
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});

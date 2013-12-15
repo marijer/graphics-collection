@@ -3,8 +3,6 @@ APP.Graphics = Backbone.Collection.extend ( {
 	url: "../graphics",
 	sortKey: "desc",
 
-
-
 	comparator: function(a, b) {
 	  // Optional call if you want case insensitive
 	  name1 = a.get(this.sortKey).toLowerCase();
@@ -37,7 +35,7 @@ APP.Graphics = Backbone.Collection.extend ( {
 			} else if ( colName === "desc") {
 				this.sort_dir = "desc";
 				this.sortKey = "date";
-			}else {
+			} else {  // if not asc or desc, it is set to recently added
 				this.sort_dir = "desc";
 				this.sortKey = "id";
 			}

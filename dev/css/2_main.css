@@ -245,7 +245,7 @@ article h2 span {
 
 .search-wrapper {
 	float: left;
-	margin-right: 36px;
+	margin-right: 39px;
 	margin-top:2px;
 }
 
@@ -335,8 +335,8 @@ article h2 span {
 .filter-info {
 	float: left;
 	line-height: 32px;
-	font-size: .9em;
-	margin-right: 5px;
+	font-size: .85em;
+	margin-right: 10px;
 }
 
 ul.collapsed {
@@ -362,7 +362,7 @@ ul.collapsed {
 	float: left;
 	font-size: 12px;
 	background: #EBEBEB;
-	margin: 6px 8px;
+	margin: 6px 8px 6px 0;
 	padding: 3px 6px;
 	border-radius: 3px;
 	cursor: pointer;
@@ -381,6 +381,13 @@ ul.collapsed {
 .filter-label .name {
 	float:left;
 	padding-right: 8px;
+}
+
+/* SLIDER */
+
+.layout-slider {
+	margin-top: 10px;
+	margin-bottom: 20px;
 }
 
 /* FOOTER */

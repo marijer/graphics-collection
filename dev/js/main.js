@@ -6,4 +6,3 @@ Backbone.controller = _.extend({}, Backbone.Events);
 //checks if user device is ipad
 Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 
-

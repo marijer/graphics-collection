@@ -3,11 +3,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>News Graphics Collection</title>
+		
+		<!-- build:css public/css/jquery.slider.min.css -->
+		<link rel="stylesheet" type="text/css" href="../bower_components/jslider/bin/jquery.slider.min.css">
+		<!-- /build -->
 
 		<!-- build:css public/css/main.min.css -->
 		<link rel="stylesheet" type="text/css" href="css/1_normalize.css">
 		<link rel="stylesheet" type="text/css" href="css/2_main.css">
 		<link rel="stylesheet" type="text/css" href="css/3_responsive.css">
+
 		<!-- /build -->
 
 	</head>
@@ -26,10 +31,16 @@
 				<div class="selected-filters-wrapper"></div>
 			</div>
 		</div>
+    
+  </div>
 
 		<div class='content-wrapper width-constraint'> 
 			<section class="column-left">
-				<div class='filters-wrapper'></div>
+				<div class='filters-wrapper'>
+					<div class="layout-slider">
+				      <input id="Slider" type="slider" data-facet="years" name="area" value="2000;2013" />
+				    </div>
+				</div>
 				<div class='scroll-to-top none fixed'> <span>⇧</span> Scroll to top  <span>⇧</span> </div>
 			</section>
 			
@@ -57,6 +68,18 @@
 		<script src="../public/js/lib/handlebars.min.js"> </script>
   		<script src="../public/js/lib/backbone.queryparams.js"></script>
 		<!-- /build -->
+		
+
+		<!-- build:js public/js/lib/jquery.slider.min.js-->
+		<script type="text/javascript" src="../bower_components/jslider/js/jshashtable-2.1_src.js"></script>
+
+		<script type="text/javascript" src="../bower_components/jslider/js/jquery.numberformatter-1.2.3.js"></script>
+		<script type="text/javascript" src="../bower_components/jslider/js/tmpl.js"></script>
+		<script type="text/javascript" src="../bower_components/jslider/js/jquery.dependClass-0.1.js"></script>
+		<script type="text/javascript" src="../bower_components/jslider/js/draggable-0.1.js"></script>
+		<script type="text/javascript" src="../bower_components/jslider/js/jquery.slider.js"></script>
+	    <!-- /build -->	
+		
 
 		<!-- build:js public/js/app.min.js -->
 		<script src="js/handlehelpers.js"></script>
@@ -70,6 +93,7 @@
 
 		<script src="js/models/facets.js"> </script>
 		<script src="js/views/facetsView.js"> </script>
+		<script src="js/views/sliderView.js"> </script>
 		<script src="js/views/sortView.js"> </script>
 		<script src="js/views/selectedFiltersView.js"> </script>		
 		<script src="js/views/facetsMasterView.js"> </script>
@@ -78,12 +102,14 @@
 		<script src="js/collections/graphics.js"> </script>
 		<script src="js/views/graphicCollectionView.js"> </script>
 
+
 		<script src="js/routers/router.js"> </script>
 		<!-- /build -->	
 	
-		<!-- build:include analytics.html -->
+	
+		<!-- <!-- build:include analytics.html -->
 			This will be replaced by the content of analytics.html, and not trigger analytics in dev mode
-		<!-- /build -->
+		<!-- /build --> -->
 
 		
 	</body>

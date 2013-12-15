@@ -61,7 +61,7 @@ APP.Router = Backbone.Router.extend({
        collection: collection,
        el: $(".graphics-wrapper")
     });
-
+      this.currentCollection = APP.collectionData;
       APP.graphicCollectionView.render();
    },
 
@@ -70,8 +70,8 @@ APP.Router = Backbone.Router.extend({
       var newCollection = this.search(params);
 
       // Get All the Facets from Param
-      var _paramsArray = new Array(),
-      _paramsValueArray = new Array()
+      var _paramsArray = [],
+      _paramsValueArray = [];
       $facets = $('.facet');
 
         //TODO this removing class could be done smarter;
@@ -81,7 +81,6 @@ APP.Router = Backbone.Router.extend({
            _paramsArray.push(key);
            _paramsValueArray.push(value);
         });
-
 
       // Get All the Available Facets
             
@@ -126,15 +125,17 @@ APP.Router = Backbone.Router.extend({
 
           var _facets = _.filter($facets, function(i, k){
              var facet_name = $(i).data('facet-name');
-             
+
              //workaround for the independent variables such as 'opendata'
              if (facet_name === 1) { 
                 facet_name = $(i).data('facet');
-                return _.indexOf(_paramsArray, facet_name) != -1 ? true: false
+                return _.indexOf(_paramsArray, facet_name) != -1 ? true: false;
               } else {
-                return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false
+                return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false;
               }
           });
+
+
 
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});

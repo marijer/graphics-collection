@@ -5,6 +5,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 		this.initSort();
 		this.initFacet();
       this.initSelectedFilters();
+      this.initSliderView();
 
       Backbone.controller.on('removedSelectedFilter', this.removedSelectedFilter, this);
    },
@@ -31,21 +32,31 @@ APP.FacetsMasterView = Backbone.View.extend({
   },
 
   initFacet: function() {
-     var self = this;
+   var self = this;
 
-     APP.facetsView = new APP.FacetsView({
+   APP.facetsView = new APP.FacetsView({
        collection: self.collection.attributes.facets
-    });
-
-     $('.filters-wrapper').append(APP.facetsView.$el);
-
-     APP.facetsView.on("filter_Changed", function(el) {  
-      self.filterResults(el.target);
    });
+
+   $('.filters-wrapper').append(APP.facetsView.$el);
+
+   APP.facetsView.on("filter_Changed", function(el) {  
+      self.filterResults(el.target);
+    });
   },
 
    initSelectedFilters: function() {
       this.selectedFilters = new APP.SelectedFiltersView({ el: $(".selected-filters-wrapper") });
+   },
+
+   initSliderView: function(){
+      var self = this;
+      APP.sliderView = new APP.SliderView();
+
+      APP.sliderView.on("slider_Changed", function(el) {  
+         self.filterResults(el.target);
+        // console.log("hi");
+      });
    },
 
    removedSelectedFilter: function(el) {
@@ -63,8 +74,11 @@ APP.FacetsMasterView = Backbone.View.extend({
       $parent = $this.parent(),
       search = false;
 
+    
       // handle list items + input
-      if( $this.is( "input" )) {
+      if( $this.is( "input[type=slider]" )){
+
+      } else if( $this.is( "input" )) {   // handle list items + input
          search = true;
          var query = $this.val();
 
