@@ -21,6 +21,9 @@ APP.SliderView = Backbone.View.extend ({
 		   callback: function( value ){ self.slideYear($slider)} 
 		});
 
+		//$slider.show();
+
+		Backbone.controller.on('checkSlider', this.checkSlider, this);
 	},
 			
 	slideYear:function ( slider ) {		
@@ -43,5 +46,12 @@ APP.SliderView = Backbone.View.extend ({
 		$slider.attr('data-facet-name', data);	
 
 		this.trigger("slider_Changed", {target: $slider});
-	}	
+	},
+
+	checkSlider: function( obj ) {
+		var years = obj.param.split("-");
+		$("#Slider").slider("value", years[0], years[1]);
+	}
 })
+
+// slider from http://egorkhmelev.github.com/jslider/

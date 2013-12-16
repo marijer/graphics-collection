@@ -40,7 +40,18 @@ APP.Graphics = Backbone.Collection.extend ( {
 				this.sortKey = "id";
 			}
 
-
 			this.sort();	
-	}
+	},
+
+	byYear: function( minYear, maxYear ) {
+    
+      filtered = this.filter( function( graphic ) {
+      	var date = String(graphic.get( "date" )).substring(0,4);
+      	var bool = date >= minYear && date <= maxYear ? true: false;
+      	return bool;
+     	});
+
+    return new APP.Graphics( filtered );
+   }
+
 })

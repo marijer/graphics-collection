@@ -74,19 +74,7 @@ Backbone.controller = _.extend({}, Backbone.Events);
 //checks if user device is ipad
 Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 
-$(function() {
 
-	var minYearSlider = 2000;
-	var maxYearSlider = 2013;
-
-
-	$("#Slider").slider({ from: minYearSlider, to: maxYearSlider, step: 1, smooth: false, skin: "round_plastic", format: { format: '####'}, round: 0, dimension: '', 
-			callback: function( value ){ slideYear()} });
-			
-	function slideYear () {		
-		console.log("you slide me!");
-	};	
-});
 APP.Facets = Backbone.Model.extend({
   
   defaults:{
@@ -168,9 +156,20 @@ APP.Graphics = Backbone.Collection.extend ( {
 				this.sortKey = "id";
 			}
 
-
 			this.sort();	
-	}
+	},
+
+	byYear: function( minYear, maxYear ) {
+    
+      filtered = this.filter( function( graphic ) {
+      	var date = String(graphic.get( "date" )).substring(0,4);
+      	var bool = date >= minYear && date <= maxYear ? true: false;
+      	return bool;
+     	});
+
+    return new APP.Graphics( filtered );
+   }
+
 })
 APP.FacetsMasterView = Backbone.View.extend({
 
@@ -179,6 +178,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 		this.initSort();
 		this.initFacet();
       this.initSelectedFilters();
+      this.initSliderView();
 
       Backbone.controller.on('removedSelectedFilter', this.removedSelectedFilter, this);
    },
@@ -205,21 +205,31 @@ APP.FacetsMasterView = Backbone.View.extend({
   },
 
   initFacet: function() {
-     var self = this;
+   var self = this;
 
-     APP.facetsView = new APP.FacetsView({
+   APP.facetsView = new APP.FacetsView({
        collection: self.collection.attributes.facets
-    });
-
-     $('.filters-wrapper').append(APP.facetsView.$el);
-
-     APP.facetsView.on("filter_Changed", function(el) {  
-      self.filterResults(el.target);
    });
+
+   $('.filters-wrapper').append(APP.facetsView.$el);
+
+   APP.facetsView.on("filter_Changed", function(el) {  
+      self.filterResults(el.target);
+    });
   },
 
    initSelectedFilters: function() {
       this.selectedFilters = new APP.SelectedFiltersView({ el: $(".selected-filters-wrapper") });
+   },
+
+   initSliderView: function(){
+      var self = this;
+      APP.sliderView = new APP.SliderView();
+
+      APP.sliderView.on("slider_Changed", function(el) {  
+         self.filterResults(el.target);
+        // console.log("hi");
+      });
    },
 
    removedSelectedFilter: function(el) {
@@ -237,8 +247,11 @@ APP.FacetsMasterView = Backbone.View.extend({
       $parent = $this.parent(),
       search = false;
 
+    
       // handle list items + input
-      if( $this.is( "input" )) {
+      if( $this.is( "input[type=slider]" )){
+
+      } else if( $this.is( "input" )) {   // handle list items + input
          search = true;
          var query = $this.val();
 
@@ -639,6 +652,63 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 	}
 });
+APP.SliderView = Backbone.View.extend ({
+
+	minYear: 2000,
+	maxYear: 2013,
+   filter_minYear: this.minYear,
+	filter_maxYear: this.maxYear,
+
+	initialize: function() {
+		var self = this;
+		var $slider = $("#Slider");
+
+		$slider.slider({ 
+			from: self.minYear, 
+			to: self.maxYear, 
+			step: 1, 
+			smooth: false, 
+			skin: "round_plastic", 
+			format: { format: '####'}, 
+			round: 0, 
+			dimension: '', 
+		   callback: function( value ){ self.slideYear($slider)} 
+		});
+
+		//$slider.show();
+
+		Backbone.controller.on('checkSlider', this.checkSlider, this);
+	},
+			
+	slideYear:function ( slider ) {		
+
+		var $slider = $(slider);
+		var values = $slider.slider("value")
+		var split = values.split(';');
+
+		this.filter_minYear = Number(split[0]);
+		this.filter_maxYear = Number(split[1]);
+
+		if (this.filter_minYear  !== this.minYear || this.filter_maxYear !== this.maxYear ) {
+			$slider.addClass("active");
+		} else {
+			$slider.removeClass("active");
+		}
+
+		var data = $slider.attr("data-facet-name");
+		data = values.replace(";", "-");
+		$slider.attr('data-facet-name', data);	
+
+		this.trigger("slider_Changed", {target: $slider});
+	},
+
+	checkSlider: function( obj ) {
+		var years = obj.param.split("-");
+		$("#Slider").slider("value", years[0], years[1]);
+	}
+})
+
+// slider from http://egorkhmelev.github.com/jslider/
 APP.SortView = Backbone.View.extend ({
 	tagName: "div",  // default setting
 	className: "filter",
@@ -836,9 +906,19 @@ APP.Router = Backbone.Router.extend({
    search: function(params){
       var self = this,
       newCollection = APP.collectionData;
-      var paramSort = false;
+     
       var collection;
 
+        // filters in the collection class
+        if (params.years) {
+            var years = params.years.split("-");
+             Backbone.controller.trigger('checkSlider', {param: params.years});
+
+            newCollection = newCollection.byYear(years[0], years[1]);
+            delete params.years;
+         } 
+
+         var paramSort = false;
          // call sort function with right param + remove it from selection
          if (params.sort) {
             APP.graphics.sortByColumn(params.sort);
@@ -865,6 +945,7 @@ APP.Router = Backbone.Router.extend({
             }) //end each
 
             collection = new Backbone.Collection(newCollection);
+
          } else {
             collection =  newCollection;  // if no parameters are set - return normal collection
       }   

@@ -151,9 +151,19 @@ APP.Router = Backbone.Router.extend({
    search: function(params){
       var self = this,
       newCollection = APP.collectionData;
-      var paramSort = false;
+     
       var collection;
 
+        // filters in the collection class
+        if (params.years) {
+            var years = params.years.split("-");
+             Backbone.controller.trigger('checkSlider', {param: params.years});
+
+            newCollection = newCollection.byYear(years[0], years[1]);
+            delete params.years;
+         } 
+
+         var paramSort = false;
          // call sort function with right param + remove it from selection
          if (params.sort) {
             APP.graphics.sortByColumn(params.sort);
@@ -180,6 +190,7 @@ APP.Router = Backbone.Router.extend({
             }) //end each
 
             collection = new Backbone.Collection(newCollection);
+
          } else {
             collection =  newCollection;  // if no parameters are set - return normal collection
       }   
