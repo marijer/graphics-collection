@@ -243,18 +243,24 @@ article h2 span {
 	border-color: rgb(143, 215, 248);
 }
 
+.slider-wrapper {
+	margin-top: 10px;
+	margin-left: 5px;
+	width: 180px;
+}
+
 .search-wrapper {
-	float: left;
-	margin-right: 39px;
-	margin-top:2px;
+	margin-top: 15px;
+	margin-bottom: 20px;
 }
 
 .total-graphics {
 	font-family: 'Lucida Sans', Arial, sans-serif;
 	line-height: 33px;
-	font-size: 12px;
+	font-size: 13px;
 	float:left;
-	min-width:100px;
+	min-width: 190px;
+	margin-right: 41px;
 }
 
 .scroll-to-top {
@@ -307,17 +313,14 @@ article h2 span {
 
 .filter-wrapper li {
 	font-size: 12px;
-	padding: 4px 5px;
+	padding: 5px;
 	cursor: pointer;
 }
 
 .filter-wrapper {
 	margin-bottom: 15px;
 }
-/*
-.filter-wrapper ul {
-	padding: 5px 0 0;
-}*/
+
 
 .filter-wrapper li:hover {
 	background-color: rgb(238, 238, 238);
@@ -335,8 +338,14 @@ article h2 span {
 .filter-info {
 	float: left;
 	line-height: 32px;
-	font-size: .85em;
+	font-size: 13px;
+	font-weight: 100;
 	margin-right: 10px;
+	color: rgb(167, 167, 167);
+}
+
+.filter-info.hasFilter {
+	color:#000;
 }
 
 ul.collapsed {
@@ -385,10 +394,6 @@ ul.collapsed {
 
 /* SLIDER */
 
-.layout-slider {
-	margin-top: 10px;
-	margin-bottom: 20px;
-}
 
 /* FOOTER */
 

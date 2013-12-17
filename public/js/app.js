@@ -576,6 +576,8 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 		Backbone.controller.on('selectedFilter', this.selectedFilter, this);
 		Backbone.controller.on('removeFilters', this.removeAll, this);
+
+		this.$el.append("<span class='filter-info'>active filter(s):</span>");
 	},
 
 // removes the filter from sidebar
@@ -612,13 +614,13 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	
 		//remove from the hash map
 		this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
-		if (this._hash.length === 0) $('.filter-info').remove();
+		if (this._hash.length === 0) $('.filter-info').removeClass('hasFilter');
 	},
 
 	removeAll:function(el){
 		this._hash = [];
 		$('.filter-label').remove();
-		$('.filter-info').remove();
+		$('.filter-info').removeClass('hasFilter');
 	},
 
 	updateLabel: function( obj ) {
@@ -643,9 +645,8 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 			this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
 		} else {
-			if (this._hash.length === 0){
-				this.$el.append("<span class='filter-info'>active filter(s):</span>");
-			}
+ 			if (this._hash.length === 0) $('.filter-info').addClass('hasFilter');
+
 			this.$el.append(this.template({category:category, name: name, facet: facet}));
 		}
 		this._hash.push({category: category, name: name, facet:facet});
