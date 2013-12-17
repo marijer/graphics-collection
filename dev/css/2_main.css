@@ -94,8 +94,6 @@ header h2 {
 
 .sort-by {
 	font-size:.9em;
-	margin-bottom: 11px;
-	float:right;
 }
 
 .sort-by .label {
@@ -160,13 +158,13 @@ article h2 {
 }
 
 article h2 span {
-	padding-top: 3px;
+	padding-top: 4px;
 	display: inline-block;
 }
 
 .favicon {
 	background-repeat: no-repeat;
-	background-position: 2px center;
+	background-position: 2px 5px;
 	display: inline-block;
 }
 
@@ -392,8 +390,56 @@ ul.collapsed {
 	padding-right: 8px;
 }
 
-/* SLIDER */
+/* Sort option */
 
+
+.sort-wrapper {
+	border-bottom: 1px solid #CCC;
+	position: relative;
+	height: 22px;
+	margin-bottom: 35px;
+	z-index:100;
+}
+
+.sort-label {
+	position: absolute;
+	top: 14px;
+	background: #FFF;
+	right: 80px;
+	padding: 0 30px 0 12px;
+	font-size: 13px;
+	cursor: pointer;
+	background: url('../img/assets/arrow.png') 42px 7px no-repeat #FFF;
+}
+
+.sort-options-wrapper {
+	position: absolute;
+	width: 120px;
+	background: #FFF;
+	display: none;
+	padding:;
+	border: 1px solid #CCC;
+}
+
+.selected .sort-options-wrapper {
+	display: block;
+}
+
+.sort-by li {
+	padding: 5px;
+}
+
+.sort-by li.active {
+	background: #CCE7FC;
+}
+
+.sort-by li:hover {
+	background: #EBEBEB;
+}
+
+.sort-label:hover {
+	color: rgb(92, 92, 92);
+}
 
 /* FOOTER */
 

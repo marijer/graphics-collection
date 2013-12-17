@@ -3,16 +3,21 @@ APP.SortView = Backbone.View.extend ({
 	className: "filter",
 
 	template: Handlebars.compile(
-		'<span class="label">Sort By</span>' +
-	      '<select class="sort-by">' + 
+	      
+	    '<div class="sort-label"> sort' +
+		'<div class="sort-options-wrapper">' + 
+	      '<ul class="sort-by">' + 
 	         '{{#each sort}}' +
-	         	'<option class="facet option-sort" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
+	         	'<li class="facet option-sort" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</li>' +
 	         '{{/each}}' +
-	      '</select>'
+	        '</ul>' +
+	     '</div>' + 
+	     '</div>'
 	),
 
 	events: {
-	    'change select': 'selectionChanged',
+		'click .sort-label': 'clickSortLabel',
+	    'click .option-sort': 'selectionChanged',
 	},	
 
 	initialize: function () {
@@ -33,12 +38,23 @@ APP.SortView = Backbone.View.extend ({
 		$el.addClass('active');
 	},
 
+	clickSortLabel: function(e) {
+		e.preventDefault();
+		var $el = $(e.target);
+
+		if ( $el.hasClass("selected") ) {
+ 			$el.removeClass("selected"); 
+		} else {
+			 $el.addClass("selected");
+		}
+	},
+
    selectionChanged: function( e ) {
       e.preventDefault();
-      var field = $(e.currentTarget);
-      var option = $("option:selected", field);
+      var $el = $(e.target);
 
-      this.trigger("sorted_Changed", {target: option});
+    	this.trigger("sorted_Changed", {target: $el});
+    	$('.sort-label').removeClass("selected"); 
   },
 
 })

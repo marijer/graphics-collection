@@ -24,7 +24,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 
      var sortData = self.collection.attributes.sort;
      var sort = new APP.SortView({collection: sortData});
-     $('.sort-by').append(sort.$el);
+     $('.sort-wrapper').append(sort.$el);
 
      sort.on("sorted_Changed", function(el) {  
       self.filterResults(el.target);

@@ -168,7 +168,63 @@ APP.Graphics = Backbone.Collection.extend ( {
      	});
 
     return new APP.Graphics( filtered );
+   },
+
+   byFilters: function (params){
+   		var self = this,
+   			collection = this,
+   			newCollection = this;
+
+        // filters in the collection class
+        if (params.years) {
+            var years = params.years.split("-");
+            Backbone.controller.trigger('checkSlider', {param: params.years});
+
+            newCollection = this.byYear(years[0], years[1]);
+            delete params.years;
+         } 
+
+         var paramSort = false;
+         // call sort function with right param + remove it from selection
+         if (params.sort) {
+            this.sortByColumn(params.sort);
+            Backbone.controller.trigger('checkSort', {param: params.sort});
+            paramSort = params.sort;
+            delete params.sort;
+         } 
+
+         if(_.size(params) ){ // checks if 1 or more parameters are used
+
+            // cals search view if title is present, updates value if needed (is for refresh)
+            if (params.title) {
+               Backbone.controller.trigger('checkSearch', {search: params.title});
+            }
+
+            _.each(params, function (val, key){  // loop over all parameters
+                  var val = self.escapeRegex(val); //clean up value
+                  var pattern = new RegExp(val, "i");
+
+                  newCollection = self.filter(function(doc){        
+                     pattern.lastIndex= 0; // Reset the last Index          
+                     return pattern.test(doc.get(key));        
+                  });
+            }) //end each
+
+            collection = new Backbone.Collection(newCollection);
+
+         } else {
+            collection =  newCollection;  // if no parameters are set - return normal collection
+      }   
+     
+      if (paramSort) params.sort = paramSort;// collection = this;
+      return collection;
+
+   },
+
+    escapeRegex: function(value){
+      return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
    }
+
 
 })
 APP.FacetsMasterView = Backbone.View.extend({
@@ -197,7 +253,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 
      var sortData = self.collection.attributes.sort;
      var sort = new APP.SortView({collection: sortData});
-     $('.sort-by').append(sort.$el);
+     $('.sort-wrapper').append(sort.$el);
 
      sort.on("sorted_Changed", function(el) {  
       self.filterResults(el.target);
@@ -715,16 +771,21 @@ APP.SortView = Backbone.View.extend ({
 	className: "filter",
 
 	template: Handlebars.compile(
-		'<span class="label">Sort By</span>' +
-	      '<select class="sort-by">' + 
+	      
+	    '<div class="sort-label"> sort' +
+		'<div class="sort-options-wrapper">' + 
+	      '<ul class="sort-by">' + 
 	         '{{#each sort}}' +
-	         	'<option class="facet option-sort" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</option>' +
+	         	'<li class="facet option-sort" data-facet="sort" data-facet-name="{{this.facet}}">{{this.title}}</li>' +
 	         '{{/each}}' +
-	      '</select>'
+	        '</ul>' +
+	     '</div>' + 
+	     '</div>'
 	),
 
 	events: {
-	    'change select': 'selectionChanged',
+		'click .sort-label': 'clickSortLabel',
+	    'click .option-sort': 'selectionChanged',
 	},	
 
 	initialize: function () {
@@ -745,12 +806,23 @@ APP.SortView = Backbone.View.extend ({
 		$el.addClass('active');
 	},
 
+	clickSortLabel: function(e) {
+		e.preventDefault();
+		var $el = $(e.target);
+
+		if ( $el.hasClass("selected") ) {
+ 			$el.removeClass("selected"); 
+		} else {
+			 $el.addClass("selected");
+		}
+	},
+
    selectionChanged: function( e ) {
       e.preventDefault();
-      var field = $(e.currentTarget);
-      var option = $("option:selected", field);
+      var $el = $(e.target);
 
-      this.trigger("sorted_Changed", {target: option});
+    	this.trigger("sorted_Changed", {target: $el});
+    	$('.sort-label').removeClass("selected"); 
   },
 
 })
@@ -905,58 +977,13 @@ APP.Router = Backbone.Router.extend({
     },
 
    search: function(params){
-      var self = this,
-      newCollection = APP.collectionData;
-     
-      var collection;
+      var newCollection = APP.collectionData;
+      
+      newCollection = newCollection.byFilters(params);
 
-        // filters in the collection class
-        if (params.years) {
-            var years = params.years.split("-");
-             Backbone.controller.trigger('checkSlider', {param: params.years});
+      return newCollection;
+    },
 
-            newCollection = newCollection.byYear(years[0], years[1]);
-            delete params.years;
-         } 
-
-         var paramSort = false;
-         // call sort function with right param + remove it from selection
-         if (params.sort) {
-            APP.graphics.sortByColumn(params.sort);
-            Backbone.controller.trigger('checkSort', {param: params.sort});
-            paramSort = params.sort;
-            delete params.sort;
-         } 
-
-         if(_.size(params) ){ // checks if 1 or more parameters are used
-
-            // cals search view if title is present, updates value if needed (is for refresh)
-            if (params.title) {
-               Backbone.controller.trigger('checkSearch', {search: params.title});
-            }
-
-            _.each(params, function (val, key){  // loop over all parameters
-                  var val = self.escapeRegex(val); //clean up value
-                  var pattern = new RegExp(val, "i");
-
-                  newCollection = newCollection.filter(function(doc){        
-                     pattern.lastIndex= 0; // Reset the last Index          
-                     return pattern.test(doc.get(key));        
-                  });
-            }) //end each
-
-            collection = new Backbone.Collection(newCollection);
-
-         } else {
-            collection =  newCollection;  // if no parameters are set - return normal collection
-      }   
-      if (paramSort) params.sort = paramSort;
-      return collection;
-   },
-
-   escapeRegex: function(value){
-      return value.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-   }, 
 
    notFound: function() {
       console.log ("404 message here");
