@@ -176,10 +176,11 @@ APP.Graphics = Backbone.Collection.extend ( {
    			newCollection = this;
 
         // filters in the collection class
+        var paramYears = false;
         if (params.years) {
             var years = params.years.split("-");
             Backbone.controller.trigger('checkSlider', {param: params.years});
-
+            paramYears = params.years;
             newCollection = this.byYear(years[0], years[1]);
             delete params.years;
          } 
@@ -187,7 +188,7 @@ APP.Graphics = Backbone.Collection.extend ( {
          var paramSort = false;
          // call sort function with right param + remove it from selection
          if (params.sort) {
-            this.sortByColumn(params.sort);
+            newCollection.sortByColumn(params.sort);
             Backbone.controller.trigger('checkSort', {param: params.sort});
             paramSort = params.sort;
             delete params.sort;
@@ -204,20 +205,21 @@ APP.Graphics = Backbone.Collection.extend ( {
                   var val = self.escapeRegex(val); //clean up value
                   var pattern = new RegExp(val, "i");
 
-                  newCollection = self.filter(function(doc){        
+                  collection = newCollection.filter(function(doc){        
                      pattern.lastIndex= 0; // Reset the last Index          
                      return pattern.test(doc.get(key));        
                   });
             }) //end each
 
-            collection = new Backbone.Collection(newCollection);
+            newCollection = new Backbone.Collection(collection);
 
          } else {
             collection =  newCollection;  // if no parameters are set - return normal collection
       }   
      
-      if (paramSort) params.sort = paramSort;// collection = this;
-      return collection;
+      if (paramSort) params.sort = paramSort;
+      if (paramYears) params.years = paramYears;
+      return newCollection;
 
    },
 
