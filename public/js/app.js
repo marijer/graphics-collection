@@ -172,7 +172,7 @@ APP.Graphics = Backbone.Collection.extend ( {
 
    byFilters: function (params){
    		var self = this,
-   			collection = this,
+   			collection,
    			newCollection = this;
 
         // filters in the collection class
@@ -205,13 +205,13 @@ APP.Graphics = Backbone.Collection.extend ( {
                   var val = self.escapeRegex(val); //clean up value
                   var pattern = new RegExp(val, "i");
 
-                  collection = newCollection.filter(function(doc){        
+                  newCollection = newCollection.filter(function(doc){        
                      pattern.lastIndex= 0; // Reset the last Index          
                      return pattern.test(doc.get(key));        
                   });
             }) //end each
 
-            newCollection = new Backbone.Collection(collection);
+             collection = new Backbone.Collection(newCollection);
 
          } else {
             collection =  newCollection;  // if no parameters are set - return normal collection
@@ -219,7 +219,7 @@ APP.Graphics = Backbone.Collection.extend ( {
      
       if (paramSort) params.sort = paramSort;
       if (paramYears) params.years = paramYears;
-      return newCollection;
+      return collection;
 
    },
 

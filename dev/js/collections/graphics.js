@@ -86,7 +86,6 @@ APP.Graphics = Backbone.Collection.extend ( {
             }
 
             _.each(params, function (val, key){  // loop over all parameters
-            	console.log(val);
                   var val = self.escapeRegex(val); //clean up value
                   var pattern = new RegExp(val, "i");
 
