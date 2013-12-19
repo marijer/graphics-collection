@@ -68,9 +68,16 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	updateLabel: function( obj ) {
 		var $el = $(obj.el);
 
+		if (!$el.text()){
+			return;
+		}
+
 		var category = $el.attr("data-facet"),
-		name = $el.text(),
+		name = $el.text() || $el.attr("data-facet-name"),
 		facet = $el.attr("data-facet-name");
+
+		
+
 		// if category is sort, don't do anything
 		if (category === "sort") return; 
 

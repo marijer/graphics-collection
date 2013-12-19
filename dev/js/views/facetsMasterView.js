@@ -55,7 +55,6 @@ APP.FacetsMasterView = Backbone.View.extend({
 
       APP.sliderView.on("slider_Changed", function(el) {  
          self.filterResults(el.target);
-        // console.log("hi");
       });
    },
 
@@ -76,7 +75,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 
     
       // handle list items + input
-      if( $this.is( "input[type=slider]" )){
+      if( $this.is( "input[type=slider]" )) {
 
       } else if( $this.is( "input" )) {   // handle list items + input
          search = true;

@@ -286,7 +286,6 @@ APP.FacetsMasterView = Backbone.View.extend({
 
       APP.sliderView.on("slider_Changed", function(el) {  
          self.filterResults(el.target);
-        // console.log("hi");
       });
    },
 
@@ -307,7 +306,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 
     
       // handle list items + input
-      if( $this.is( "input[type=slider]" )){
+      if( $this.is( "input[type=slider]" )) {
 
       } else if( $this.is( "input" )) {   // handle list items + input
          search = true;
@@ -684,9 +683,16 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	updateLabel: function( obj ) {
 		var $el = $(obj.el);
 
+		if (!$el.text()){
+			return;
+		}
+
 		var category = $el.attr("data-facet"),
-		name = $el.text(),
+		name = $el.text() || $el.attr("data-facet-name"),
 		facet = $el.attr("data-facet-name");
+
+		
+
 		// if category is sort, don't do anything
 		if (category === "sort") return; 
 
@@ -763,7 +769,14 @@ APP.SliderView = Backbone.View.extend ({
 
 	checkSlider: function( obj ) {
 		var years = obj.param.split("-");
-		$("#Slider").slider("value", years[0], years[1]);
+		var $slider = $("#Slider");
+
+		$slider.slider("value", years[0], years[1]);
+
+		var data = $slider.attr("data-facet-name");
+		data = years[0] + "-" + years[1];
+		$slider.attr('data-facet-name', data);	
+
 	}
 })
 
@@ -964,7 +977,6 @@ APP.Router = Backbone.Router.extend({
                 return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false;
               }
           });
-
 
 
           _.each(_facets, function(facet){

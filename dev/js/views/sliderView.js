@@ -50,7 +50,14 @@ APP.SliderView = Backbone.View.extend ({
 
 	checkSlider: function( obj ) {
 		var years = obj.param.split("-");
-		$("#Slider").slider("value", years[0], years[1]);
+		var $slider = $("#Slider");
+
+		$slider.slider("value", years[0], years[1]);
+
+		var data = $slider.attr("data-facet-name");
+		data = years[0] + "-" + years[1];
+		$slider.attr('data-facet-name', data);	
+
 	}
 })
 

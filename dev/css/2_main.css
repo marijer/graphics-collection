@@ -405,7 +405,7 @@ ul.collapsed {
 .sort-wrapper {
 	border-bottom: 1px solid #CCC;
 	position: relative;
-	height: 19px;
+	height: 20px;
 	margin-bottom: 35px;
 	z-index:100;
 }
