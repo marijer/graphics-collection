@@ -4,8 +4,8 @@ APP.FacetsMasterView = Backbone.View.extend({
 		this.initSearch();
 		this.initSort();
 		this.initFacet();
-      this.initSelectedFilters();
-      this.initSliderView();
+    this.initSelectedFilters();
+    this.initSliderView();
 
       Backbone.controller.on('removedSelectedFilter', this.removedSelectedFilter, this);
    },
@@ -64,18 +64,30 @@ APP.FacetsMasterView = Backbone.View.extend({
       facet = $el.attr("data-facet");
 
       var target = $('.facet[data-facet="'+facet+'"][data-facet-name="'+name+'"]')[0];
-      this.filterResults(target);
+      this.filterResults(target, true);
    },
 
-   filterResults: function( e ) {
+   filterResults: function( e, bool ) {
       var self = this,
       $this = $(e),
       $parent = $this.parent(),
       search = false;
-
     
       // handle list items + input
       if( $this.is( "input[type=slider]" )) {
+        var values = $this.slider("value")
+        var split = values.split(';');
+
+        var filter_minYear = Number(split[0]);
+        var filter_maxYear = Number(split[1]);
+
+         if (filter_minYear !==  APP.sliderView.minYear || filter_maxYear !== APP.sliderView.maxYear ) {
+            $this.addClass("active");
+         } else {
+            $this.removeClass("active");
+         }
+
+        if( bool ) $this.removeClass("active"),  APP.sliderView.reset();;
 
       } else if( $this.is( "input" )) {   // handle list items + input
          search = true;

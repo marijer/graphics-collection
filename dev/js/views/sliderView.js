@@ -2,7 +2,7 @@ APP.SliderView = Backbone.View.extend ({
 
 	minYear: 2000,
 	maxYear: 2013,
-   filter_minYear: this.minYear,
+    filter_minYear: this.minYear,
 	filter_maxYear: this.maxYear,
 
 	initialize: function() {
@@ -32,15 +32,6 @@ APP.SliderView = Backbone.View.extend ({
 		var values = $slider.slider("value")
 		var split = values.split(';');
 
-		this.filter_minYear = Number(split[0]);
-		this.filter_maxYear = Number(split[1]);
-
-		if (this.filter_minYear !== this.minYear || this.filter_maxYear !== this.maxYear ) {
-			$slider.addClass("active");
-		} else {
-			$slider.removeClass("active");
-		}
-
 		var data = $slider.attr("data-facet-name");
 		data = values.replace(";", "-");
 		$slider.attr('data-facet-name', data);	
@@ -50,14 +41,20 @@ APP.SliderView = Backbone.View.extend ({
 
 	checkSlider: function( obj ) {
 		var years = obj.param.split("-");
-		var $slider = $("#Slider");
+		this.updateSlider(years[0], years[1]);
+	},
 
-		$slider.slider("value", years[0], years[1]);
+	updateSlider: function(year, year2) {
+		var $slider = $("#Slider");
+		$slider.slider("value", year, year2);
 
 		var data = $slider.attr("data-facet-name");
-		data = years[0] + "-" + years[1];
+		data = year + "-" + year2;
 		$slider.attr('data-facet-name', data);	
+	},
 
+	reset: function() {
+		this.updateSlider(this.minYear, this.maxYear);
 	}
 })
 

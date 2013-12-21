@@ -53,9 +53,10 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	removeFacet:function(category){
 		var $el = $('.filter-label[data-facet="'+category+'"]')[0];
 		$el.remove();
-	
+
 		//remove from the hash map
 		this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
+		
 		if (this._hash.length === 0) $('.filter-info').removeClass('hasFilter');
 	},
 
@@ -68,18 +69,13 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	updateLabel: function( obj ) {
 		var $el = $(obj.el);
 
-		if (!$el.text()){
-			return;
-		}
+		// if category is sort, don't do anything
+		if (category === "sort") return; 	
 
 		var category = $el.attr("data-facet"),
 		name = $el.text() || $el.attr("data-facet-name"),
 		facet = $el.attr("data-facet-name");
 
-		
-
-		// if category is sort, don't do anything
-		if (category === "sort") return; 
 
 		var existingCategory = _.filter(this._hash, function( e ){ return e.category === category; });
 

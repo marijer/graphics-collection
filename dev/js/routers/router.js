@@ -67,11 +67,12 @@ APP.Router = Backbone.Router.extend({
 
    filterResults:function(params) {
       var self = this;
-      var newCollection = this.search(params);
+      var newCollection = this.search( params );
 
       // Get All the Facets from Param
       var _paramsArray = [],
       _paramsValueArray = [];
+      
       $facets = $('.facet');
 
         //TODO this removing class could be done smarter;
@@ -82,69 +83,28 @@ APP.Router = Backbone.Router.extend({
            _paramsValueArray.push(value);
         });
 
-      // Get All the Available Facets
-            
-            // var _facetArray = new Array();
-            
-            // $facets.filter(function(i, k){
-            //    var key = $(this).data('facet');
-            //    var value = $(this).data('facet-name');
-
-            //    if (_.findWhere(_facetArray, key) == null) {
-            //          _facetArray.push({key: key, value: value});
-            //    }
-            // });
-
-
-            // var _excludedFacet = _.without(_facetArray, _paramsArray),
-            //     _availableFacets = new Array();
-
-            
-            // _.each(_excludedFacet, function(value, key){        
-            //   newCollection.filter(function(doc){  
-            //   doc = doc.get(value.value);
-            //    _availableFacets.push(doc);          
-            //   });        
-            // });
-
-            // console.log(_availableFacets);
-
-
-            // _availableFacets.push(_paramsValueArray);
-            // _availableFacets = _.flatten(_availableFacets); 
-            
-            // var $f = $facets.removeClass("disabled").filter(function(i, k){
-            //    var facet_name = $(i).data('facet-name');
-            //   return _.indexOf(_availableFacets, facet_name) == -1? true: false;
-              
-            // }).addClass("disabled");
-      
-
         // set active or inactive
         if (_paramsValueArray.length){
 
           var _facets = _.filter($facets, function(i, k){
              var facet_name = $(i).data('facet-name');
+             var facet = $(i).data('facet');
 
              //workaround for the independent variables such as 'opendata'
-             if (facet_name === 1) { 
-                facet_name = $(i).data('facet');
-                return _.indexOf(_paramsArray, facet_name) != -1 ? true: false;
+             if (facet_name === 1 || facet === "years" ) { 
+                return _.indexOf(_paramsArray, facet) != -1 ? true: false;
               } else {
                 return _.indexOf(_paramsValueArray, facet_name) != -1 ? true: false;
               }
           });
 
-
+          // trigger filter label
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
          })
 
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
-
-          // Hack
-          if (params.years) { $("#Slider").addClass("active"); }
        }
 
        this.renderGraphics( newCollection );

@@ -209,6 +209,7 @@ article h2 span {
 	z-index: 1000;
 	position: absolute;
 	background: #FFF;
+	background: rgba(255, 255, 255, 0.96);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
