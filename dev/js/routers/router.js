@@ -142,6 +142,9 @@ APP.Router = Backbone.Router.extend({
 
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
+
+          // Hack
+          if (params.years) { $("#Slider").addClass("active"); }
        }
 
        this.renderGraphics( newCollection );
