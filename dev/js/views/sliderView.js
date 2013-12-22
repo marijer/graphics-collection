@@ -5,8 +5,16 @@ APP.SliderView = Backbone.View.extend ({
     filter_minYear: this.minYear,
 	filter_maxYear: this.maxYear,
 
+	template: Handlebars.compile(
+		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2013" data-facet-name="2000-2013" style="display:none;" />'
+	),
+
+
 	initialize: function() {
 		var self = this;
+
+		this.$el.html(this.template);
+		
 		var $slider = $("#Slider");
 
 		$slider.slider({ 

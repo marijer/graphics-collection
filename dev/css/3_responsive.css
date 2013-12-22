@@ -4,8 +4,68 @@
   }
 }*/
 
-@media (min-width: 200px) and (max-width: 860px) {
-  article {
-  	width:50%;
+/* ipad mini: 1024 by 768 pixel */
+
+.mobile-menu {
+	display:none;
+}
+
+article:nth-child(3n+3) {  
+  padding-right: 0;
+}
+
+@media (min-width: 200px) and (max-width: 1030px) {
+  .main-content {
+	margin-left: 0;
   }
+
+  .graphics-wrapper {
+		margin-left: 40px;
+  }
+
+  .panel-wrapper {
+  	display:none;
+  }
+
+  .mobile-menu {
+  	display:block;
+  }
+
+	.show-menu {
+		display: block !important;
+		padding-right: 20px;
+		padding-top:15px;
+		background: #FFF;
+		z-index: 1000;
+		margin-right: 20px;
+		height:auto;
+		position:absolute;
+	}
+
+}
+
+@media (min-width: 200px) and (max-width: 650px) {
+
+	article:nth-child(2n+2) {  
+	  padding-right: 0;
+	  padding-left: 3%;
+	}
+
+	article:nth-child(3n+3) {  
+	  padding-right: 3%;
+	}
+
+		/* two column layout */
+	  article {
+	  	width:50%;
+	  }
+}
+
+
+@media (min-width: 200px) and (max-width: 400px) {
+
+  article {
+  	width:100%;
+  }
+
 }

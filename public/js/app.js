@@ -237,6 +237,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 		this.initFacet();
     this.initSelectedFilters();
     this.initSliderView();
+    this.initPanelView();
 
       Backbone.controller.on('removedSelectedFilter', this.removedSelectedFilter, this);
    },
@@ -276,17 +277,24 @@ APP.FacetsMasterView = Backbone.View.extend({
     });
   },
 
+  // setup 'active filter'
    initSelectedFilters: function() {
       this.selectedFilters = new APP.SelectedFiltersView({ el: $(".selected-filters-wrapper") });
    },
 
+   // setup years slider
    initSliderView: function(){
       var self = this;
-      APP.sliderView = new APP.SliderView();
+      APP.sliderView = new APP.SliderView({ el: $(".slider-wrapper") });
 
       APP.sliderView.on("slider_Changed", function(el) {  
          self.filterResults(el.target);
       });
+   },
+
+   initPanelView: function() {
+      APP.panelView = new APP.PanelView({ el: $(".mobile-menu") });
+      APP.panelView.render();
    },
 
    removedSelectedFilter: function(el) {
@@ -532,6 +540,39 @@ APP.GraphicItemView = Backbone.View.extend({
          $(e.target).fadeIn(400);
     }
 });
+APP.PanelView = Backbone.View.extend ({
+	
+	isHidden: true,
+
+	template: Handlebars.compile(
+		'<div class="panelViewWrapper">' +
+			'Show Menu' +
+		'</div>'
+	),
+
+	events: {
+		"click .panelViewWrapper": "onClick"
+	},
+
+	onClick: function( e ) {
+		var $panel = $('.panel-wrapper');
+
+		if( !$panel.hasClass("show-menu") ) {
+			$panel.addClass('show-menu');
+			$('.panelViewWrapper').html('Hide Menu');
+		} else {
+			$panel.removeClass('show-menu');
+			$('.panelViewWrapper').html('Show Menu');
+		}
+
+	},
+
+	render: function() {
+		this.$el.html(this.template);
+		return this;
+	},
+
+})
 APP.ScrollView = Backbone.View.extend ({
 
 	initialize: function() {
@@ -732,8 +773,16 @@ APP.SliderView = Backbone.View.extend ({
     filter_minYear: this.minYear,
 	filter_maxYear: this.maxYear,
 
+	template: Handlebars.compile(
+		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2013" data-facet-name="2000-2013" style="display:none;" />'
+	),
+
+
 	initialize: function() {
 		var self = this;
+
+		this.$el.html(this.template);
+		
 		var $slider = $("#Slider");
 
 		$slider.slider({ 

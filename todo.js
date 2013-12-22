@@ -29,20 +29,27 @@ Thursday
 
 needs to be done
 || set state of search on refresh
--- accordion filters
+|| accordion filters
 -- memoize
 || only return data that is needed >> php side
 || setup Grunt
--- setup Grunt properly for minification
--- set the participation filter in
--- year filtering
+|| setup Grunt properly for minification
+|| set the participation filter in
+|| year filtering
 
 
 nice to have
--- ipad friendly
 -- 404 page
--- make build file properly
+|| make build file properly
 -- css stuff
 -- filters visual
 -- set loading icon and all
 -- create api php which sends only max items
+
+-- more labels and explanations what it means
+
+-- full responsive
+-- ipad friendly
+-- setup panel widget for mobile
+http://view.jquerymobile.com/1.3.2/dist/demos/widgets/panels/
+

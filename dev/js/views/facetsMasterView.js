@@ -6,6 +6,7 @@ APP.FacetsMasterView = Backbone.View.extend({
 		this.initFacet();
     this.initSelectedFilters();
     this.initSliderView();
+    this.initPanelView();
 
       Backbone.controller.on('removedSelectedFilter', this.removedSelectedFilter, this);
    },
@@ -45,17 +46,24 @@ APP.FacetsMasterView = Backbone.View.extend({
     });
   },
 
+  // setup 'active filter'
    initSelectedFilters: function() {
       this.selectedFilters = new APP.SelectedFiltersView({ el: $(".selected-filters-wrapper") });
    },
 
+   // setup years slider
    initSliderView: function(){
       var self = this;
-      APP.sliderView = new APP.SliderView();
+      APP.sliderView = new APP.SliderView({ el: $(".slider-wrapper") });
 
       APP.sliderView.on("slider_Changed", function(el) {  
          self.filterResults(el.target);
       });
+   },
+
+   initPanelView: function() {
+      APP.panelView = new APP.PanelView({ el: $(".mobile-menu") });
+      APP.panelView.render();
    },
 
    removedSelectedFilter: function(el) {

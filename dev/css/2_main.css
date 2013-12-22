@@ -85,7 +85,7 @@ header h2 {
 
 .content-wrapper {
 	overflow: hidden;
-	margin-top: 60px;
+	margin-top: 55px;
 	clear:both;
 	min-height:600px;
 }
@@ -190,7 +190,7 @@ article h2 span {
 .show-more {
 	clear: both;
 	background: #F8F8F8;
-	padding: 8px 10px;
+	padding: 15px 10px;
 	border: 1px solid #E7E7E7;
 	color: rgb(82, 82, 82);
 	text-align: center;
@@ -198,7 +198,7 @@ article h2 span {
 	cursor: pointer;
 	font-size: 14px;
 	font-weight:bold;
-	margin-bottom:10px;
+	margin-bottom:20px;
 }
 
 /* fixed submenu */
@@ -292,8 +292,25 @@ article h2 span {
 /* filter */
 
 .column-left {
-	width: 191px;
 	float: left;
+}
+
+.panel-wrapper {
+	width: 191px;
+}
+
+.panelViewWrapper {
+	cursor: pointer;
+	font-size: .8em;
+	padding: 10px;
+	color: #070707;
+	border-radius: 3px;
+	background: rgb(216, 216, 216);
+	display: inline-block;
+}
+
+.panelViewWrapper:hover {
+	color: gray;
 }
 
 .filter-wrapper h2 {
@@ -327,7 +344,7 @@ article h2 span {
 }
 
 .filter-wrapper {
-	margin-bottom: 15px;
+	margin-bottom: 16px;
 }
 
 

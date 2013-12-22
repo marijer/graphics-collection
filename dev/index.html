@@ -34,16 +34,17 @@
   </div>
 
 		<div class='content-wrapper width-constraint'> 
+			<div class="mobile-menu"></div>
+
 			<section class="column-left">
-				<div class='filters-wrapper'>
+				<div class="panel-wrapper">
+					<div class='filters-wrapper'>
+						<div class="slider-wrapper"></div>
+					    <div class="search-wrapper"></div>
 
-					<div class="slider-wrapper">
-				      <input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2013" data-facet-name="2000-2013" style="display:none;" />
-				    </div>
-				    <div class="search-wrapper"></div>
-
+					</div>
+					<div class='scroll-to-top none fixed'> <span>⇧</span> Scroll to top  <span>⇧</span> </div>
 				</div>
-				<div class='scroll-to-top none fixed'> <span>⇧</span> Scroll to top  <span>⇧</span> </div>
 			</section>
 			
 			<section class="main-content">
@@ -102,7 +103,8 @@
 		<script src="js/views/facetsView.js"> </script>
 		<script src="js/views/sliderView.js"> </script>
 		<script src="js/views/sortView.js"> </script>
-		<script src="js/views/selectedFiltersView.js"> </script>		
+		<script src="js/views/selectedFiltersView.js"> </script>
+		<script src="js/views/panelView.js"> </script>		
 		<script src="js/views/facetsMasterView.js"> </script>
 
 		<script src="js/models/graphic.js"> </script>
@@ -114,9 +116,9 @@
 		<!-- /build -->	
 	
 	
-		<!-- <!-- build:include analytics.html -->
+		<!-- build:include analytics.html -->
 			This will be replaced by the content of analytics.html, and not trigger analytics in dev mode
-		<!-- /build --> -->
+		<!-- /build -->
 
 		
 	</body>
