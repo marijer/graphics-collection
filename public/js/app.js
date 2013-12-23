@@ -577,7 +577,7 @@ APP.ScrollView = Backbone.View.extend ({
 
 	initialize: function() {
 	    if (Backbone.isiPad) { 
-	    	$(window).on({ 'touchmove' : this.onScrolling });
+	    //	$(window).on({ 'touchmove' : this.onScrolling });
 	    }else{
 	    	  $(window).scroll(this.onScrolling);
 	    }

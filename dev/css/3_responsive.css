@@ -4,6 +4,15 @@
   }
 }*/
 
+
+.filter-info {
+	 transition:margin .4s linear; 
+    -o-transition:margin .4s linear; 
+    -moz-transition:margin .4s linear; 
+    -webkit-transition:margin .4s linear;
+}
+
+
 /* ipad mini: 1024 by 768 pixel */
 
 .mobile-menu {
@@ -19,8 +28,12 @@ article:nth-child(3n+3) {
 	margin-left: 0;
   }
 
+.filter-info {
+  	margin-left: 0;
+}
+
   .graphics-wrapper {
-		margin-left: 40px;
+		margin-left: 20px;
   }
 
   .panel-wrapper {

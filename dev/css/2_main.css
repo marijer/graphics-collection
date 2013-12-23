@@ -269,7 +269,6 @@ article h2 span {
 	font-size: 13px;
 	float:left;
 	min-width: 190px;
-	margin-right: 41px;
 }
 
 .scroll-to-top {
@@ -278,7 +277,6 @@ article h2 span {
 	font-size: 14px;
 	color: #6F6F6F;
 	cursor: pointer;
-	transition:color 0.4s ease;
 }
 
 .scroll-to-top:hover {
@@ -368,6 +366,7 @@ article h2 span {
 	font-weight: 100;
 	margin-right: 10px;
 	color: rgb(167, 167, 167);
+	margin-left: 41px;
 }
 
 .filter-info.hasFilter {
