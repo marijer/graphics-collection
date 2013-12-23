@@ -3,7 +3,7 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	className: "filter",
 
 	template: Handlebars.compile(
-		'<div class="filter-label" data-facet="{{category}}" data-facet-name="{{facet}}">' +
+		'<div class="filter-label tooltip" data-tip-type="text" data-facet="{{category}}" data-facet-name="{{facet}}">' +
 		'<div class="name">{{name}}</div>'+
 		'<span class="remove"></span> </div>'
 		),

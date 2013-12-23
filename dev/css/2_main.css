@@ -470,6 +470,21 @@ ul.collapsed {
 /* FOOTER */
 
 footer {
-	background:#000;
+	/* background:#000; */
 	height:10px;
+}
+
+/* tooltip */
+
+#tooltip-container {
+	color: white;
+	position: absolute;
+	padding: 8px 16px;
+	font-size: .85em;
+	max-width: 200px;
+	background-color: rgb(0, 0, 0); /* ie7 and ie8 */
+	background-color: rgba(0, 0, 0, .85);
+	border-radius: 5px;
+	z-index: 2000;
+	display: none;
 }

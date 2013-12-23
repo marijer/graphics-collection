@@ -24,7 +24,7 @@
         {"value": "science", "title":"Science"},
         {"value": "culture", "title":"Culture"},
         {"value": "lifestyle", "title":"Lifestyle"},
-        {"value": "healthcare", "title":"Healthcare"},
+        {"value": "health", "title":"Health"},
         {"value": "other", "title":"Other"}
       ]   
     },
