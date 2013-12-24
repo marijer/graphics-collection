@@ -73,52 +73,6 @@ Backbone.controller = _.extend({}, Backbone.Events);
 
 //checks if user device is ipad
 Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
-
-
-/*
-$(document).ready(function(e) {
-
-	$('.tooltip').mouseenter(function(e){
-		var $this = $(this),
-			$el = $('#tooltip-container');
-
-		if ($this.attr('data-tip-type') === "text" ) {
-			$el.html($this.attr('data-facet'));
-		}
-
-		$el.css({'display':'block', 'opacity': 0}).animate({opacity: 1}, 250);
-		e.stopPropagation(); 
-	}).mousemove(function( e ){
-		var $el = $('#tooltip-container');
-		var toolTipWidth = $el.outerWidth(); 
-		var toolTipHeight = $el.outerHeight(); 
-
-		// check if the x pos not exceeds the page width
-		var pageWidth = $('body').width();
-		if ( e.pageX > pageWidth / 2 ) {
-			$el.css('left', (e.pageX - toolTipWidth + 20) + 'px' );
-		} else {
-			$el.css('left', ( e.pageX - 20 ) + 'px');
-		}
-
-		// checks if y pos is not higher than the browser
-		if (e.pageY > 100) {
-			$el.css('top', (e.pageY - toolTipHeight + 20) + 'px' );
-		} else {
-			$el.css('top', ( e.pageY + 20 ) + 'px');
-		}
-		e.stopPropagation(); 
-	}).mouseleave(function(e){
-		$el = $('#tooltip-container');
-
-		$el.animate({opacity: 0}, 250, function() {
-			$el.css('display', 'none').html('');
-		});	
-		e.stopPropagation(); 
-	});
-});
-
-*/
 APP.Facets = Backbone.Model.extend({
   
   defaults:{
@@ -737,7 +691,8 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 // removes the filter from sidebar
 	onClickFilterLabel: function( e ) {
 		e.preventDefault();
-		var target = $(e.target).parent();
+		var target = $(e.target);
+		if (!target.hasClass("filter-label"))target = $(e.target).parent();
 		Backbone.controller.trigger('removedSelectedFilter', {target: target});
 		this.removeFacet(target.attr("data-facet"));
 	},
@@ -798,18 +753,72 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 			//update value and data attribute
 			$label.find('.name').html(name);
 			data = facet;
-			$label.attr('data-facet-name', data);	
+			$label.attr('data-facet-name', data);
 
 			this._hash = _.without(this._hash, _.findWhere(this._hash, {category: category}));
 		} else {
  			if (this._hash.length === 0) $('.filter-info').addClass('hasFilter');
 
-			this.$el.append(this.template({category:category, name: name, facet: facet}));
+			var el = this.template({category:category, name: name, facet: facet});
+
+			this.$el.append(el);
+
 		}
 		this._hash.push({category: category, name: name, facet:facet});
 
 	}
 });
+
+/*
+
+/*
+			this.$el.mouseenter(function(e){
+				var $this = $(e.target);
+				if (!$this.hasClass("filter-label"))$this = $(e.target).parent();
+
+
+				var $el = $('#tooltip-container');
+
+					console.log($this);
+
+				if ($this.attr('data-tip-type') === "text" ) {
+					$el.html($this.attr('data-facet'));
+				}
+
+				$el.css({'display':'block', 'opacity': 0}).animate({opacity: 1}, 250);
+				e.stopPropagation(); 
+			}).mousemove(function( e ){
+				var $el = $('#tooltip-container');
+				var toolTipWidth = $el.outerWidth(); 
+				var toolTipHeight = $el.outerHeight(); 
+
+				// check if the x pos not exceeds the page width
+				var pageWidth = $('body').width();
+				if ( e.pageX > pageWidth / 2 ) {
+					$el.css('left', (e.pageX - toolTipWidth + 20) + 'px' );
+				} else {
+					$el.css('left', ( e.pageX - 20 ) + 'px');
+				}
+
+				// checks if y pos is not higher than the browser
+				if (e.pageY > 100) {
+					$el.css('top', (e.pageY - toolTipHeight + 20) + 'px' );
+				} else {
+					$el.css('top', ( e.pageY + 20 ) + 'px');
+				}
+				e.stopPropagation(); 
+			}).mouseleave(function(e){
+				$el = $('#tooltip-container');
+
+				$el.animate({opacity: 0}, 250, function() {
+					$el.css('display', 'none').html('');
+				});	
+				e.stopPropagation(); 
+			});
+
+		}
+
+		*/
 APP.SliderView = Backbone.View.extend ({
 
 	minYear: 2000,

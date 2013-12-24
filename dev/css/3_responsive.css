@@ -20,6 +20,7 @@
 }
 
 article:nth-child(3n+3) {  
+  padding-left: 3%;
   padding-right: 0;
 }
 
@@ -33,7 +34,7 @@ article:nth-child(3n+3) {
 }
 
   .graphics-wrapper {
-		margin-left: 20px;
+		margin-left: 10px;
   }
 
   .panel-wrapper {

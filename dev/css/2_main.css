@@ -396,7 +396,7 @@ ul.collapsed {
 	float: left;
 	font-size: 12px;
 	background: #EBEBEB;
-	margin: 6px 8px 6px 0;
+	margin: 6px 12px 6px 0;
 	padding: 3px 6px;
 	border-radius: 3px;
 	cursor: pointer;
@@ -443,7 +443,7 @@ ul.collapsed {
 	width: 120px;
 	background: #FFF;
 	display: none;
-	padding:;
+	margin-left: -40px;
 	border: 1px solid #CCC;
 }
 
