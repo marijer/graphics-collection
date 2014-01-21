@@ -58,6 +58,7 @@ APP.GraphicCollectionView = Backbone.View.extend ({
     	this.page++;
     	var start = this.page * this.limit;
     	var end = start + this.limit -1;
+    	//console.log(this.page);
 
     	$( ".show-more" ).remove();
 

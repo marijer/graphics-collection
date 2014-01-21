@@ -1,12 +1,10 @@
 APP.SliderView = Backbone.View.extend ({
 
 	minYear: 2000,
-	maxYear: 2013,
-    filter_minYear: this.minYear,
-	filter_maxYear: this.maxYear,
+	maxYear: 2014,
 
 	template: Handlebars.compile(
-		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2013" data-facet-name="2000-2013" style="display:none;" />'
+		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2014" data-facet-name="2000-2014" style="display:none;" />'
 	),
 
 

@@ -1,4 +1,5 @@
 APP.ScrollView = Backbone.View.extend ({
+	timer: undefined,
 
 	initialize: function() {
 	    if (Backbone.isiPad) { 
@@ -16,6 +17,7 @@ APP.ScrollView = Backbone.View.extend ({
 	},
 
     onScrolling: function () {
+    	//var self = this;
     	var $scrollTop = $(window).scrollTop();
     	var viewportHeight = $(window).height();
     	var bodyHeight = $('body').height();
@@ -33,8 +35,11 @@ APP.ScrollView = Backbone.View.extend ({
 		    $('.scroll-to-top').hide();
 		}
 
+
+
 		if($scrollTop + $(window).height() === $(document).height()) {
 		    APP.graphicCollectionView.onShowMore(); // infinite scrolling
+		    //console.log('hello');
 		}
     }
-})
+});

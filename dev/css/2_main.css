@@ -443,6 +443,7 @@ ul.collapsed {
 	width: 120px;
 	background: #FFF;
 	display: none;
+	margin-top:3px;
 	margin-left: -40px;
 	border: 1px solid #CCC;
 }
@@ -452,7 +453,7 @@ ul.collapsed {
 }
 
 .sort-by li {
-	padding: 5px;
+	padding: 8px 5px;
 }
 
 .sort-by li.active {

@@ -105,7 +105,8 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 /*
 
-/*
+$(document).ready(function(e) {
+
 			this.$el.mouseenter(function(e){
 				var $this = $(e.target);
 				if (!$this.hasClass("filter-label"))$this = $(e.target).parent();
