@@ -486,6 +486,7 @@ APP.GraphicCollectionView = Backbone.View.extend ({
     	this.page++;
     	var start = this.page * this.limit;
     	var end = start + this.limit -1;
+    	//console.log(this.page);
 
     	$( ".show-more" ).remove();
 
@@ -572,6 +573,7 @@ APP.PanelView = Backbone.View.extend ({
 
 })
 APP.ScrollView = Backbone.View.extend ({
+	timer: undefined,
 
 	initialize: function() {
 	    if (Backbone.isiPad) { 
@@ -589,6 +591,7 @@ APP.ScrollView = Backbone.View.extend ({
 	},
 
     onScrolling: function () {
+    	//var self = this;
     	var $scrollTop = $(window).scrollTop();
     	var viewportHeight = $(window).height();
     	var bodyHeight = $('body').height();
@@ -606,11 +609,14 @@ APP.ScrollView = Backbone.View.extend ({
 		    $('.scroll-to-top').hide();
 		}
 
+
+
 		if($scrollTop + $(window).height() === $(document).height()) {
 		    APP.graphicCollectionView.onShowMore(); // infinite scrolling
+		    //console.log('hello');
 		}
     }
-})
+});
 APP.SearchView = Backbone.View.extend ({
 	template: Handlebars.compile(
 		'<div class="search">' +
@@ -771,7 +777,8 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 /*
 
-/*
+$(document).ready(function(e) {
+
 			this.$el.mouseenter(function(e){
 				var $this = $(e.target);
 				if (!$this.hasClass("filter-label"))$this = $(e.target).parent();
@@ -822,12 +829,10 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 APP.SliderView = Backbone.View.extend ({
 
 	minYear: 2000,
-	maxYear: 2013,
-    filter_minYear: this.minYear,
-	filter_maxYear: this.maxYear,
+	maxYear: 2014,
 
 	template: Handlebars.compile(
-		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2013" data-facet-name="2000-2013" style="display:none;" />'
+		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2014" data-facet-name="2000-2014" style="display:none;" />'
 	),
 
 
