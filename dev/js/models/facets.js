@@ -1,10 +1,9 @@
 APP.Facets = Backbone.Model.extend({
+  url: "../facets",
   
   defaults:{
     "facet": "",
     "heading": "",
     "sort_order": "",
   },
-  
-  url: '/public/data/facets.json'
 });

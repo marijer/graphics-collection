@@ -1,0 +1,85 @@
+{
+  "facets": [
+    {
+      "facet": "newspaper",
+      "heading": "News Organization",
+      "expanded": true,
+      "options": [
+          {"value":"gua", "title":"Guardian"},
+          {"value":"nyt", "title":"New York Times"}
+      ]      
+    },
+    {
+      "facet": "newscategory",
+      "heading": "Category",
+      "expanded": true,
+      "options": [
+        {"value": "politics", "title":"Politics"},
+        {"value": "business", "title":"Business"}, 
+        {"value": "sports", "title":"Sports"}, 
+        {"value": "conflict", "title":"Conflict"},
+        {"value": "disaster", "title":"Disaster"},
+        {"value": "environment", "title":"Environment"},
+        {"value": "demographics", "title":"Demographics"},
+        {"value": "science", "title":"Science"},
+        {"value": "culture", "title":"Culture"},
+        {"value": "lifestyle", "title":"Lifestyle"},
+        {"value": "health", "title":"Health"},
+        {"value": "other", "title":"Other"}
+      ]   
+    },
+    {
+      "facet": "visualform",
+      "heading": "Visualform",
+      "expanded": false,
+      "options": [
+          {"value":"chart", "title":"Charts"},
+          {"value":"hierarchy", "title":"Hierarchy"},
+          {"value":"illustration", "title":"Illustration"},
+          {"value":"map", "title":"Maps", "suboptions": [
+              {"value": "choropleth", "title":"choropleth"},
+              {"value": "choropleth2", "title":"choropleth2"}
+             ]
+          },
+          {"value":"network", "title":"Network"},
+          {"value":"text", "title":"Text"}
+      ]     
+    },
+    {
+      "heading": "Participation",
+      "expanded": false,
+      "independent": true,
+      "options": [
+          {"value":"1", "title":"Open Data", "facet": "opendata"},
+          {"value":"1", "title":"Social Data", "facet": "socialdata"},
+          {"value":"1", "title":"Reader Generated", "facet": "readergenerated"},
+          {"value":"1", "title":"Gamification", "facet": "gamification"}
+      ]    
+    }, 
+     {
+      "facet": "annotation",
+      "heading": "Annotation",
+      "expanded": false,
+      "options": [
+          {"value":"high", "title":"High"},
+          {"value":"low", "title":"Low"},
+          {"value":"debatable", "title":"Debatable"}
+      ]    
+    }, 
+    {
+      "facet": "visualizationtype",
+      "heading": "Data Type",
+      "expanded": false,
+      "options": [
+          {"value":"quantitative", "title":"Quantative"},
+          {"value":"hybrid", "title":"Combination"},
+          {"value":"qualitative", "title":"Qualitative"}
+      ]      
+    }
+  ],
+  "sort": [
+    {"facet": "desc", "title":"date descending", "comparator": "date"},
+    {"facet": "asc", "title":"date ascending", "comparator": "date"},
+    {"facet": "lastadded", "title":"last added", "comparator": "title"}
+  ]
+}

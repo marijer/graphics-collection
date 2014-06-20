@@ -22,7 +22,6 @@ APP.Graphics = Backbone.Collection.extend ( {
 	},
 
 	initialize: function() {
-		this.on('change', this.viewRefresh, this);
 		this.sortByColumn(this.sortKey);
 	},
 

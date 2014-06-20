@@ -235,7 +235,6 @@ article h2 span {
     -moz-transition: background-color 200ms ease-out;
     -o-transition: background-color 200ms ease-out;
     transition: background-color 200ms ease-out;	
-
 }
 
 .search-input.active {
@@ -345,7 +344,6 @@ article h2 span {
 	margin-bottom: 16px;
 }
 
-
 .filter-wrapper li:hover {
 	background-color: rgb(238, 238, 238);
 }
@@ -357,6 +355,12 @@ article h2 span {
 
 .filter-wrapper li.active:hover .remove:after {
 	color:#000;
+}
+
+ul.credits {
+	max-height: 200px;
+	overflow-y: scroll;
+	border-bottom: 1px solid #E2E2E2;
 }
 
 .filter-info {

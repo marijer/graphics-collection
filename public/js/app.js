@@ -74,14 +74,13 @@ Backbone.controller = _.extend({}, Backbone.Events);
 //checks if user device is ipad
 Backbone.isiPad = navigator.userAgent.match(/iPad/i) != null;
 APP.Facets = Backbone.Model.extend({
+  url: "../facets",
   
   defaults:{
     "facet": "",
     "heading": "",
     "sort_order": "",
   },
-  
-  url: '/public/data/facets.json'
 });
 APP.Graphic = Backbone.Model.extend ({
 	defaults: {
@@ -98,7 +97,7 @@ APP.Graphic = Backbone.Model.extend ({
 	},
 
 	// rewrite of database values
-	parse: function(response){
+	parse: function( response ){
 		paper = response.newspaper;
 		newscategory = response.newscategory;
 		
@@ -112,6 +111,10 @@ APP.Graphic = Backbone.Model.extend ({
 
 
 
+// APP.Facets = Backbone.Collection.extend ( {
+// 	model: APP.Facet,
+// 	url: "../facets",
+// })
 APP.Graphics = Backbone.Collection.extend ( {
 	model: APP.Graphic,
 	url: "../graphics",
@@ -136,7 +139,6 @@ APP.Graphics = Backbone.Collection.extend ( {
 	},
 
 	initialize: function() {
-		this.on('change', this.viewRefresh, this);
 		this.sortByColumn(this.sortKey);
 	},
 
@@ -774,58 +776,6 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 	}
 });
-
-/*
-
-$(document).ready(function(e) {
-
-			this.$el.mouseenter(function(e){
-				var $this = $(e.target);
-				if (!$this.hasClass("filter-label"))$this = $(e.target).parent();
-
-
-				var $el = $('#tooltip-container');
-
-					console.log($this);
-
-				if ($this.attr('data-tip-type') === "text" ) {
-					$el.html($this.attr('data-facet'));
-				}
-
-				$el.css({'display':'block', 'opacity': 0}).animate({opacity: 1}, 250);
-				e.stopPropagation(); 
-			}).mousemove(function( e ){
-				var $el = $('#tooltip-container');
-				var toolTipWidth = $el.outerWidth(); 
-				var toolTipHeight = $el.outerHeight(); 
-
-				// check if the x pos not exceeds the page width
-				var pageWidth = $('body').width();
-				if ( e.pageX > pageWidth / 2 ) {
-					$el.css('left', (e.pageX - toolTipWidth + 20) + 'px' );
-				} else {
-					$el.css('left', ( e.pageX - 20 ) + 'px');
-				}
-
-				// checks if y pos is not higher than the browser
-				if (e.pageY > 100) {
-					$el.css('top', (e.pageY - toolTipHeight + 20) + 'px' );
-				} else {
-					$el.css('top', ( e.pageY + 20 ) + 'px');
-				}
-				e.stopPropagation(); 
-			}).mouseleave(function(e){
-				$el = $('#tooltip-container');
-
-				$el.animate({opacity: 0}, 250, function() {
-					$el.css('display', 'none').html('');
-				});	
-				e.stopPropagation(); 
-			});
-
-		}
-
-		*/
 APP.SliderView = Backbone.View.extend ({
 
 	minYear: 2000,
@@ -964,25 +914,6 @@ APP.Router = Backbone.Router.extend({
  initialize: function() {
    var self = this;
 
-      // get and display the facets
-      APP.facets = new APP.Facets();
-      APP.facets.fetch({
-         success: function (facets, response, options) {
-            APP.facetsData = facets;
-            APP.facets.trigger("dataLoaded");
-         }
-      });
-
-      // when the data is loaded, set view
-      APP.facets.on("dataLoaded", function() {  
-
-       var masterView = new APP.FacetsMasterView({
-        collection: APP.facetsData
-     });
-
-       self.startRouter();
-    })
-
       //get the collection data 
       APP.graphics = new APP.Graphics();
       APP.graphics.fetch({
@@ -995,6 +926,27 @@ APP.Router = Backbone.Router.extend({
       // trigger rendergraphics when data is loaded
       APP.graphics.on("dataLoaded", function() {
          self.renderGraphics(APP.collectionData);
+         self.startRouter();
+      })
+
+
+      // get and display the facets
+      APP.facets = new APP.Facets();
+      APP.facets.fetch({
+         success: function (facets, response, options) {
+           APP.facetsData = facets;
+           APP.facets.trigger("dataLoaded");
+         }
+      });
+
+
+      // when the data is loaded, set view
+      APP.facets.on("dataLoaded", function() {  
+
+         var masterView = new APP.FacetsMasterView({
+          collection: APP.facetsData
+       });
+
          self.startRouter();
       })
 
@@ -1063,12 +1015,17 @@ APP.Router = Backbone.Router.extend({
        }
 
        this.renderGraphics( newCollection );
+       
     },
 
    search: function(params){
       var newCollection = APP.collectionData;
       
       newCollection = newCollection.byFilters(params);
+      
+    var names = _.uniq(newCollection.pluck('newscategory'));
+    console.log(names.length);
+    console.log(names);
 
       return newCollection;
     },

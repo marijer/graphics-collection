@@ -38,6 +38,8 @@ module.exports = function(grunt) {
             { expand: true, flatten: true, src: ['bower_components/normalize-css/normalize.css'], dest: 'public/css'},
             { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.js'], dest: 'public/js/lib'},
             { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.css'], dest: 'public/css'},
+            { expand: true, flatten: true, src:['dev/data/*.*'], dest: 'public/data'},
+            { expand: true, flatten: true, src:['dev/img/assets/**'], dest: 'public/img'},
             ]
           }
         },

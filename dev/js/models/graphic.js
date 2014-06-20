@@ -13,7 +13,7 @@ APP.Graphic = Backbone.Model.extend ({
 	},
 
 	// rewrite of database values
-	parse: function(response){
+	parse: function( response ){
 		paper = response.newspaper;
 		newscategory = response.newscategory;
 		

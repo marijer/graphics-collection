@@ -9,25 +9,6 @@ APP.Router = Backbone.Router.extend({
  initialize: function() {
    var self = this;
 
-      // get and display the facets
-      APP.facets = new APP.Facets();
-      APP.facets.fetch({
-         success: function (facets, response, options) {
-            APP.facetsData = facets;
-            APP.facets.trigger("dataLoaded");
-         }
-      });
-
-      // when the data is loaded, set view
-      APP.facets.on("dataLoaded", function() {  
-
-       var masterView = new APP.FacetsMasterView({
-        collection: APP.facetsData
-     });
-
-       self.startRouter();
-    })
-
       //get the collection data 
       APP.graphics = new APP.Graphics();
       APP.graphics.fetch({
@@ -40,6 +21,27 @@ APP.Router = Backbone.Router.extend({
       // trigger rendergraphics when data is loaded
       APP.graphics.on("dataLoaded", function() {
          self.renderGraphics(APP.collectionData);
+         self.startRouter();
+      })
+
+
+      // get and display the facets
+      APP.facets = new APP.Facets();
+      APP.facets.fetch({
+         success: function (facets, response, options) {
+           APP.facetsData = facets;
+           APP.facets.trigger("dataLoaded");
+         }
+      });
+
+
+      // when the data is loaded, set view
+      APP.facets.on("dataLoaded", function() {  
+
+         var masterView = new APP.FacetsMasterView({
+          collection: APP.facetsData
+       });
+
          self.startRouter();
       })
 
@@ -108,12 +110,17 @@ APP.Router = Backbone.Router.extend({
        }
 
        this.renderGraphics( newCollection );
+       
     },
 
    search: function(params){
       var newCollection = APP.collectionData;
       
       newCollection = newCollection.byFilters(params);
+      
+    var names = _.uniq(newCollection.pluck('newscategory'));
+    console.log(names.length);
+    console.log(names);
 
       return newCollection;
     },
