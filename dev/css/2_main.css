@@ -3,6 +3,12 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
+ h2 {
+	padding: 0;
+	margin: 0;
+}
+
+
 ul {
 	margin: 0;
 	padding: 0;
@@ -79,6 +85,7 @@ header h2 {
 	color: #DDDDDD;
 	line-height: 2.2em;
 	margin: 0;
+	padding: 0;
 	font-family: 'Lucida Sans', Arial, sans-serif;
 	font-weight: normal;
 }
@@ -222,14 +229,13 @@ article h2 span {
 }
 
 .search-input {
-	padding: 5px;
-	width: 180px;
+	padding: 5px 0 5px 2px;
 	font-size: .8em;
 	font-weight: 200;
-	border: 1px solid #E0E0E0;
-	border-top-color: #E6E6E6;
-	border-right: 1px solid #C7C7C7;
+	width: 100%;
+	border: 0 none;
 	border-bottom: 1px solid #C7C7C7;
+	-webkit-font-smoothing: antialiased;
 
 	-webkit-transition: background-color 200ms ease-out;
     -moz-transition: background-color 200ms ease-out;
@@ -243,23 +249,22 @@ article h2 span {
 
 .slider-wrapper {
 	margin-top: 10px;
-	margin-left: 5px;
-	width: 180px;
 }
 
 .jslider .jslider-bg .l, .jslider .jslider-bg .f, .jslider .jslider-bg .r {
 	border-top: 1px solid #CCC;
 	background: none;
+	margin-top: 1px;
 }
 
 .jslider .jslider-bg .v {
 	background: none;
-	border-top: 3px solid #2AA5E5;
+	border-top: 4px solid #2AA5E5;
 }
 
 .search-wrapper {
 	margin-top: 15px;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 .total-graphics {
@@ -309,39 +314,40 @@ article h2 span {
 .panelViewWrapper:hover {
 	color: gray;
 }
+.filter-wrapper {
+	padding: 10px 0;
+	border-bottom: 1px solid #E2E2E2;
+}
+
+.filter-wrapper ul {
+margin-top: 5px;
+}
 
 .filter-wrapper h2 {
 	font-size: 13px;
 	font-weight: bold;
-	margin: 0;
-	padding: 0 0 4px;
-	margin-bottom:5px;
 	cursor: pointer;
-	background-position: right 6px;
-	background-repeat: no-repeat;
-	border-bottom: 1px solid #E2E2E2;
 }
 
 .filter-wrapper h2:hover {
 	color: rgb(129, 129, 129);
 }
 
-.filter-wrapper h2.expanded {
-	background-image: url('../img/assets/arrow.png');
+.filter-wrapper h2.expanded:after {
+	content: '-';
+	float: right;
+	padding-right: 3px;
 }
 
-.filter-wrapper h2 {
-	background-image: url('../img/assets/arrow_left.png');
+.filter-wrapper h2:after {
+	content: '+';
+	float: right;
 }
 
 .filter-wrapper li {
 	font-size: 12px;
 	padding: 5px;
 	cursor: pointer;
-}
-
-.filter-wrapper {
-	margin-bottom: 16px;
 }
 
 .filter-wrapper li:hover {
@@ -360,7 +366,6 @@ article h2 span {
 ul.credits {
 	max-height: 200px;
 	overflow-y: scroll;
-	border-bottom: 1px solid #E2E2E2;
 }
 
 .filter-info {
@@ -390,7 +395,6 @@ ul.collapsed {
 
 .facet.active .remove:after, .filter-label .remove:after {
 	content: "x";
-	text-shadow: 0px 1px #FFF;
 	color: #5C5C5C;
 	font-family: Verdana;
 	line-height: 1em;

@@ -12,7 +12,7 @@
     {
       "facet": "newscategory",
       "heading": "Category",
-      "expanded": true,
+      "expanded": false,
       "options": [
         {"value": "politics", "title":"Politics"},
         {"value": "business", "title":"Business"}, 
@@ -31,7 +31,7 @@
     {
       "facet": "visualform",
       "heading": "Visualform",
-      "expanded": false,
+      "expanded": true,
       "options": [
           {"value":"chart", "title":"Charts"},
           {"value":"hierarchy", "title":"Hierarchy"},
