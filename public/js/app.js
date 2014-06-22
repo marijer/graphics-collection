@@ -268,8 +268,8 @@ APP.FacetsMasterView = Backbone.View.extend({
 
    $('.filters-wrapper').append(APP.facetsView.$el);
 
-   APP.facetsView.on("filter_Changed", function(el) {  
-      self.filterResults(el.target);
+    APP.facetsView.on("filter_Changed", function(el) {  
+      self.filterResults( el.target );
     });
   },
 
@@ -302,6 +302,7 @@ APP.FacetsMasterView = Backbone.View.extend({
       this.filterResults(target, true);
    },
 
+  // this function is so ugly, bah!
    filterResults: function( e, bool ) {
       var self = this,
         $this = $(e);
@@ -369,6 +370,8 @@ APP.FacetsMasterView = Backbone.View.extend({
 });
 APP.FacetsView = Backbone.View.extend ({
 
+  initStart: true,
+
   template: Handlebars.compile(
     '<div class="filter-wrapper">' +
         '<h2 class="{{isExpanded expanded}} header">{{heading}}</h2>' +
@@ -393,6 +396,7 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   initialize: function(){
+    Backbone.controller.on('restart', this.test, this);
     this.render();     
   },
 
@@ -401,10 +405,21 @@ APP.FacetsView = Backbone.View.extend ({
     this.trigger("filter_Changed", {target: e.target}); 
   },
 
-// function that does slide up or down
-  onClickHeader: function (e){
-    var $header = $(e.target);
+  test: function( obj ){
+    if ( !this.initStart) return false;
+     var el =  $(obj.el).closest( "ul" ).siblings( ".header" );
+     this.onClickHeader(el, true);
+  },
 
+// function that does slide up or down
+  onClickHeader: function ( e, bool ){
+    var $header = $(e);
+
+    if ( !bool ){
+      $header = $(e.target);
+      this.initStart = false;
+    }
+    
     if ($header.hasClass('header')){
       if ($header.hasClass('expanded')){
           $header.removeClass('expanded');
@@ -930,7 +945,6 @@ APP.Router = Backbone.Router.extend({
          self.startRouter();
       })
 
-
       // get and display the facets
       APP.facets = new APP.Facets();
       APP.facets.fetch({
@@ -973,7 +987,7 @@ APP.Router = Backbone.Router.extend({
       APP.graphicCollectionView.render();
    },
 
-   filterResults:function(params) {
+   filterResults:function( params ) {
       var self = this;
       var newCollection = this.search( params );
 
@@ -989,8 +1003,6 @@ APP.Router = Backbone.Router.extend({
         });
       }
 
-
-      
       $facets = $('.facet');
 
         //TODO this removing class could be done smarter;
@@ -1019,6 +1031,7 @@ APP.Router = Backbone.Router.extend({
           // trigger filter label
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
+            Backbone.controller.trigger('restart', {el: facet, arr:_facets});
          })
 
           // Add Active Class to Selected Facet
@@ -1026,7 +1039,6 @@ APP.Router = Backbone.Router.extend({
        }
 
        this.renderGraphics( newCollection );
-       
     },
 
    search: function(params){
