@@ -31,7 +31,7 @@
     {
       "facet": "visualform",
       "heading": "Visualform",
-      "expanded": true,
+      "expanded": false,
       "options": [
           {"value":"chart", "title":"Charts"},
           {"value":"hierarchy", "title":"Hierarchy"},

@@ -76,10 +76,9 @@ APP.FacetsMasterView = Backbone.View.extend({
    },
 
    filterResults: function( e, bool ) {
-      var self = this,
-      $this = $(e),
-      $parent = $this.parent(),
-      search = false;
+      var $this = $(e).closest('.facet'),
+          $parent = $this.parent(),
+          search = false;
     
       // handle list items + input
       if( $this.is( "input[type=slider]" )) {
