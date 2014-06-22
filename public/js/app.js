@@ -370,8 +370,6 @@ APP.FacetsMasterView = Backbone.View.extend({
 });
 APP.FacetsView = Backbone.View.extend ({
 
-  initStart: true,
-
   template: Handlebars.compile(
     '<div class="filter-wrapper">' +
         '<h2 class="{{isExpanded expanded}} header">{{heading}}</h2>' +
@@ -406,19 +404,13 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   test: function( obj ){
-    if ( !this.initStart) return false;
      var el =  $(obj.el).closest( "ul" ).siblings( ".header" );
      this.onClickHeader(el, true);
   },
 
 // function that does slide up or down
   onClickHeader: function ( e, bool ){
-    var $header = $(e);
-
-    if ( !bool ){
-      $header = $(e.target);
-      this.initStart = false;
-    }
+    var $header = bool ? $(e) : $( e.target );
     
     if ($header.hasClass('header')){
       if ($header.hasClass('expanded')){
@@ -921,6 +913,7 @@ APP.SortView = Backbone.View.extend ({
 })
 APP.Router = Backbone.Router.extend({
 	prev: false,
+  first: true,
 
 	routes: {
     "!/"                       : "index",
@@ -988,8 +981,9 @@ APP.Router = Backbone.Router.extend({
    },
 
    filterResults:function( params ) {
-      var self = this;
-      var newCollection = this.search( params );
+      var self = this,
+          newCollection = this.search( params ),
+          first = this.first;
 
       // Get All the Facets from Param
       var _paramsArray = [],
@@ -1031,14 +1025,17 @@ APP.Router = Backbone.Router.extend({
           // trigger filter label
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
-            Backbone.controller.trigger('restart', {el: facet, arr:_facets});
-         })
+            if ( first ){ 
+              Backbone.controller.trigger('restart', {el: facet, arr:_facets});
+            }            
+          })
 
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
        }
 
        this.renderGraphics( newCollection );
+       this.first = false;
     },
 
    search: function(params){
