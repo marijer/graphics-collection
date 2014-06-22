@@ -46,7 +46,6 @@ app.get('/facets', function( req, res ) {
 	});
 });
 
-
 function createCreditFacet( data ) {
   var index = {
   		facet: 'credits',
@@ -69,6 +68,9 @@ function createCreditFacet( data ) {
 			title: key + ' - ' + temp[key],
 			count: temp[key]
 		}
+
+		if( key === '-' ) obj.title = 'not found' + ' - ' + temp[key];
+
 		index.options[index.options.length] = obj;
 	});
 
@@ -86,7 +88,7 @@ function countWords(sentence, index) {
               
     words.forEach(function ( word ) {
     	word = word.trim();
-    	if (word === ',' || word === '-') return false;
+    	if (word === ',') return false;
         if (!index.hasOwnProperty( word )) index[word] = 0;
         index[word]++;
     });

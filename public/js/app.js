@@ -404,8 +404,12 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   test: function( obj ){
-     var el =  $(obj.el).closest( "ul" ).siblings( ".header" );
-     this.onClickHeader(el, true);
+    var $ul = $(obj.el).closest( "ul" );
+
+    if ( $ul.hasClass('expanded' )) return;
+
+     var $el =  $ul.siblings( ".header" );
+     this.onClickHeader( $el, true);
   },
 
 // function that does slide up or down
@@ -751,7 +755,6 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 
 	updateLabel: function( obj ) {
 		var $el = $(obj.el);
-
 
 		var category = $el.attr("data-facet"),
 		name = $el.text() || $el.attr("data-facet-name"),

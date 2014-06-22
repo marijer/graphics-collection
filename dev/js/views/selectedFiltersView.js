@@ -70,7 +70,6 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 	updateLabel: function( obj ) {
 		var $el = $(obj.el);
 
-
 		var category = $el.attr("data-facet"),
 		name = $el.text() || $el.attr("data-facet-name"),
 		facet = $el.attr("data-facet-name");
