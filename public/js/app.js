@@ -111,10 +111,6 @@ APP.Graphic = Backbone.Model.extend ({
 
 
 
-// APP.Facets = Backbone.Collection.extend ( {
-// 	model: APP.Facet,
-// 	url: "../facets",
-// })
 APP.Graphics = Backbone.Collection.extend ( {
 	model: APP.Graphic,
 	url: "../graphics",
@@ -308,10 +304,12 @@ APP.FacetsMasterView = Backbone.View.extend({
 
    filterResults: function( e, bool ) {
       var self = this,
-      $this = $(e),
-      $parent = $this.parent(),
-      search = false;
-    
+        $this = $(e);
+        if ($this[0].className !== 'facet') $this = $this.closest('.facet');
+
+        var $parent = $this.parent(),
+        search = false;
+      
       // handle list items + input
       if( $this.is( "input[type=slider]" )) {
         var values = $this.slider("value")
@@ -627,7 +625,8 @@ APP.SearchView = Backbone.View.extend ({
 	),
 
 	events: {
-		"keyup .search": "onSearch"
+		"keyup .search": "onSearch",
+		'blur .search': 'onSearch'
 	},
 
 	initialize: function () {
@@ -656,17 +655,19 @@ APP.SearchView = Backbone.View.extend ({
 		
 		data = query;
 		$search.attr('data-facet-name', data);	
-		$search.addClass('active');
+		if ( query === '' ){
+			$search.removeClass('active');
+		}else{
+			$search.addClass('active');
+		}
+		
 		$search.val(query);	
 	},
 
 	onSearch: function () {
-		var $search = $('.search-input');
-		var query = $search.val();		
-
-		if( query !== "" ) {
-			this.updateSearch( query );
-		}
+		var $search = $('.search-input'),
+			query = $search.val();		
+		this.updateSearch( query );
 
 		this.trigger("search_Changed", {target: $search});
 	}
@@ -1023,9 +1024,7 @@ APP.Router = Backbone.Router.extend({
       
       newCollection = newCollection.byFilters(params);
       
-    var names = _.uniq(newCollection.pluck('newscategory'));
-    console.log(names.length);
-    console.log(names);
+      var names = _.uniq(newCollection.pluck('newscategory'));
 
       return newCollection;
     },

@@ -118,9 +118,7 @@ APP.Router = Backbone.Router.extend({
       
       newCollection = newCollection.byFilters(params);
       
-    var names = _.uniq(newCollection.pluck('newscategory'));
-    console.log(names.length);
-    console.log(names);
+      var names = _.uniq(newCollection.pluck('newscategory'));
 
       return newCollection;
     },

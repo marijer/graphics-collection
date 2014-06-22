@@ -6,7 +6,8 @@ APP.SearchView = Backbone.View.extend ({
 	),
 
 	events: {
-		"keyup .search": "onSearch"
+		"keyup .search": "onSearch",
+		'blur .search': 'onSearch'
 	},
 
 	initialize: function () {
@@ -35,17 +36,19 @@ APP.SearchView = Backbone.View.extend ({
 		
 		data = query;
 		$search.attr('data-facet-name', data);	
-		$search.addClass('active');
+		if ( query === '' ){
+			$search.removeClass('active');
+		}else{
+			$search.addClass('active');
+		}
+		
 		$search.val(query);	
 	},
 
 	onSearch: function () {
-		var $search = $('.search-input');
-		var query = $search.val();		
-
-		if( query !== "" ) {
-			this.updateSearch( query );
-		}
+		var $search = $('.search-input'),
+			query = $search.val();		
+		this.updateSearch( query );
 
 		this.trigger("search_Changed", {target: $search});
 	}
