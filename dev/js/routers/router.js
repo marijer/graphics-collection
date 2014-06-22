@@ -74,6 +74,16 @@ APP.Router = Backbone.Router.extend({
       // Get All the Facets from Param
       var _paramsArray = [],
       _paramsValueArray = [];
+
+      var ga = ga || undefined;
+
+      if ( ga ){
+        ga('send', 'pageview', {
+         'page': location.pathname + location.search  + location.hash
+        });
+      }
+
+
       
       $facets = $('.facet');
 

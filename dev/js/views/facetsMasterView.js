@@ -129,7 +129,7 @@ APP.FacetsMasterView = Backbone.View.extend({
             var el = $(this),
             category = el.attr("data-facet"),
             name = el.attr("data-facet-name");
-            _hash.push(category+"="+escape(name));
+            _hash.push(category+"="+encodeURI(name));
          });
 
          if(_hash.length){
