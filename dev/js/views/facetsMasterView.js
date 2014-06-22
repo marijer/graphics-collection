@@ -41,8 +41,8 @@ APP.FacetsMasterView = Backbone.View.extend({
 
    $('.filters-wrapper').append(APP.facetsView.$el);
 
-   APP.facetsView.on("filter_Changed", function(el) {  
-      self.filterResults(el.target);
+    APP.facetsView.on("filter_Changed", function(el) {  
+      self.filterResults( el.target );
     });
   },
 
@@ -75,6 +75,7 @@ APP.FacetsMasterView = Backbone.View.extend({
       this.filterResults(target, true);
    },
 
+  // this function is so ugly, bah!
    filterResults: function( e, bool ) {
       var self = this,
         $this = $(e);
