@@ -414,6 +414,8 @@ APP.FacetsView = Backbone.View.extend ({
 
 // function that does slide up or down
   onClickHeader: function ( e, bool ){
+
+    if(  bool && !APP.router.first ) return;
     var $header = bool ? $(e) : $( e.target );
     
     if ($header.hasClass('header')){
@@ -949,7 +951,6 @@ APP.Router = Backbone.Router.extend({
            APP.facets.trigger("dataLoaded");
          }
       });
-
 
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  

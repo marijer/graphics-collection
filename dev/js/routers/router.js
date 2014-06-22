@@ -34,7 +34,6 @@ APP.Router = Backbone.Router.extend({
          }
       });
 
-
       // when the data is loaded, set view
       APP.facets.on("dataLoaded", function() {  
 
