@@ -1,7 +1,5 @@
 APP.FacetsView = Backbone.View.extend ({
 
-  initStart: true,
-
   template: Handlebars.compile(
     '<div class="filter-wrapper">' +
         '<h2 class="{{isExpanded expanded}} header">{{heading}}</h2>' +
@@ -36,19 +34,13 @@ APP.FacetsView = Backbone.View.extend ({
   },
 
   test: function( obj ){
-    if ( !this.initStart) return false;
      var el =  $(obj.el).closest( "ul" ).siblings( ".header" );
      this.onClickHeader(el, true);
   },
 
 // function that does slide up or down
   onClickHeader: function ( e, bool ){
-    var $header = $(e);
-
-    if ( !bool ){
-      $header = $(e.target);
-      this.initStart = false;
-    }
+    var $header = bool ? $(e) : $( e.target );
     
     if ($header.hasClass('header')){
       if ($header.hasClass('expanded')){

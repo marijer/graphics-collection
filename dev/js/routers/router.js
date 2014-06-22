@@ -1,5 +1,6 @@
 APP.Router = Backbone.Router.extend({
 	prev: false,
+  first: true,
 
 	routes: {
     "!/"                       : "index",
@@ -67,8 +68,9 @@ APP.Router = Backbone.Router.extend({
    },
 
    filterResults:function( params ) {
-      var self = this;
-      var newCollection = this.search( params );
+      var self = this,
+          newCollection = this.search( params ),
+          first = this.first;
 
       // Get All the Facets from Param
       var _paramsArray = [],
@@ -110,14 +112,17 @@ APP.Router = Backbone.Router.extend({
           // trigger filter label
           _.each(_facets, function(facet){
             Backbone.controller.trigger('selectedFilter', {el: facet, arr:_facets});
-            Backbone.controller.trigger('restart', {el: facet, arr:_facets});
-         })
+            if ( first ){ 
+              Backbone.controller.trigger('restart', {el: facet, arr:_facets});
+            }            
+          })
 
           // Add Active Class to Selected Facet
           $(_facets).addClass("active");
        }
 
        this.renderGraphics( newCollection );
+       this.first = false;
     },
 
    search: function(params){
