@@ -63,9 +63,11 @@ function createCreditFacet( data ) {
 	}
 
 	Object.keys( temp ).forEach(function(key) {
+		var upperCase = toTitleCase( key );
+
 	   	var obj = {
 			value: key,
-			title: key + ' - ' + temp[key],
+			title: upperCase + ' - ' + temp[key],
 			count: temp[key]
 		}
 
@@ -78,7 +80,11 @@ function createCreditFacet( data ) {
 
 	return index;
 }
-// 
+
+function toTitleCase(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
 function countWords(sentence, index) {
     var words = sentence

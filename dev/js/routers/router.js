@@ -141,6 +141,7 @@ APP.Router = Backbone.Router.extend({
 
    index: function (e) {
       var self = this;
+      this.first = false;
 
       //removes all clases
       $('.facet').removeClass('active');     

@@ -55,11 +55,13 @@ module.exports = function(grunt) {
 
     // combine all js files
     concat: {
-        basic_and_extras: {
-          files: {
-            'public/js/app.js': ['dev/js/*.js', 'dev/js/models/*.js', 'dev/js/collections/*.js', 'dev/js/views/*.js', 'dev/js/routers/*.js'],
-           // 'public/css/main.css': ['dev/css/*.css'],
-          },
+        basic: {
+          src: ['dev/js/*.js', 'dev/js/models/*.js', 'dev/js/collections/*.js', 'dev/js/views/*.js', 'dev/js/routers/*.js'],
+          dest: 'public/js/app.js',
+        },
+        libs: {
+          src: ['public/js/lib/*.js'],
+          dest: 'public/js/lib/lib.js',
         },
       },
 
@@ -85,6 +87,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask("jshint2", ["jshint"]);
   grunt.registerTask("copy2", ["copy"]);
-  grunt.registerTask("dev", ["concat", "uglify","cssmin", "processhtml"]);
+  grunt.registerTask("dev", ["concat:basic", "concat:libs", "uglify","cssmin", "processhtml"]);
 
 };
