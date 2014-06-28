@@ -922,8 +922,9 @@ APP.Router = Backbone.Router.extend({
   first: true,
 
 	routes: {
-    "!/"                       : "index",
-    "!/search"                 : "filterResults"
+    ""                  : "index",
+    "!/"                : "index",
+    "!/search"          : "filterResults"
  },
 
  initialize: function() {
