@@ -26,13 +26,13 @@ input, input[type="search"] {
     border-radius: 0;
 }
 
-.bold {
-	font-weight: bold;
-}
-
-.fixed {
-	position: fixed;
-}
+.bold { font-weight: bold; }
+.fixed { position: fixed; }
+.clear { clear: both; }
+.left { float: left; }
+.right { float: right; }
+.none { display: none; }
+.pointer { cursor: pointer; }
 
 .fixed-menu-wrapper.fixed{
 	top:0;
@@ -41,10 +41,6 @@ input, input[type="search"] {
 
 .scroll-to-top.fixed{
 	top: 50px;
-}
-
-.none {
-	display: none;
 }
 
 noscript {
@@ -79,7 +75,7 @@ header {
 	max-width: 1120px;
 }
 
-header h2 {
+header {
 	font-size: .9em;
 	color: #DDDDDD;
 	line-height: 2.2em;
@@ -87,6 +83,10 @@ header h2 {
 	padding: 0;
 	font-family: 'Lucida Sans', Arial, sans-serif;
 	font-weight: normal;
+}
+
+header h2 {
+	font-size: 1em;
 }
 
 .content-wrapper {

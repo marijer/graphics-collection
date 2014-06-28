@@ -6,10 +6,11 @@
 		<!-- <meta name="viewport" content="width=device-width"> -->
 
 		<!-- build:css public/css/main.min.css -->
-		<link rel="stylesheet" type="text/css" href="css/1_normalize.css">
-		<link rel="stylesheet" type="text/css" href="css/2_main.css">
-		<link rel="stylesheet" type="text/css" href="css/3_responsive.css">
-		<link rel="stylesheet" type="text/css" href="css/4_jquery_slider.css">
+			<link rel="stylesheet" type="text/css" href="css/1_normalize.css">
+			<link rel="stylesheet" type="text/css" href="css/2_main.css">
+			<link rel="stylesheet" type="text/css" href="css/3_responsive.css">
+			<link rel="stylesheet" type="text/css" href="css/4_jquery_slider.css">
+			<link rel="stylesheet" type="text/css" href="css/5.annotation.css">
 		<!-- /build -->
 
 		<!--[if lt IE 9]>
@@ -21,7 +22,10 @@
 
 		<header>
 			<div class='header-wrapper width-constraint'>
-				<h2>Graphics Collection</h2>
+				<h2 class='left'>Graphics Collection</h2>
+
+				<div class='about-wrapper right'>
+				</div>
 			</div>
 		</header>
 
@@ -51,12 +55,13 @@
 			<section class="main-content">
 			<noscript> Please enable JavaScript to view this page</noscript>
 				<div class="fixed-main-content">
-					
+					<div class='annotation-wrapper'></div>
 
 					<div class="sort-wrapper">
 					</div>
 
 				</div>
+
 				<div class='graphics-wrapper' id="graphics-wrapper"> </div>
 			</div>
 				
@@ -93,6 +98,8 @@
 
 		<script src="js/views/searchView.js"> </script>
 		<script src="js/views/graphicItemView.js"> </script>
+
+		<script src="js/views/aboutView.js"> </script>
 
 		<script src="js/models/facets.js"> </script>
 		<script src="js/views/facetsView.js"> </script>

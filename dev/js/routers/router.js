@@ -47,6 +47,7 @@ APP.Router = Backbone.Router.extend({
 
       //initialze the scrollviews
       APP.scroll = new APP.ScrollView();
+      APP.aboutView = new APP.AboutView({ el: $(".about-wrapper") });
    },
 
     startRouter: function() {  //starts the router after both renders are done
