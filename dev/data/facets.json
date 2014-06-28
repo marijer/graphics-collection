@@ -71,7 +71,7 @@
       "heading": "Data Type",
       "expanded": false,
       "options": [
-          {"value":"quantitative", "title":"Quantative"},
+          {"value":"quantitative", "title":"Quantitative"},
           {"value":"hybrid", "title":"Combination"},
           {"value":"qualitative", "title":"Qualitative"}
       ]      
