@@ -67,6 +67,7 @@ APP.Router = Backbone.Router.extend({
       APP.graphicCollectionView.render();
 
        $(".loading").addClass('none');
+       $(".sort-wrapper").removeClass('none');
    },
 
    filterResults:function( params ) {
