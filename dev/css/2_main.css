@@ -209,13 +209,6 @@ article h2 span {
 
 /* fixed submenu */
 
-div.pointer-thumb {
-	background: #346F8D;
-	width: 9px;
-	height: 4px;
-	margin-top: 7px;
-}
-
 .fixed-menu-wrapper {
 	min-height: 35px;
 	width: 100%;
@@ -243,9 +236,6 @@ div.pointer-thumb {
 	border-bottom: 1px solid #C7C7C7;
 	-webkit-font-smoothing: antialiased;
 
-	-webkit-transition: background-color 200ms ease-out;
-    -moz-transition: background-color 200ms ease-out;
-    -o-transition: background-color 200ms ease-out;
     transition: background-color 200ms ease-out;	
 }
 
@@ -257,6 +247,19 @@ div.pointer-thumb {
 	margin-top: 10px;
 }
 
+.slider-wrapper .jslider{
+	width: 172px;
+	margin-left: 8px;
+}
+
+
+.pointer-thumb {
+	background: #133E53;
+	width: 10px;
+	height: 4px;
+	margin-top: 7px;
+}
+
 .jslider .jslider-bg .l, .jslider .jslider-bg .f, .jslider .jslider-bg .r {
 	border-top: 1px solid #CCC;
 	background: none;
@@ -265,7 +268,7 @@ div.pointer-thumb {
 
 .jslider .jslider-bg .v {
 	background: none;
-	border-top: 4px solid #2AA5E5;
+	border-top: 4px solid #52BEF7;
 }
 
 .search-wrapper {

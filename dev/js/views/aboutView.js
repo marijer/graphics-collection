@@ -10,13 +10,12 @@ APP.AboutView = Backbone.View.extend ({
 		"<div class='close right pointer'>close</div>" +
 		"<h2 class='clear'>About</h2>" +
 		"<p class='about'>" +
-		"This page shows interactive graphic work of the Guardian and the New York Times." +
-			" The page does not contain all of the work of both news organizations. It is a goal, but it does not seem to be a viable one." +
+		"This page shows interactive graphic work of the Guardian and the New York Times. I started this collection a couple years ago, when I researched this topic." +
+			" The page does not show all of the work of both news organizations." +
 		"</p>" +
 		"<p class='about'>" +
-			"I am updating the page every time I come across work of the two news organizations." +
-			"If you know about a graphice which is not shown here or maybe it is in the database and completely wrong categorized, please let me know." +
-			"You can drop me a line on twitter @marijerr or send me a mail at marijer@gmail.com." +
+			"If you know about a graphic which is not shown here or maybe it is in the database and completely wrong categorized, please let me know." +
+			"You can drop me a line on twitter @marijerr or send a mail to marijer@gmail.com." +
 		"</p>" 
 	),
 
