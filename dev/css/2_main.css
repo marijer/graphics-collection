@@ -43,6 +43,13 @@ input, input[type="search"] {
 	top: 50px;
 }
 
+.loading {
+	background: url('../img/assets/broken_circle.gif') center center no-repeat #FFF;
+	width: 100px;
+	height: 200px;
+	margin: 0 auto;
+}
+
 noscript {
 	margin-bottom: 500px;
 	display: block;

@@ -53,7 +53,6 @@ APP.Router = Backbone.Router.extend({
     startRouter: function() {  //starts the router after both renders are done
       if (APP.router.prev){
          Backbone.history.start(); 
-
       } else {
          APP.router.prev = true;
       }
@@ -66,6 +65,8 @@ APP.Router = Backbone.Router.extend({
     });
       this.currentCollection = APP.collectionData;
       APP.graphicCollectionView.render();
+
+       $(".loading").addClass('none');
    },
 
    filterResults:function( params ) {
