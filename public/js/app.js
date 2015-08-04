@@ -848,10 +848,10 @@ APP.SelectedFiltersView = Backbone.View.extend ({
 APP.SliderView = Backbone.View.extend ({
 
 	minYear: 2000,
-	maxYear: 2014,
+	maxYear: 2015,
 
 	template: Handlebars.compile(
-		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2014" data-facet-name="2000-2014" style="display:none;" />'
+		'<input id="Slider" type="slider" class="facet" data-facet="years" name="area" value="2000;2015" data-facet-name="2000-2015" style="display:none;" />'
 	),
 
 
@@ -881,11 +881,11 @@ APP.SliderView = Backbone.View.extend ({
 			
 	slideYear:function ( slider ) {		
 
-		var $slider = $(slider);
-		var values = $slider.slider("value")
-		var split = values.split(';');
+		var $slider = $(slider),
+			values = $slider.slider("value"),
+			split = values.split(';'),
+			data = $slider.attr("data-facet-name");
 
-		var data = $slider.attr("data-facet-name");
 		data = values.replace(";", "-");
 		$slider.attr('data-facet-name', data);	
 

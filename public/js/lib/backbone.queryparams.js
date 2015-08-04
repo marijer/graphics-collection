@@ -191,6 +191,7 @@ _.extend(Backbone.Router.prototype, {
   _setParamValue: function(key, value, data) {
     // use '.' to define hash separators
     key = key.replace('[]', '');
+    key = key.replace('%5B%5D', '');
     var parts = key.split('.');
     var _data = data;
     for (var i=0; i<parts.length; i++) {
@@ -315,7 +316,12 @@ _.extend(Backbone.Router.prototype, {
 
 function parseParams(value) {
   // decodeURIComponent doesn't touch '+'
-  return decodeURIComponent(value.replace(/\+/g, ' '));
+  try {
+    return decodeURIComponent(value.replace(/\+/g, ' '));
+  } catch (err) {
+    // Failover to whatever was passed if we get junk data
+    return value;
+  }
 }
 
 function iterateQueryString(queryString, callback) {

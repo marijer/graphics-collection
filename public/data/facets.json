@@ -12,7 +12,7 @@
     {
       "facet": "newscategory",
       "heading": "Category",
-      "expanded": true,
+      "expanded": false,
       "options": [
         {"value": "politics", "title":"Politics"},
         {"value": "business", "title":"Business"}, 
@@ -71,7 +71,7 @@
       "heading": "Data Type",
       "expanded": false,
       "options": [
-          {"value":"quantitative", "title":"Quantative"},
+          {"value":"quantitative", "title":"Quantitative"},
           {"value":"hybrid", "title":"Combination"},
           {"value":"qualitative", "title":"Qualitative"}
       ]      

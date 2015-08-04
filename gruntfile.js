@@ -27,17 +27,15 @@ module.exports = function(grunt) {
         main: {
           files: [
             // includes files within path
-            { expand: true, flatten: true, src: ['bower_components/backbone/backbone-min.js'], dest: 'public/js/lib'},
-            { expand: true, flatten: true, src: ['bower_components/backbone/backbone-min.map'], dest: 'public/js/lib'},         
+            { expand: true, flatten: true, src: ['bower_components/backbone/backbone.js'], dest: 'public/js/lib'},
             { expand: true, flatten: true, src: ['bower_components/backbone-query-parameters/backbone.queryparams.js'], dest: 'public/js/lib'},        
             { expand: true, flatten: true, src: ['bower_components/handlebars/handlebars.min.js'], dest: 'public/js/lib'},
             { expand: true, flatten: true, src: ['bower_components/jquery/jquery.min.js'], dest: 'public/js/lib'},
-            { expand: true, flatten: true, src: ['bower_components/jquery/jquery.min.map'], dest: 'public/js/lib'},
             { expand: true, flatten: true, src: ['bower_components/underscore/underscore-min.js'], dest: 'public/js/lib'},
-            { expand: true, flatten: true, src: ['bower_components/underscore/underscore-min.map'], dest: 'public/js/lib'},
-            { expand: true, flatten: true, src: ['bower_components/normalize-css/normalize.css'], dest: 'public/css'},
             { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.js'], dest: 'public/js/lib'},
+
             { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.css'], dest: 'public/css'},
+            { expand: true, flatten: true, src: ['bower_components/normalize-css/normalize.css'], dest: 'public/css'},
             { expand: true, flatten: true, src:['dev/data/*.*'], dest: 'public/data'},
             { expand: true, flatten: true, src:['dev/img/assets/**'], dest: 'public/img'},
             ]
@@ -60,7 +58,14 @@ module.exports = function(grunt) {
           dest: 'public/js/app.js',
         },
         libs: {
-          src: ['public/js/lib/*.js'],
+          src: ['public/js/lib/underscore-min.js',
+                'public/js/lib/handlebars.min.js',
+                'public/js/lib/jquery.min.js',
+                'public/js/lib/backbone.js',
+                'public/js/lib/backbone.queryparams.js',
+                'public/js/lib/jquery.slider.min.js'
+          ],
+          // src: ['public/js/lib/*.js'],
           dest: 'public/js/lib/lib.js',
         },
       },
