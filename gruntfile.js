@@ -23,6 +23,11 @@ module.exports = function(grunt) {
         }
       },
 
+      clean: {
+          build: ['public/**/**'],
+          between_build: ['public/js/lib/**', 'public/js/app.js']
+      },
+
       copy: {
         main: {
           files: [
@@ -34,7 +39,6 @@ module.exports = function(grunt) {
             { expand: true, flatten: true, src: ['bower_components/underscore/underscore-min.js'], dest: 'public/js/lib'},
             { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.js'], dest: 'public/js/lib'},
 
-            { expand: true, flatten: true, src:['bower_components/jslider/bin/jquery.slider.min.css'], dest: 'public/css'},
             { expand: true, flatten: true, src: ['bower_components/normalize-css/normalize.css'], dest: 'public/css'},
             { expand: true, flatten: true, src:['dev/data/*.*'], dest: 'public/data'},
             { expand: true, flatten: true, src:['dev/img/assets/**'], dest: 'public/img/assets/'},
@@ -66,7 +70,7 @@ module.exports = function(grunt) {
                 'public/js/lib/jquery.slider.min.js'
           ],
           // src: ['public/js/lib/*.js'],
-          dest: 'public/js/lib/lib.js',
+          dest: 'public/js/libs.js',
         },
       },
 
@@ -92,6 +96,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask("jshint2", ["jshint"]);
   grunt.registerTask("copy2", ["copy"]);
-  grunt.registerTask("dev", ["concat:basic", "concat:libs", "uglify","cssmin", "processhtml"]);
+  grunt.registerTask("dev", ['clean:build', 'copy', "concat:basic", "concat:libs", "uglify","cssmin", "processhtml", 'clean:between_build']);
 
 };

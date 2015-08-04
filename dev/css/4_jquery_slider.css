@@ -159,9 +159,9 @@
 }
 
 .jslider_round_plastic .jslider-pointer {
-    width: 10px;
-      height: 10px;
-      background-color: rgb(84, 149, 203);
-      border-radius: 50%;
-      border: 1px solid rgb(39, 119, 186);
+  width: 9px;
+  height: 9px;
+  background-color: rgb(65, 163, 244);
+  border-radius: 50%;
+  border: 1px solid rgb(53, 140, 213);
 }
